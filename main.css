@@ -1,0 +1,48 @@
+
+table {
+    background-color: #eee;
+}
+td {
+    width :100px;
+    height:100px;
+    text-align: center;
+    vertical-align: center;
+    background-color: #eee;
+}
+
+.grass {
+    background-image: url("images/tile-blank.jpg");
+}
+.grass:before {
+    content:"g";
+}
+
+.mountains {
+    background-image: url("images/tile-blank.jpg");
+}
+
+.mountains:before {
+    content:"m";
+}
+
+
+.dirt {
+    background-image: url("images/tile-blank.jpg");
+}
+.dirt:before {
+    content:"d";
+}
+
+.water {
+    background-image: url("images/tile-blank.jpg");
+}
+.water:before {
+    content:"w";
+}
+
+.forest {
+    background-image: url("images/tile-blank.jpg");
+}
+.forest:before {
+    content:"f";
+}
