@@ -10,6 +10,13 @@ td {
     background-color: #eee;
 }
 
+.water {
+    background-image: url("images/tile-blank.jpg");
+}
+.water:before {
+    content:"w";
+}
+
 .grass {
     background-image: url("images/tile-blank.jpg");
 }
@@ -17,6 +24,18 @@ td {
     content:"g";
 }
 
+.sand {
+    background-image: url("images/tile-blank.jpg");
+}
+.sand:before {
+    content:"sn";
+}
+.rocks {
+    background-image: url("images/tile-blank.jpg");
+}
+.rocks:before {
+    content:"r";
+}
 .mountains {
     background-image: url("images/tile-blank.jpg");
 }
@@ -25,7 +44,6 @@ td {
     content:"m";
 }
 
-
 .dirt {
     background-image: url("images/tile-blank.jpg");
 }
@@ -33,16 +51,21 @@ td {
     content:"d";
 }
 
-.water {
-    background-image: url("images/tile-blank.jpg");
-}
-.water:before {
-    content:"w";
-}
-
 .forest {
     background-image: url("images/tile-blank.jpg");
 }
 .forest:before {
     content:"f";
+}
+.snow {
+    background-image: url("images/tile-blank.jpg");
+}
+.snow:before {
+    content:"sn";
+}
+.ice {
+    background-image: url("images/tile-blank.jpg");
+}
+.ice:before {
+    content:"i";
 }

@@ -6,7 +6,7 @@ function get_random_tile(){
 var slots = $("td"),
     slot  = undefined
     i     = 0,
-    tiles = ["water","grass","mountains","dirt", "forest"];
+    tiles = ["water","grass", "sand", "rocks", "mountains","dirt", "forest", "snow", "ice"];
     
 for(i = 0; i < slots.length; i++){
     $(slots[i]).addClass(get_random_tile());
