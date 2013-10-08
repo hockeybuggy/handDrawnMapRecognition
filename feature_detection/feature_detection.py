@@ -6,7 +6,12 @@ import os
 import csv
 from argparse import ArgumentParser
 
-import Image
+try:
+    import Image
+except ImportError:
+    print "need PIL installed: easy_install PIL"
+    sys.exit(1)
+
 
 def parse_args():
     parser = ArgumentParser(
