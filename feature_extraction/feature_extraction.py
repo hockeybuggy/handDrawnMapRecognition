@@ -1,9 +1,50 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import sys
 import re
 import os
-import Image
+import csv
+from argparse import ArgumentParser
+
+try:
+    import Image
+except ImportError:
+    print "need PIL installed: easy_install PIL"
+    sys.exit(1)
+
+
+def parse_args():
+    parser = ArgumentParser(
+        description="""
+        Extracts 'feature' data from an image file using convolution filters.
+        CIS*4780 Computational Intelligence, University of Guelph.
+        Authors: Ryan Pattison, Douglas Anderson, Oliver Cook
+        Notes: requires PIL 'easy_install PIL'
+        """)
+    parser.add_argument('image', help="A bitmap image file to process.", type=Image.open)
+    parser.add_argument('columns', type=int, help="The number of 'cells' along the x-dimension in the image file's grid.")
+    parser.add_argument('rows', type=int, help="The number of 'cells' along the y-dimension in the image file's grid.")
+    parser.add_argument('filters', nargs='+', help="CSV files containing odd, square matrices to use in convolution filters")
+    args = parser.parse_args()
+    return args
+
+
+def read_filters(filenames):
+    filters = []
+    for filename in filenames:
+        with open(filename, 'r') as csv_file:
+            reader = csv.reader(csv_file)
+            try:
+                matrix = [[float(aij) for aij in row] for row in reader]
+            except:
+                raise ValueError("ill-formed matrix file, (not all floats) in: " + filename)
+        if len(matrix) % 2 != 1:
+            raise ValueError("matrix must have an odd size in: " + filename)
+        if not all(len(r) == len(matrix) for r in matrix):
+            raise ValueError("matrix must be square, in: " + filename)
+        filters.append(matrix)
+    return filters
+
 
 def validate_args():
     filter_list = []
@@ -69,7 +110,15 @@ def main(image, imageName, width, height, filter_list):
     print "Closing:\t", outputFile
     w.close()
 
+
 if __name__ == "__main__":
-    args = validate_args()
-    main(args[0],args[1],args[2],args[3], args[4])
+    try:
+        args = parse_args()
+        filters = read_filters(args.filters)
+    except Exception as e:
+        print e
+        sys.exit(1)
+
+    #args = validate_args()
+    #main(args[0],args[1],args[2],args[3], args[4])
 
