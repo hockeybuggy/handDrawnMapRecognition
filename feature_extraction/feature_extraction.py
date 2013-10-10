@@ -18,7 +18,7 @@ def parse_args():
     parser = ArgumentParser(
         description="""
         Extracts 'feature' data from an image file using convolution filters.
-        CIS*4780 Computational Intelligence, University of Guelph.
+        CIS*4780 Computational Intelligence, University of Guelph.str()j
         Authors: Ryan Pattison, Douglas Anderson, Oliver Cook
         Notes: requires PIL 'easy_install PIL'
         """)
@@ -53,6 +53,12 @@ def apply_filters(image, filters):
         image = image.filter(f)
     return(image)
 
+def get_cell_stats(cell):
+    vector = list(cell.getdata())
+    matrix = [vector[x:x+cell.size[0]] for x in xrange(0, len(vector),cell.size[0])]
+    return [len(matrix)]
+    
+
 def main(image, rows, columns, filter_list):
     cell_w = image.size[0]/args.columns
     cell_h = image.size[1]/args.rows
@@ -63,12 +69,19 @@ def main(image, rows, columns, filter_list):
     print "Cell Width:\t", cell_w
     print "Cell Height:\t", cell_h
     filtered_image = apply_filters(image, filters)
-    filtered_image.save("test.bmp")
+    #filtered_image.save("test.bmp") # DEBUG
+
+    w = open("OUTPUT.csv", "w")
+    w.write("i,j\n")
 
     for i in range(0,columns):
         for j in range(0,rows):
-            cell = image.crop([i*cell_w,j*cell_h,(i*cell_w)+cell_w,(j*cell_h)+cell_h])
-            cell.save("test2.bmp")
+            cell = filtered_image.crop([i*cell_w,j*cell_h,(i*cell_w)+cell_w,(j*cell_h)+cell_h])
+            #cell.save("town" +str(i)+"-"+str(j)+".bmp") # DEBUG
+            stats = get_cell_stats(cell)
+            w.write(str(i)+","+str(j)+","+ ",".join(map(str, stats))+"\n")
+
+    w.close()
 
 if __name__ == "__main__":
     try:
