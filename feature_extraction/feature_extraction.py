@@ -4,12 +4,16 @@ import sys
 import os
 import csv
 from argparse import ArgumentParser
-
 try:
     import Image
     import ImageFilter
 except ImportError:
-    print "need PIL installed: easy_install PIL"
+    print "PIL package required: easy_install PIL"
+    sys.exit(1)
+try:
+    import numpy
+except ImportError:
+    print "Numpy package required: easy_install PIL"
     sys.exit(1)
 
 
@@ -37,11 +41,10 @@ def parse_args():
 
     if args.filtered_image:
         args.filtered_image = args.filtered_image[0]
-    image_name = args.image
-    args.image = Image.open(image_name)
     base_name_no_ext = lambda s: os.path.splitext(os.path.basename(s))[0]
-    default_csv_name = base_name_no_ext(image_name) + '-'.join(map(base_name_no_ext, args.filters)) + '.bmp'
-    return args
+    image_name = base_name_no_ext(args.image)
+    args.image = Image.open(args.image)
+    return (args, image_name)
 
 
 def read_filters(filenames):
@@ -57,7 +60,7 @@ def read_filters(filenames):
             raise ValueError("matrix must be square with a width of 3 or 5: " + filename)
         if not all(len(r) == len(matrix) for r in matrix):
             raise ValueError("matrix must be square, in: " + filename)
-        print [x for row in matrix for x in row]
+        #print [x for row in matrix for x in row]
         f = ImageFilter.Kernel((len(matrix), len(matrix)), [x for row in matrix for x in row])
         filters.append(f)
     return filters
@@ -79,7 +82,7 @@ def analyze(image):
     return dict(data=len(matrix))
 
 
-def main(image, rows, columns, filter_list, csv_output, filter_image_name=None):
+def main(image, image_name, rows, columns, filter_list, csv_output, filter_image_name=None):
     cell_w = image.size[0] / columns
     cell_h = image.size[1] / rows
     filtered_image = apply_filters(image, filter_list)
@@ -96,7 +99,7 @@ def main(image, rows, columns, filter_list, csv_output, filter_image_name=None):
             stats_data[i].append(analyze(cell))
 
     header_names = stats_data[0][0].keys()
-    stats_writer = csv.writer(csv_output)  #  maybe DictWriter would be nicer here.
+    stats_writer = csv.writer(csv_output)
     stats_writer.writerow(['i', 'j'] + header_names)
     for i in range(columns):
         for j in range(rows):
@@ -108,7 +111,7 @@ def main(image, rows, columns, filter_list, csv_output, filter_image_name=None):
 
 if __name__ == "__main__":
     try:
-        args = parse_args()
+        args, image_name = parse_args()
         filters = read_filters(args.filters)
     except Exception as e:
         print e
@@ -122,5 +125,5 @@ if __name__ == "__main__":
             if args.filtered_image:
                 csv_output = open(os.path.join(args.output, args.filter_image_name), "w")
 
-    main(args.image, args.rows, args.columns, filters, csv_output=csv_output, filter_image_name=args.filtered_image)
+    main(args.image, image_name, args.rows, args.columns, filters, csv_output=csv_output, filter_image_name=args.filtered_image)
 
