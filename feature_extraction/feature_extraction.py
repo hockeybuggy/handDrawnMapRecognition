@@ -88,18 +88,23 @@ def main(image, rows, columns, filter_list, csv_output=sys.stdout):
     print "Cell Width:\t", cell_w
     print "Cell Height:\t", cell_h
     filtered_image = apply_filters(image, filter_list)
-    # filtered_image.save("test.bmp")
 
-    stats_writer = csv.writer(csv_output)  #  maybe DictWriter would be nicer here.
-    stats_writer.writerow(('i', 'j', 'data'))
+    stats_data = [list() * rows]
     for i in range(columns):
         for j in range(rows):
             bb = bounding_box(i * cell_w, j * cell_h, cell_w, cell_h)
             cell = image.crop(bb)
-            # cell.save("test_%d_%d.bmp" % (i, j))
-            data = analyze(cell)
-            v = [i, j, data['data']]
-            stats_writer.writerow(v)
+            stats_data[i][j] = analyze(cell)
+
+    header_names = ['i', 'j'].extend(stats_data[0].keys())
+    stats_writer = csv.writer(csv_output)  #  maybe DictWriter would be nicer here.
+    stats_writer.writerow(header_names)
+    for i in range(columns):
+        for j in range(rows):
+            row = [i, j]
+            for k in header_names:
+                row.append(data[i][j][k])
+            stats_writer.writerow(row)
 
 
 if __name__ == "__main__":
