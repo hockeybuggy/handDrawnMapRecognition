@@ -72,8 +72,10 @@ def bounding_box(x, y, w, h, inset=0)
     return [x + inset, y + inset, x + w - 2 * inset, y + h - 2 * inset]
 
 
-def analyze(image, bb):
-    return dict()
+def analyze(image):
+    vector = list(image.getdata())
+    matrix = [vector[x:x + image.size[0]] for x in xrange(0, len(vector), image.size[0])]
+    return dict(data=len(matrix))
 
 
 def main(image, rows, columns, filter_list, csv_output=sys.stdout):
@@ -86,16 +88,18 @@ def main(image, rows, columns, filter_list, csv_output=sys.stdout):
     print "Cell Width:\t", cell_w
     print "Cell Height:\t", cell_h
     filtered_image = apply_filters(image, filter_list)
-    filtered_image.save("test.bmp")
+    # filtered_image.save("test.bmp")
 
     stats_writer = csv.writer(csv_output)  #  maybe DictWriter would be nicer here.
+    stats_writer.writerow(('i', 'j', 'data'))
     for i in range(columns):
         for j in range(rows):
             bb = bounding_box(i * cell_w, j * cell_h, cell_w, cell_h)
             cell = image.crop(bb)
-            cell.save("test_%d_%d.bmp" % (i, j))
-            data = analyze(image, bb)
-            stats_writer.writerow(data.values())
+            # cell.save("test_%d_%d.bmp" % (i, j))
+            data = analyze(cell)
+            v = [i, j, data['data']]
+            stats_writer.writerow(v)
 
 
 if __name__ == "__main__":
