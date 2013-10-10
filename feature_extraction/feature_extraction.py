@@ -27,7 +27,7 @@ def parse_args():
     parser.add_argument('rows', type=int, help="The number of 'cells' along the y-dimension in the image file's grid.")
     parser.add_argument('filters', nargs='+', help="CSV files containing square matrices (3x3 or 5x5) to use as a convolution filter")
 
-    parser.add_argument('-o', help="output directory to write csv data to, default=stdout")
+    parser.add_argument('-output', help="output directory to write csv data to, default=stdout")
     parser.add_argument('-filtered_image', nargs=1, help="where to save the filtered output image, (default=no save file)")
 
     args = parser.parse_args()
@@ -35,7 +35,8 @@ def parse_args():
     if args.columns <= 0 or args.rows <= 0:
         raise ValueError("rows and columns must be positive integers")
 
-    args.filtered_image = args.filtered_image[0]
+    if args.filtered_image:
+        args.filtered_image = args.filtered_image[0]
     image_name = args.image
     args.image = Image.open(image_name)
     base_name_no_ext = lambda s: os.path.splitext(os.path.basename(s))[0]
@@ -78,10 +79,11 @@ def analyze(image):
     return dict(data=len(matrix))
 
 
-def main(image, rows, columns, filter_list, csv_output=sys.stdout, filter_image_name=None):
+def main(image, rows, columns, filter_list, csv_output, filter_image_name=None):
     cell_w = image.size[0] / columns
     cell_h = image.size[1] / rows
     filtered_image = apply_filters(image, filter_list)
+
     if filter_image_name:
         print filter_image_name
         filtered_image.save(filter_image_name)
@@ -107,11 +109,18 @@ def main(image, rows, columns, filter_list, csv_output=sys.stdout, filter_image_
 if __name__ == "__main__":
     try:
         args = parse_args()
-        image = args.image
         filters = read_filters(args.filters)
     except Exception as e:
         print e
         sys.exit(1)
 
-    main(args.image, args.rows, args.columns, filters, filter_image_name=args.filtered_image)
+    csv_output = sys.stdout
+    if args.output:
+        if os.path.isfile(args.output):
+            csv_output = open(args.output, "w")
+        else:
+            if args.filtered_image:
+                csv_output = open(os.path.join(args.output, args.filter_image_name), "w")
+
+    main(args.image, args.rows, args.columns, filters, csv_output=csv_output, filter_image_name=args.filtered_image)
 
