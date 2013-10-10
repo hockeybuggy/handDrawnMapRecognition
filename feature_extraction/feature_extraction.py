@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import sys
-import re
 import os
 import csv
 from argparse import ArgumentParser
@@ -18,70 +17,86 @@ def parse_args():
     parser = ArgumentParser(
         description="""
         Extracts 'feature' data from an image file using convolution filters.
-        CIS*4780 Computational Intelligence, University of Guelph.str()j
+        CIS*4780 Computational Intelligence, University of Guelph.
         Authors: Ryan Pattison, Douglas Anderson, Oliver Cook
         Notes: requires PIL 'easy_install PIL'
         """)
-    parser.add_argument('image',  type=Image.open, help="A greyscale bitmap image file to process.")
+
+    parser.add_argument('image', help="A greyscale bitmap image file to process.")
     parser.add_argument('columns', type=int, help="The number of 'cells' along the x-dimension in the image file's grid.")
     parser.add_argument('rows', type=int, help="The number of 'cells' along the y-dimension in the image file's grid.")
-    parser.add_argument('filters', nargs='+', help="CSV files containing odd, square matrices to use in convolution filters")
+    parser.add_argument('filters', nargs='+', help="CSV files containing square matrices (3x3 or 5x5) to use as a convolution filter")
+    
+    parser.add_argument('-o', help="output directory to write csv data to, default=stdout")
+    parser.add_argument('-filtered_image', help="where to save the filtered output image, (default=no save file)")
+    
     args = parser.parse_args()
+    
+    if args.columns <= 0 or args.rows <= 0:
+        raise ValueError("rows and columns must be positive integers")
+    
+    image_name = args.image
+    args.image = Image.open(image_name)
+    
+    # TODO: construct an output filename, filtered_image name,  if a directory is given ...
+    
     return args
 
 
 def read_filters(filenames):
     filters = []
     for filename in filenames:
-        with open(filename, 'r') as csv_file:
+        with open(filename, 'rb') as csv_file:
             reader = csv.reader(csv_file)
             try:
                 matrix = [[float(aij) for aij in row] for row in reader]
             except:
                 raise ValueError("ill-formed matrix file, (not all floats) in: " + filename)
-        if len(matrix) != 3  and len(matrix) != 5:
+        if len(matrix) != 3 and len(matrix) != 5:
             raise ValueError("matrix must be square with a width of 3 or 5: " + filename)
         if not all(len(r) == len(matrix) for r in matrix):
             raise ValueError("matrix must be square, in: " + filename)
         print [x for row in matrix for x in row]
-        f = ImageFilter.Kernel((len(matrix),len(matrix)), [x for row in matrix for x in row])
+        f = ImageFilter.Kernel((len(matrix), len(matrix)), [x for row in matrix for x in row])
         filters.append(f)
     return filters
+
 
 def apply_filters(image, filters):
     for f in filters:
         image = image.filter(f)
-    return(image)
+    return image
 
-def get_cell_stats(cell):
-    vector = list(cell.getdata())
-    matrix = [vector[x:x+cell.size[0]] for x in xrange(0, len(vector),cell.size[0])]
-    return [len(matrix)]
-    
 
-def main(image, rows, columns, filter_list):
-    cell_w = image.size[0]/args.columns
-    cell_h = image.size[1]/args.rows
+def bounding_box(x, y, w, h, inset=0)
+    return [x + inset, y + inset, x + w - 2 * inset, y + h - 2 * inset]
+
+
+def analyze(image, bb):
+    return dict()
+
+
+def main(image, rows, columns, filter_list, csv_output=sys.stdout):
+    cell_w = image.size[0] / columns
+    cell_h = image.size[1] / rows
     print image
     print filters
-    print "Rows:\t", rows
+    print "Rows:\t", rows3 s
     print "Cols:\t", columns
     print "Cell Width:\t", cell_w
     print "Cell Height:\t", cell_h
-    filtered_image = apply_filters(image, filters)
-    #filtered_image.save("test.bmp") # DEBUG
+    filtered_image = apply_filters(image, filter_list)
+    filtered_image.save("test.bmp")
 
-    w = open("OUTPUT.csv", "w")
-    w.write("i,j\n")
+    stats_writer = csv.writer(csv_output)  #  maybe DictWriter would be nicer here.
+    for i in range(columns):
+        for j in range(rows):
+            bb = bounding_box(i * cell_w, j * cell_h, cell_w, cell_h)
+            cell = image.crop(bb)
+            cell.save("test_%d_%d.bmp" % (i, j))
+            data = analyze(image, bb)
+            stats_writer.writerow(data.values())
 
-    for i in range(0,columns):
-        for j in range(0,rows):
-            cell = filtered_image.crop([i*cell_w,j*cell_h,(i*cell_w)+cell_w,(j*cell_h)+cell_h])
-            #cell.save("town" +str(i)+"-"+str(j)+".bmp") # DEBUG
-            stats = get_cell_stats(cell)
-            w.write(str(i)+","+str(j)+","+ ",".join(map(str, stats))+"\n")
-
-    w.close()
 
 if __name__ == "__main__":
     try:
