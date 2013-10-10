@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import sys
-#import os
+import os
 import csv
 from argparse import ArgumentParser
 
@@ -28,18 +28,18 @@ def parse_args():
     parser.add_argument('filters', nargs='+', help="CSV files containing square matrices (3x3 or 5x5) to use as a convolution filter")
 
     parser.add_argument('-o', help="output directory to write csv data to, default=stdout")
-    parser.add_argument('-filtered_image', help="where to save the filtered output image, (default=no save file)")
+    parser.add_argument('-filtered_image', nargs=1, help="where to save the filtered output image, (default=no save file)")
 
     args = parser.parse_args()
 
     if args.columns <= 0 or args.rows <= 0:
         raise ValueError("rows and columns must be positive integers")
 
+    args.filtered_image = args.filtered_image[0]
     image_name = args.image
     args.image = Image.open(image_name)
-
-    # TODO: construct an output filename, filtered_image name,  if a directory is given ...
-
+    base_name_no_ext = lambda s: os.path.splitext(os.path.basename(s))[0]
+    default_csv_name = base_name_no_ext(image_name) + '-'.join(map(base_name_no_ext, args.filters)) + '.bmp'
     return args
 
 
@@ -78,15 +78,13 @@ def analyze(image):
     return dict(data=len(matrix))
 
 
-def main(image, rows, columns, filter_list, csv_output=sys.stdout):
+def main(image, rows, columns, filter_list, csv_output=sys.stdout, filter_image_name=None):
     cell_w = image.size[0] / columns
     cell_h = image.size[1] / rows
-    print "Rows:\t", rows
-    print "Cols:\t", columns
-    print "Cell Width:\t", cell_w
-    print "Cell Height:\t", cell_h
     filtered_image = apply_filters(image, filter_list)
-
+    if filter_image_name:
+        print filter_image_name
+        filtered_image.save(filter_image_name)
     stats_data = []
     for i in range(columns):
         stats_data.append(list())
@@ -115,5 +113,5 @@ if __name__ == "__main__":
         print e
         sys.exit(1)
 
-    main(args.image, args.rows, args.columns, filters)
+    main(args.image, args.rows, args.columns, filters, filter_image_name=args.filtered_image)
 
