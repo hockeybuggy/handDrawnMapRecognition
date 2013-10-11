@@ -168,6 +168,11 @@ if __name__ == "__main__":
         if not os.path.exists(args.output) or os.path.isfile(args.output):
             csv_out = open(args.output, "w")
         else:
+            if os.path.isdir(args.output):
+                file_name = image_name+"-"+"-".join(map(base_name_no_ext, args.filters))+".csv"
+                csv_out = open(os.path.join(args.output, file_name), "w")
+    
+
             if args.filtered_image:
                 csv_out = open(os.path.join(args.output, args.filter_image_name), "w")
     yaml_out = None
