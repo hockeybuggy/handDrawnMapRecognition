@@ -17,12 +17,17 @@ for csv_file in sys.argv[1:]:
 
 final_data = dict()
 for f in file_data:
-    print f.keys()
     for key in  f.keys():
-        if not final_data[key]:
-            final_data[key] = []
-        final_data[key].append(f[key])
+        try:
+            final_data[key].extend(f[key])
+        except KeyError:
+            final_data[key] = f[key]
 
-f = open("output.csv", "w")
-w = csv.writer(f)
-w.writerows([[key[0], key[1], final_data[key]] for key in final_data])
+w = csv.writer(sys.stdout)
+
+keys = final_data.keys()
+header_key = keys.pop(keys.index(("i","j")))
+sorted_keys = sorted(keys, cmp=lambda x,y: cmp((int(x[0]),int(x[1])),(int(y[0]),int(y[1]))) )
+
+w.writerow([header_key[0], header_key[1]]+final_data[header_key])
+w.writerows([[key[0], key[1]]+final_data[key] for key in sorted_keys])
