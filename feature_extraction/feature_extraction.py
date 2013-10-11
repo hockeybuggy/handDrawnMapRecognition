@@ -76,10 +76,32 @@ def bounding_box(x, y, w, h, inset=0):
     return [x + inset, y + inset, x + w - 2 * inset, y + h - 2 * inset]
 
 
-def analyze(image):
-    vector = list(image.getdata())
-    matrix = [vector[x:x + image.size[0]] for x in xrange(0, len(vector), image.size[0])]
-    return dict(data=len(matrix))
+def apply_index_weighting(vector, luminosity):
+    new_vector = numpy.array([])
+    for i in range(0, len(vector)):
+        new_vector = (vector * i) / luminosity
+    return new_vector
+
+
+def get_weighted_vectors(image):
+    vectors = dict()
+    vector = numpy.array(image.getdata())
+    matrix = numpy.reshape(vector, (image.size[0], image.size[0]))
+    rowSum = numpy.sum(matrix, 0) # Sum matrix along each axis
+    colSum = numpy.sum(matrix, 1)
+    luminosity = numpy.sum(matrix)
+
+    vectors["x"] = apply_index_weighting(rowSum, luminosity)
+    vectors["y"] = apply_index_weighting(colSum, luminosity)
+    return vectors
+
+
+def get_stats_from_wvector(w_vector, key_prefix=""):
+    stat_functions = dict(mean=numpy.mean,stddev=numpy.std)
+    stat_results = dict()
+    for key in stat_functions:
+        stat_results[key_prefix+"_"+key] = stat_functions[key](w_vector)
+    return stat_results
 
 
 def main(image, image_name, rows, columns, filter_list, csv_output, filter_image_name=None):
@@ -94,17 +116,21 @@ def main(image, image_name, rows, columns, filter_list, csv_output, filter_image
     for i in range(columns):
         stats_data.append(list())
         for j in range(rows):
+            stats_data[i].append(dict())
             bb = bounding_box(i * cell_w, j * cell_h, cell_w, cell_h)
             cell = filtered_image.crop(bb)
-            stats_data[i].append(analyze(cell))
+            vectors = get_weighted_vectors(cell)
+            for key in vectors:
+                # union of two dict to add new keys
+                stats_data[i][j].update(get_stats_from_wvector(vectors[key], key)) 
 
-    header_names = stats_data[0][0].keys()
+    stat_names = stats_data[0][0].keys()
     stats_writer = csv.writer(csv_output)
-    stats_writer.writerow(['i', 'j'] + header_names)
+    stats_writer.writerow(['i', 'j'] + stat_names)
     for i in range(columns):
         for j in range(rows):
             row = [i, j]
-            for k in header_names:
+            for k in stat_names:
                 row.append(stats_data[i][j][k])
             stats_writer.writerow(row)
 
