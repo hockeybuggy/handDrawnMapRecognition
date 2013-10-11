@@ -17,7 +17,7 @@ for csv_file in sys.argv[1:]:
 
 final_data = dict()
 for f in file_data:
-    for key in  f.keys():
+    for key in f.keys():
         try:
             final_data[key].extend(f[key])
         except KeyError:
