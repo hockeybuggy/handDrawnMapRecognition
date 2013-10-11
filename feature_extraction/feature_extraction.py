@@ -37,8 +37,6 @@ def parse_args():
     parser.add_argument('columns', type=int, help="The number of 'cells' along the x-dimension in the image file's grid.")
     parser.add_argument('rows', type=int, help="The number of 'cells' along the y-dimension in the image file's grid.")
     parser.add_argument('filters', nargs='+', help="CSV files containing square matrices (3x3 or 5x5) to use as a convolution filter")
-
-    parser.add_argument('--save_map_image', dest='save_map_image', action='store_true', help="Save a copy of the post-filtered map")
     parser.add_argument('--save_cell_images', dest='save_cell_images', action='store_true', help="Save a copy of each of the post-filtered cells")
     parser.add_argument('-output', help="output file or directory to write csv data to, default=stdout")
     parser.add_argument('-yaml', help="yaml file to output vectors to, default=None")
@@ -107,14 +105,11 @@ def get_stats_from_wvector(w_vector, key_prefix=""):
 
 
 def main(image, image_name, rows, columns, filter_list, csv_output,
-        yaml_out=None, save_map_image=None, save_cell_images=False, filter_image_name=None):
+        yaml_out=None, save_cell_images=False, filter_image_name=None):
     cell_w = image.size[0] / columns
     cell_h = image.size[1] / rows
     filter_name = "-".join(map(base_name_no_ext, args.filters))
     filtered_image = apply_filters(image, filter_list)
-    if save_map_image:
-        filtered_image.save(image_name + "-" + filter_name + ".bmp")
-
     if filter_image_name:
         filtered_image.save(filter_image_name)
     stats_data = []
@@ -169,7 +164,7 @@ if __name__ == "__main__":
     csv_out = sys.stdout if not args.output else open(filename_or_file_at(args.output, file_name), "w")
     yaml_out = None if not args.yaml else open(args.yaml, "w")
     main(image, image_name, args.rows, args.columns, filters, csv_out,
-        yaml_out, args.save_map_image, args.save_cell_images,
+        yaml_out, args.save_cell_images,
         filter_image_name=args.filtered_image)
 
     if csv_out != sys.stdout:
