@@ -28,6 +28,8 @@ w = csv.writer(sys.stdout)
 keys = final_data.keys()
 header_key = keys.pop(keys.index(("i","j")))
 sorted_keys = sorted(keys, cmp=lambda x,y: cmp((int(x[0]),int(x[1])),(int(y[0]),int(y[1]))) )
+print header_key
+print sorted_keys
 
 w.writerow([header_key[0], header_key[1]]+final_data[header_key])
 w.writerows([[key[0], key[1]]+final_data[key] for key in sorted_keys])
