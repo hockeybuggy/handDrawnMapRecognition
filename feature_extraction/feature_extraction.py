@@ -3,6 +3,7 @@
 import sys
 import os
 import csv
+import yaml
 from argparse import ArgumentParser
 try:
     import Image
@@ -13,7 +14,7 @@ except ImportError:
 try:
     import numpy
 except ImportError:
-    print "Numpy package required: easy_install PIL"
+    print "Numpy package required: easy_install Numpy"
     sys.exit(1)
 
 
@@ -31,7 +32,8 @@ def parse_args():
     parser.add_argument('rows', type=int, help="The number of 'cells' along the y-dimension in the image file's grid.")
     parser.add_argument('filters', nargs='+', help="CSV files containing square matrices (3x3 or 5x5) to use as a convolution filter")
 
-    parser.add_argument('-output', help="output directory to write csv data to, default=stdout")
+    parser.add_argument('-output', help="output file or directory to write csv data to, default=stdout")
+    parser.add_argument('-yaml', help="yaml file to output vectors to, default=None")
     parser.add_argument('-filtered_image', nargs=1, help="where to save the filtered output image, (default=no save file)")
 
     args = parser.parse_args()
@@ -104,13 +106,11 @@ def get_stats_from_wvector(w_vector, key_prefix=""):
     return stat_results
 
 
-def main(image, image_name, rows, columns, filter_list, csv_output, filter_image_name=None):
+def main(image, image_name, rows, columns, filter_list, csv_output, yaml_out, filter_image_name=None):
     cell_w = image.size[0] / columns
     cell_h = image.size[1] / rows
     filtered_image = apply_filters(image, filter_list)
-
     filter_name = "-".join(map(base_name_no_ext, args.filters))
-    print filter_name
     
     if filter_image_name:
         print filter_image_name
@@ -126,6 +126,8 @@ def main(image, image_name, rows, columns, filter_list, csv_output, filter_image
             for key in vectors:
                 # union of two dict to add new keys
                 stats_data[i][j].update(get_stats_from_wvector(vectors[key], key)) 
+    if yaml_out:
+        yaml_out.write(yaml.dump(stats_data))
 
     stat_names = stats_data[0][0].keys()
     header_names = [filter_name+"-"+stat_name for stat_name in stat_names]
@@ -149,14 +151,17 @@ if __name__ == "__main__":
         print e
         sys.exit(1)
 
-    csv_output = sys.stdout
+    csv_out = sys.stdout
     if args.output:
         if os.path.isfile(args.output):
-            csv_output = open(args.output, "w")
+            csv_out = open(args.output, "w")
         else:
             if args.filtered_image:
-                csv_output = open(os.path.join(args.output, args.filter_image_name), "w")
+                csv_out = open(os.path.join(args.output, args.filter_image_name), "w")
+    yaml_out = None
+    if args.yaml:
+        if not os.path.isdir(args.yaml):
+            yaml_out = open(args.yaml, "w")
 
-    
-    main(image, image_name, args.rows, args.columns, filters, csv_output=csv_output, filter_image_name=args.filtered_image)
+    main(image, image_name, args.rows, args.columns, filters, csv_out, yaml_out, filter_image_name=args.filtered_image)
 
