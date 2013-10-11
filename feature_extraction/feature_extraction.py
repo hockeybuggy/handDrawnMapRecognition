@@ -41,11 +41,11 @@ def parse_args():
 
     if args.filtered_image:
         args.filtered_image = args.filtered_image[0]
-    base_name_no_ext = lambda s: os.path.splitext(os.path.basename(s))[0]
-    image_name = base_name_no_ext(args.image)
-    args.image = Image.open(args.image)
-    return (args, image_name)
 
+    return args
+
+def base_name_no_ext(fileStr):
+    return os.path.splitext(os.path.basename(fileStr))[0]
 
 def read_filters(filenames):
     filters = []
@@ -109,6 +109,9 @@ def main(image, image_name, rows, columns, filter_list, csv_output, filter_image
     cell_h = image.size[1] / rows
     filtered_image = apply_filters(image, filter_list)
 
+    filter_name = "-".join(map(base_name_no_ext, args.filters))
+    print filter_name
+    
     if filter_image_name:
         print filter_image_name
         filtered_image.save(filter_image_name)
@@ -125,8 +128,9 @@ def main(image, image_name, rows, columns, filter_list, csv_output, filter_image
                 stats_data[i][j].update(get_stats_from_wvector(vectors[key], key)) 
 
     stat_names = stats_data[0][0].keys()
+    header_names = [filter_name+"-"+stat_name for stat_name in stat_names]
     stats_writer = csv.writer(csv_output)
-    stats_writer.writerow(['i', 'j'] + stat_names)
+    stats_writer.writerow(['i', 'j'] + header_names)
     for i in range(columns):
         for j in range(rows):
             row = [i, j]
@@ -137,7 +141,9 @@ def main(image, image_name, rows, columns, filter_list, csv_output, filter_image
 
 if __name__ == "__main__":
     try:
-        args, image_name = parse_args()
+        args = parse_args()
+        image = Image.open(args.image)
+        image_name = base_name_no_ext(args.image)
         filters = read_filters(args.filters)
     except Exception as e:
         print e
@@ -151,5 +157,6 @@ if __name__ == "__main__":
             if args.filtered_image:
                 csv_output = open(os.path.join(args.output, args.filter_image_name), "w")
 
-    main(args.image, image_name, args.rows, args.columns, filters, csv_output=csv_output, filter_image_name=args.filtered_image)
+    
+    main(image, image_name, args.rows, args.columns, filters, csv_output=csv_output, filter_image_name=args.filtered_image)
 
