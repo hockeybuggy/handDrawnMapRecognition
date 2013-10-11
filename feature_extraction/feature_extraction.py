@@ -10,13 +10,13 @@ except ImportError:
     def yaml_dump(d):
         raise ValueError("YAML required for yaml dumping: easy_install yaml")
 
-
 try:
     import Image
     import ImageFilter
 except ImportError:
     print "PIL package required: easy_install PIL"
     sys.exit(1)
+
 try:
     import numpy as np
 except ImportError:
@@ -42,15 +42,12 @@ def parse_args():
     parser.add_argument('--save_cell_images', dest='save_cell_images', action='store_true', help="Save a copy of each of the post-filtered cells")
     parser.add_argument('-output', help="output file or directory to write csv data to, default=stdout")
     parser.add_argument('-yaml', help="yaml file to output vectors to, default=None")
-    parser.add_argument('-filtered_image', nargs=1, help="where to save the filtered output image, (default=no save file)")
+    parser.add_argument('-filtered_image', default=None, help="where to save the filtered output image, (default=no save file)")
 
     args = parser.parse_args()
 
     if args.columns <= 0 or args.rows <= 0:
         raise ValueError("rows and columns must be positive integers")
-
-    if args.filtered_image:
-        args.filtered_image = args.filtered_image[0]
 
     return args
 
