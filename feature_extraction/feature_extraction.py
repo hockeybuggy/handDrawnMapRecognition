@@ -86,7 +86,7 @@ def bounding_box(x, y, w, h, inset=0):
 
 
 def apply_index_weighting(vector, luminosity):
-    return vector * np.arange(len(vector)) / luminosity
+    return vector * np.arange(len(vector)) / float(luminosity)
 
 
 def get_weighted_vectors(image):
@@ -116,8 +116,10 @@ def main(image, image_name, rows, columns, filter_list, csv_output,
     if filter_image_name:
         filtered_image.save(filter_image_name)
     stats_data = []
+    vector_data = []
     for i in range(columns):
         stats_data.append(list())
+        vector_data.append(list())
         for j in range(rows):
             stats_data[i].append(dict())
             bb = bounding_box(i * cell_w, j * cell_h, cell_w, cell_h)
@@ -129,8 +131,13 @@ def main(image, image_name, rows, columns, filter_list, csv_output,
             for key in vectors:
                 # union of two dict to add new keys
                 stats_data[i][j].update(get_stats_from_wvector(vectors[key], key))
+
+            #  yaml lib doesn't like numpy data types.
+            vectors['x'] = list(map(float, vectors['x']))
+            vectors['y'] = list(map(float, vectors['x']))
+            vector_data[i].append(vectors)
     if yaml_out:
-        yaml_out.write(yaml_dump(stats_data))
+        yaml_out.write(yaml_dump(vector_data))
 
     stat_names = stats_data[0][0].keys()
     header_names = [filter_name + "-" + stat_name for stat_name in stat_names]
