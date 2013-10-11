@@ -33,7 +33,11 @@ def parse_args():
     parser.add_argument('filters', nargs='+', help="CSV files containing square matrices (3x3 or 5x5) to use as a convolution filter")
 
     parser.add_argument('--save_map_image',dest='save_map_image',action='store_true', help="Save a copy of the post-filtered map")
-    parser.add_argument('--no_save_map_image',dest='save_map_image',action='store_false', help="")
+    parser.add_argument('--no_save_map_image',dest='save_map_image',action='store_false')
+    parser.set_defaults(save_map_image=False)
+
+    parser.add_argument('--save_cell_images',dest='save_cell_images',action='store_true', help="Save a copy of each of the post-filtered cells")
+    parser.add_argument('--no_save_cell_images',dest='save_cell_images',action='store_false')
     parser.set_defaults(save_map_image=False)
 
     parser.add_argument('-output', help="output file or directory to write csv data to, default=stdout")
@@ -110,7 +114,7 @@ def get_stats_from_wvector(w_vector, key_prefix=""):
     return stat_results
 
 
-def main(image, image_name, rows, columns, filter_list, csv_output, yaml_out, save_map_image, filter_image_name=None):
+def main(image, image_name, rows, columns, filter_list, csv_output, yaml_out, save_map_image, save_cell_images, filter_image_name=None):
     cell_w = image.size[0] / columns
     cell_h = image.size[1] / rows
     filter_name = "-".join(map(base_name_no_ext, args.filters))
@@ -128,6 +132,8 @@ def main(image, image_name, rows, columns, filter_list, csv_output, yaml_out, sa
             stats_data[i].append(dict())
             bb = bounding_box(i * cell_w, j * cell_h, cell_w, cell_h)
             cell = filtered_image.crop(bb)
+            if save_cell_images:
+                cell.save(image_name+"-"+filter_name+"_y"+"{0:02d}".format(j)+"_x"+"{0:02d}".format(i)+".bmp")
             vectors = get_weighted_vectors(cell)
             for key in vectors:
                 # union of two dict to add new keys
@@ -169,5 +175,5 @@ if __name__ == "__main__":
         if not os.path.isdir(args.yaml):
             yaml_out = open(args.yaml, "w")
 
-    main(image, image_name, args.rows, args.columns, filters, csv_out, yaml_out, args.save_map_image, filter_image_name=args.filtered_image)
+    main(image, image_name, args.rows, args.columns, filters, csv_out, yaml_out, args.save_map_image, args.save_cell_images, filter_image_name=args.filtered_image)
 
