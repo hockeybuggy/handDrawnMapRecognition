@@ -3,8 +3,14 @@
 import sys
 import os
 import csv
-import yaml
 from argparse import ArgumentParser
+try:
+    from yaml import dump as yaml_dump
+except ImportError:
+    def yaml_dump(d):
+        raise ValueError("YAML required for yaml dumping: easy_install yaml")
+
+
 try:
     import Image
     import ImageFilter
@@ -32,14 +38,8 @@ def parse_args():
     parser.add_argument('rows', type=int, help="The number of 'cells' along the y-dimension in the image file's grid.")
     parser.add_argument('filters', nargs='+', help="CSV files containing square matrices (3x3 or 5x5) to use as a convolution filter")
 
-    parser.add_argument('--save_map_image',dest='save_map_image',action='store_true', help="Save a copy of the post-filtered map")
-    parser.add_argument('--no_save_map_image',dest='save_map_image',action='store_false')
-    parser.set_defaults(save_map_image=False)
-
-    parser.add_argument('--save_cell_images',dest='save_cell_images',action='store_true', help="Save a copy of each of the post-filtered cells")
-    parser.add_argument('--no_save_cell_images',dest='save_cell_images',action='store_false')
-    parser.set_defaults(save_cell_images=False)
-
+    parser.add_argument('--save_map_image', dest='save_map_image', action='store_true', help="Save a copy of the post-filtered map")
+    parser.add_argument('--save_cell_images', dest='save_cell_images', action='store_true', help="Save a copy of each of the post-filtered cells")
     parser.add_argument('-output', help="output file or directory to write csv data to, default=stdout")
     parser.add_argument('-yaml', help="yaml file to output vectors to, default=None")
     parser.add_argument('-filtered_image', nargs=1, help="where to save the filtered output image, (default=no save file)")
@@ -92,6 +92,7 @@ def apply_index_weighting(vector, luminosity):
 
 
 def get_weighted_vectors(image):
+    image = image.convert('L')
     matrix = np.array(image.getdata())
     matrix.shape = image.size[:2]
     luminosity = matrix.sum()
@@ -101,7 +102,7 @@ def get_weighted_vectors(image):
 
 
 def get_stats_from_wvector(w_vector, key_prefix=""):
-    stat_functions = dict(mean=numpy.mean, stddev=numpy.std)
+    stat_functions = dict(mean=np.mean, stddev=np.std)
     stat_results = dict()
     for key in stat_functions:
         stat_results[key_prefix + "_" + key] = stat_functions[key](w_vector)
@@ -132,9 +133,9 @@ def main(image, image_name, rows, columns, filter_list, csv_output,
             vectors = get_weighted_vectors(cell)
             for key in vectors:
                 # union of two dict to add new keys
-                stats_data[i][j].update(get_stats_from_wvector(vectors[key], key)) 
+                stats_data[i][j].update(get_stats_from_wvector(vectors[key], key))
     if yaml_out:
-        yaml_out.write(yaml.dump(stats_data))
+        yaml_out.write(yaml_dump(stats_data))
 
     stat_names = stats_data[0][0].keys()
     header_names = [filter_name + "-" + stat_name for stat_name in stat_names]
@@ -154,7 +155,7 @@ def filename_or_file_at(file_path, default_name):
     elif os.path.isdir(file_path):
         return os.path.join(file_path, default_name)
     else:
-        return default_name
+        return file_path
 
 
 if __name__ == "__main__":
@@ -168,14 +169,14 @@ if __name__ == "__main__":
         sys.exit(1)
 
     file_name = image_name + "-" + "-".join(map(base_name_no_ext, args.filters)) + ".csv"
-    csv_out = sys.stdout if not args.output else open(filename_or_file_at(args.output, file_name), "w") 
-    yaml_out = None if not args.yaml else open(args.yaml, "w") 
+    csv_out = sys.stdout if not args.output else open(filename_or_file_at(args.output, file_name), "w")
+    yaml_out = None if not args.yaml else open(args.yaml, "w")
     main(image, image_name, args.rows, args.columns, filters, csv_out,
         yaml_out, args.save_map_image, args.save_cell_images,
         filter_image_name=args.filtered_image)
 
     if csv_out != sys.stdout:
-        close(csv_out)
-        
+        csv_out.close()
+
     if yaml_out:
-        close(yaml_out)
+        yaml_out.close()
