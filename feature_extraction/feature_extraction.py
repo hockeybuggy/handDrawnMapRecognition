@@ -12,7 +12,7 @@ except ImportError:
     print "PIL package required: easy_install PIL"
     sys.exit(1)
 try:
-    import numpy
+    import numpy as np
 except ImportError:
     print "Numpy package required: easy_install Numpy"
     sys.exit(1)
@@ -54,8 +54,10 @@ def parse_args():
 
     return args
 
+
 def base_name_no_ext(fileStr):
     return os.path.splitext(os.path.basename(fileStr))[0]
+
 
 def read_filters(filenames):
     filters = []
@@ -70,7 +72,6 @@ def read_filters(filenames):
             raise ValueError("matrix must be square with a width of 3 or 5: " + filename)
         if not all(len(r) == len(matrix) for r in matrix):
             raise ValueError("matrix must be square, in: " + filename)
-        #print [x for row in matrix for x in row]
         f = ImageFilter.Kernel((len(matrix), len(matrix)), [x for row in matrix for x in row])
         filters.append(f)
     return filters
@@ -87,43 +88,36 @@ def bounding_box(x, y, w, h, inset=0):
 
 
 def apply_index_weighting(vector, luminosity):
-    new_vector = numpy.array([])
-    for i in range(0, len(vector)):
-        new_vector = (vector * i) / luminosity
-    return new_vector
+    return vector * np.arange(len(vector)) / luminosity
 
 
 def get_weighted_vectors(image):
-    vectors = dict()
-    vector = numpy.array(image.getdata())
-    matrix = numpy.reshape(vector, (image.size[0], image.size[0]))
-    rowSum = numpy.sum(matrix, 0) # Sum matrix along each axis
-    colSum = numpy.sum(matrix, 1)
-    luminosity = numpy.sum(matrix)
-
-    vectors["x"] = apply_index_weighting(rowSum, luminosity)
-    vectors["y"] = apply_index_weighting(colSum, luminosity)
-    return vectors
+    matrix = np.array(image.getdata())
+    matrix.shape = image.size[:2]
+    luminosity = matrix.sum()
+    return dict(
+            x=apply_index_weighting(matrix.sum(0), luminosity),
+            y=apply_index_weighting(matrix.sum(1), luminosity))
 
 
 def get_stats_from_wvector(w_vector, key_prefix=""):
-    stat_functions = dict(mean=numpy.mean,stddev=numpy.std)
+    stat_functions = dict(mean=numpy.mean, stddev=numpy.std)
     stat_results = dict()
     for key in stat_functions:
-        stat_results[key_prefix+"_"+key] = stat_functions[key](w_vector)
+        stat_results[key_prefix + "_" + key] = stat_functions[key](w_vector)
     return stat_results
 
 
-def main(image, image_name, rows, columns, filter_list, csv_output, yaml_out, save_map_image, save_cell_images, filter_image_name=None):
+def main(image, image_name, rows, columns, filter_list, csv_output,
+        yaml_out=None, save_map_image=None, save_cell_images=False, filter_image_name=None):
     cell_w = image.size[0] / columns
     cell_h = image.size[1] / rows
     filter_name = "-".join(map(base_name_no_ext, args.filters))
     filtered_image = apply_filters(image, filter_list)
     if save_map_image:
-        filtered_image.save(image_name+"-"+filter_name+".bmp")
+        filtered_image.save(image_name + "-" + filter_name + ".bmp")
 
     if filter_image_name:
-        print filter_image_name
         filtered_image.save(filter_image_name)
     stats_data = []
     for i in range(columns):
@@ -133,7 +127,8 @@ def main(image, image_name, rows, columns, filter_list, csv_output, yaml_out, sa
             bb = bounding_box(i * cell_w, j * cell_h, cell_w, cell_h)
             cell = filtered_image.crop(bb)
             if save_cell_images:
-                cell.save(image_name+"-"+filter_name+"_y"+"{0:02d}".format(j)+"_x"+"{0:02d}".format(i)+".bmp")
+                cell_name = "{:s}-{:s}_y{0:02d}_x{0:02d}.bmp".format(image_name, filter_name, i, j)
+                cell.save(cell_name)
             vectors = get_weighted_vectors(cell)
             for key in vectors:
                 # union of two dict to add new keys
@@ -142,7 +137,7 @@ def main(image, image_name, rows, columns, filter_list, csv_output, yaml_out, sa
         yaml_out.write(yaml.dump(stats_data))
 
     stat_names = stats_data[0][0].keys()
-    header_names = [filter_name+"-"+stat_name for stat_name in stat_names]
+    header_names = [filter_name + "-" + stat_name for stat_name in stat_names]
     stats_writer = csv.writer(csv_output)
     stats_writer.writerow(['i', 'j'] + header_names)
     for i in range(columns):
@@ -151,6 +146,15 @@ def main(image, image_name, rows, columns, filter_list, csv_output, yaml_out, sa
             for k in stat_names:
                 row.append(stats_data[i][j][k])
             stats_writer.writerow(row)
+
+
+def filename_or_file_at(file_path, default_name):
+    if not file_path:
+        return default_name
+    elif os.path.isdir(file_path):
+        return os.path.join(file_path, default_name)
+    else:
+        return default_name
 
 
 if __name__ == "__main__":
@@ -163,22 +167,15 @@ if __name__ == "__main__":
         print e
         sys.exit(1)
 
-    csv_out = sys.stdout
-    if args.output:
-        if not os.path.exists(args.output) or os.path.isfile(args.output):
-            csv_out = open(args.output, "w")
-        else:
-            if os.path.isdir(args.output):
-                file_name = image_name+"-"+"-".join(map(base_name_no_ext, args.filters))+".csv"
-                csv_out = open(os.path.join(args.output, file_name), "w")
-    
+    file_name = image_name + "-" + "-".join(map(base_name_no_ext, args.filters)) + ".csv"
+    csv_out = sys.stdout if not args.output else open(filename_or_file_at(args.output, file_name), "w") 
+    yaml_out = None if not args.yaml else open(args.yaml, "w") 
+    main(image, image_name, args.rows, args.columns, filters, csv_out,
+        yaml_out, args.save_map_image, args.save_cell_images,
+        filter_image_name=args.filtered_image)
 
-            if args.filtered_image:
-                csv_out = open(os.path.join(args.output, args.filter_image_name), "w")
-    yaml_out = None
-    if args.yaml:
-        if not os.path.isdir(args.yaml):
-            yaml_out = open(args.yaml, "w")
-
-    main(image, image_name, args.rows, args.columns, filters, csv_out, yaml_out, args.save_map_image, args.save_cell_images, filter_image_name=args.filtered_image)
-
+    if csv_out != sys.stdout:
+        close(csv_out)
+        
+    if yaml_out:
+        close(yaml_out)
