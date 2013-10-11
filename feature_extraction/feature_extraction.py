@@ -7,8 +7,11 @@ from argparse import ArgumentParser
 try:
     from yaml import dump as yaml_dump
 except ImportError:
-    def yaml_dump(d):
-        raise ValueError("YAML required for yaml dumping: easy_install yaml")
+    try:
+        from simpleyaml import dump as yaml_dump
+    except ImportError:
+        def yaml_dump(d):
+            raise ValueError("YAML required for yaml dumping: easy_install simpleyaml")
 
 try:
     import Image
