@@ -38,7 +38,7 @@ def parse_args():
 
     parser.add_argument('--save_cell_images',dest='save_cell_images',action='store_true', help="Save a copy of each of the post-filtered cells")
     parser.add_argument('--no_save_cell_images',dest='save_cell_images',action='store_false')
-    parser.set_defaults(save_map_image=False)
+    parser.set_defaults(save_cell_images=False)
 
     parser.add_argument('-output', help="output file or directory to write csv data to, default=stdout")
     parser.add_argument('-yaml', help="yaml file to output vectors to, default=None")
