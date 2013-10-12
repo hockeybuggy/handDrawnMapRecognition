@@ -85,25 +85,33 @@ def bounding_box(x, y, w, h, inset=0):
     return [x + inset, y + inset, x + w - 2 * inset, y + h - 2 * inset]
 
 
-def apply_index_weighting(vector, luminosity):
-    return vector * np.arange(len(vector)) / float(luminosity)
+def apply_index_weighting(vector):
+    return vector * np.arange(len(vector))
 
 
-def get_weighted_vectors(image):
-    image = image.convert('L')
+def centred_difference(vector):
+    return np.array([(vector[i+1]-vector[i-1]) * 0.5 for i in range(1, len(vector) - 1)])
+
+
+def get_vectors(image):
     matrix = np.array(image.getdata())
     matrix.shape = image.size[:2]
-    luminosity = matrix.sum()
-    return dict(
-            x=apply_index_weighting(matrix.sum(0), luminosity),
-            y=apply_index_weighting(matrix.sum(1), luminosity))
+    luminosity = float(matrix.sum())
+    xv = matrix.sum(0) / luminosity
+    yv = matrix.sum(1) / luminosity
+    dx = centred_difference(xv)
+    dy = centred_difference(yv)
+    ddx = centred_difference(dx)
+    ddy = centred_difference(dy)
+    return dict(x=xv, y=yv, dx=dx, dy=dy, ddx=ddx, ddy=ddy)
 
 
-def get_stats_from_wvector(w_vector, key_prefix=""):
+def get_stats_from_vector(vector, key_prefix=""):
+    weighted = apply_index_weighting(vector)
     stat_functions = dict(mean=np.mean, stddev=np.std)
     stat_results = dict()
     for key in stat_functions:
-        stat_results[key_prefix + "_" + key] = stat_functions[key](w_vector)
+        stat_results[key_prefix + "_" + key] = stat_functions[key](weighted)
     return stat_results
 
 
@@ -127,10 +135,10 @@ def main(image, image_name, rows, columns, filter_list, csv_output,
             if save_cell_images:
                 cell_name = "{:s}-{:s}_y{0:02d}_x{0:02d}.bmp".format(image_name, filter_name, i, j)
                 cell.save(cell_name)
-            vectors = get_weighted_vectors(cell)
+            vectors = get_vectors(cell)
             for key in vectors:
                 # union of two dict to add new keys
-                stats_data[i][j].update(get_stats_from_wvector(vectors[key], key))
+                stats_data[i][j].update(get_stats_from_vector(vectors[key], key))
 
             #  yaml lib doesn't like numpy data types.
             vectors['x'] = list(map(float, vectors['x']))
@@ -164,6 +172,7 @@ if __name__ == "__main__":
     try:
         args = parse_args()
         image = Image.open(args.image)
+        image = image.convert('L')
         image_name = base_name_no_ext(args.image)
         filters = read_filters(args.filters)
     except Exception as e:

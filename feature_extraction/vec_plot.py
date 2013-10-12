@@ -35,7 +35,8 @@ def main(yamlfilename, csvfilename):
             name = "output-%s-%s--%d.png" % (sym, key, len(vecs))
             plt.title(name)
             plt.savefig(name)
-            plt.figure()
+            plt.close()
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
