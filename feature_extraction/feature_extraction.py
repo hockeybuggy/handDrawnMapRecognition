@@ -108,11 +108,7 @@ def get_vectors(image):
     luminosity = float(matrix.sum())
     xv = matrix.sum(0) / luminosity
     yv = matrix.sum(1) / luminosity
-    # dx = centred_difference(xv)
-    # dy = centred_difference(yv)
-    # ddx = centred_difference(dx)
-    # ddy = centred_difference(dy)
-    return dict(x=xv, y=yv) # , dx=dx, dy=dy, ddx=ddx, ddy=ddy)
+    return dict(x=xv, y=yv)
 
 
 def get_stats_from_vector(vector, key_prefix=""):
@@ -150,8 +146,8 @@ def main(image, image_name, rows, columns, filter_list, csv_output,
                 stats_data[i][j].update(get_stats_from_vector(vectors[key], key))
 
             vector_data[i].append(vectors)
-            #  yaml lib doesn't like numpy data types.
-            if yaml_out:
+            
+            if yaml_out:   #  yaml lib doesn't like numpy data types.
                 vectors['x'] = list(map(float, vectors['x']))
                 vectors['y'] = list(map(float, vectors['x']))
   
