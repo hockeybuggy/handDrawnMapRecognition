@@ -95,11 +95,11 @@ def centred_difference(vector):
 
 
 def count_positive_to_negative(a):
-	return sum(x > 0 and y <= 0 for x, y in zip(a[:-1], a[1:])
+    return sum(x > 0 and y <= 0 for x, y in zip(a[:-1], a[1:]))
 
 
 def count_max_peaks(a):
-    return count_positive_to_negative(centred_differece(a))
+    return count_positive_to_negative(centred_difference(a))
 
 
 def chi_mean(a):
@@ -138,19 +138,19 @@ def main(image, image_name, rows, columns, filter_list, csv_output,
             bb = bounding_box(i * cell_w, j * cell_h, cell_w, cell_h)
             cell = filtered_image.crop(bb)
             if save_cell_images:
-                cell_name = "{:s}-{:s}_y{0:02d}_x{0:02d}.bmp".format(image_name, filter_name, i, j)
+                cell_name = "{:s}-{:s}_y{:02d}_x{:02d}.bmp".format(image_name, filter_name, i, j)
                 cell.save(cell_name)
             vectors = get_vectors(cell)
             for key in vectors:
                 # union of two dict to add new keys
-                stats_data[i][j].update(dict_map(vectors[key], stat_functions, key=key + "_"))
+                stats_data[i][j].update(dict_map(vectors[key], stat_functions, key + "_"))
 
             vector_data[i].append(vectors)
-            
+
             if yaml_out:   #  yaml lib doesn't like numpy data types.
                 vectors['x'] = list(map(float, vectors['x']))
                 vectors['y'] = list(map(float, vectors['x']))
-  
+
     if yaml_out:
         yaml_out.write(yaml_dump(vector_data))
 
