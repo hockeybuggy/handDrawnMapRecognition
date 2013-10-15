@@ -4,6 +4,7 @@ import sys
 import os
 import csv
 from argparse import ArgumentParser
+
 try:
     from yaml import dump as yaml_dump
 except ImportError:
@@ -93,22 +94,30 @@ def centred_difference(vector):
     return np.array([(vector[i+1]-vector[i-1]) * 0.5 for i in range(1, len(vector) - 1)])
 
 
+def count_positive_to_negative(a):
+	return sum(x > 0 and y <= 0 for x, y in zip(a[:-1], a[1:])
+
+
+def count_max_peaks(a):
+    return count_positive_to_negative(centred_differece(a))
+
+
 def get_vectors(image):
     matrix = np.array(image.getdata())
     matrix.shape = image.size[:2]
     luminosity = float(matrix.sum())
     xv = matrix.sum(0) / luminosity
     yv = matrix.sum(1) / luminosity
-    dx = centred_difference(xv)
-    dy = centred_difference(yv)
-    ddx = centred_difference(dx)
-    ddy = centred_difference(dy)
-    return dict(x=xv, y=yv, dx=dx, dy=dy, ddx=ddx, ddy=ddy)
+    # dx = centred_difference(xv)
+    # dy = centred_difference(yv)
+    # ddx = centred_difference(dx)
+    # ddy = centred_difference(dy)
+    return dict(x=xv, y=yv) # , dx=dx, dy=dy, ddx=ddx, ddy=ddy)
 
 
 def get_stats_from_vector(vector, key_prefix=""):
     weighted = apply_index_weighting(vector)
-    stat_functions = dict(mean=np.mean, stddev=np.std)
+    stat_functions = dict(mean=np.mean, stddev=np.std, peaks=count_max_peaks)
     stat_results = dict()
     for key in stat_functions:
         stat_results[key_prefix + "_" + key] = stat_functions[key](weighted)
@@ -140,10 +149,12 @@ def main(image, image_name, rows, columns, filter_list, csv_output,
                 # union of two dict to add new keys
                 stats_data[i][j].update(get_stats_from_vector(vectors[key], key))
 
-            #  yaml lib doesn't like numpy data types.
-            vectors['x'] = list(map(float, vectors['x']))
-            vectors['y'] = list(map(float, vectors['x']))
             vector_data[i].append(vectors)
+            #  yaml lib doesn't like numpy data types.
+            if yaml_out:
+                vectors['x'] = list(map(float, vectors['x']))
+                vectors['y'] = list(map(float, vectors['x']))
+  
     if yaml_out:
         yaml_out.write(yaml_dump(vector_data))
 
