@@ -102,6 +102,10 @@ def count_max_peaks(a):
     return count_positive_to_negative(centred_differece(a))
 
 
+def chi_mean(a):
+	return apply_index_weighting(a).mean()
+
+
 def get_vectors(image):
     matrix = np.array(image.getdata())
     matrix.shape = image.size[:2]
@@ -111,13 +115,8 @@ def get_vectors(image):
     return dict(x=xv, y=yv)
 
 
-def get_stats_from_vector(vector, key_prefix=""):
-    weighted = apply_index_weighting(vector)
-    stat_functions = dict(mean=np.mean, stddev=np.std, peaks=count_max_peaks)
-    stat_results = dict()
-    for key in stat_functions:
-        stat_results[key_prefix + "_" + key] = stat_functions[key](weighted)
-    return stat_results
+def dict_map(a, functions, key_prefix=""):
+    return dict([(key_prefix + key, func(a)) for key, func in functions.items()])
 
 
 def main(image, image_name, rows, columns, filter_list, csv_output,
@@ -130,6 +129,7 @@ def main(image, image_name, rows, columns, filter_list, csv_output,
         filtered_image.save(filter_image_name)
     stats_data = []
     vector_data = []
+    stat_functions = dict(mean=chi_mean, stddev=np.std, peaks=count_max_peaks)
     for i in range(columns):
         stats_data.append(list())
         vector_data.append(list())
@@ -143,7 +143,7 @@ def main(image, image_name, rows, columns, filter_list, csv_output,
             vectors = get_vectors(cell)
             for key in vectors:
                 # union of two dict to add new keys
-                stats_data[i][j].update(get_stats_from_vector(vectors[key], key))
+                stats_data[i][j].update(dict_map(vectors[key], stat_functions, key=key + "_"))
 
             vector_data[i].append(vectors)
             
