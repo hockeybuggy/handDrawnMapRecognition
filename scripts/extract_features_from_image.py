@@ -4,41 +4,64 @@ import os
 from shutil import rmtree
 from itertools import permutations
 from subprocess import call
+from argparse import ArgumentParser
 
-if len(sys.argv) != 5 or os.path.basename(os.getcwd()) != "handDrawnMapRecognition":
-    print "Usage: from repo root ./scripts/extract_features_from_image.py <IMAGE> <CELLS WIDE> <CELL HIGH> <INTENDED_MAP_CSV>"
-    sys.exit(-1)
-if os.path.exists(os.getcwd()+"tmp"):
-    print "Please clean up tmp dir. Exiting"
-    sys.exit(-1)
+def parse_args():
+    parser = ArgumentParser( description="Calculates subsets of the set the equal the sum.")
+    parser.add_argument("image", type=str, help="A greyscale bitmap image of a map")
+    parser.add_argument("width", type=int, help="The width of the map in cell")
+    parser.add_argument("height", type=int, help="The height of the map in cell")
+    parser.add_argument("intended", type=str, help="A csv file of the intend representation")
+    parser.add_argument("--keeptmp", dest="keeptmp", action="store_true", default=False, help="A flag to control removal of intermediate files")
+    # TODO add more args
+    # TODO add blur
+    # TODO add adjustable output
+    # TODO add add filter list
+    if os.path.basename(os.getcwd()) != "handDrawnMapRecognition":
+        raise Exception("Must be in root directory of the project")
+    if os.path.exists(os.path.join(os.getcwd(),"tmp")):
+        raise Exception("Please clean up tmp dir. Exiting")
+    return(parser.parse_args())
 
-filter_dir = "feature_extraction/filters/"
-output_dir = "tmp/"
-feature_extraction_exe = "feature_extraction/feature_extraction.py"
-csv_join_exe = "scripts/csv_join.py"
-map_pivot_exe = "scripts/map_csv_pivot.py"
-final_output = os.path.join(os.getcwd(), os.path.basename(sys.argv[1]).split(".")[0]+".csv")
-os.mkdir(output_dir)
+f_dir = "feature_extraction/filters/"
+out_dir = "tmp/"
 
 filters = ["horz", "vert", "dia1", "dia2"]
 
-for f in filters:
-    print "Extracting features for under: ", f
-    call(["python",feature_extraction_exe,sys.argv[1],sys.argv[2],sys.argv[3],filter_dir+f+".csv","-output",output_dir])
+def feature_extraction(args):
+    call(["python", "feature_extraction/feature_extraction.py"] + args)
 
-for combo in permutations(filters,2):
-    print "Extracting features for under: ", " and ".join(combo)
-    call(["python",feature_extraction_exe,sys.argv[1],sys.argv[2],sys.argv[3],filter_dir+combo[0]+".csv",filter_dir+combo[1]+".csv","-output",output_dir])
+def map_pivot(args):
+    call(["python", "scripts/map_csv_pivot.py"] + args)
 
-print "Transforming intended csv"
-call(["python",map_pivot_exe, sys.argv[4], output_dir+"intended.csv"])
+def csv_join(files, output):
+    w = open(output, "w")
+    call(["python", "scripts/csv_join.py"]+files, stdout=w)
+    w.close()
 
-print "Joining all intermediate csv files"
-csv_files = [output_dir+csv_file for csv_file in os.listdir(output_dir)]
-w = open(final_output, "w")
-call(["python",csv_join_exe]+csv_files, stdout=w)
-w.close()
+def main(image, width, height, intended, keeptmp):
+    os.mkdir(out_dir)
 
-#print "Removing intermediate csv files"
-#rmtree(os.path.join(os.getcwd(),output_dir))
+    for f in filters:
+        print "Extracting features under: ", f
+        feature_extraction([image, width, height,f_dir+f+".csv", "-output", out_dir])
+    for combo in permutations(filters,2):
+        print "Extracting features under: ", " and ".join(combo)
+        feature_extraction([image, width, height,f_dir+combo[0]+".csv",f_dir+combo[1]+".csv","-output", out_dir])
+
+    print "Transforming intended csv"
+    map_pivot([intended, out_dir+"intended.csv"])
+
+    print "Joining all intermediate csv files"
+    csv_files = [out_dir+csv_file for csv_file in os.listdir(out_dir)]
+    final_output = os.path.join(os.getcwd(), os.path.basename(image).split(".")[0]+".csv")
+    csv_join(csv_files, final_output)
+
+    if not keeptmp:
+        print "Removing intermediate csv files"
+        rmtree(os.path.join(os.getcwd(),out_dir))
+
+if __name__ == "__main__":
+    args = parse_args()
+    main(args.image, str(args.width), str(args.height), args.intended, args.keeptmp)
 

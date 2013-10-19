@@ -40,12 +40,11 @@ def main(data_file, outdir, image_prefix, cell_images):
         #print key, images_by_class[key], "\n"
         dilution = 1.0/float(len(images_by_class[key]))
         print key, "at a dilution of:", dilution
+        # Create an image for each list of images
         mean_image = Image.new("L", images_by_class[key][0].size, "white") # TODO make this non-static
         for image in images_by_class[key]:
             mean_image = Image.blend(mean_image, image, dilution)
-        print outdir
         mean_image.save(os.path.join(outdir,key+".bmp") if outdir else key+".bmp")
-        # Create an image for each list of images
 
 if __name__ == "__main__":
     main(*parse_args())
