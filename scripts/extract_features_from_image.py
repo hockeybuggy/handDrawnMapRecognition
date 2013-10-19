@@ -3,8 +3,9 @@ import sys
 import os
 from shutil import rmtree
 from itertools import permutations
-from subprocess import call
+from subprocess import call, check_call
 from argparse import ArgumentParser
+import multiprocessing as mp
 
 def parse_args():
     parser = ArgumentParser( description="Calculates subsets of the set the equal the sum.")
@@ -40,9 +41,6 @@ def parse_args():
         args.output = os.path.join(args.output, os.path.basename(args.image).split(".")[0]+".csv")
     return(args)
 
-def feature_extraction(args):
-    call(["python", "feature_extraction/feature_extraction.py"] + args)
-
 def map_pivot(args):
     call(["python", "scripts/map_csv_pivot.py"] + args)
 
@@ -74,12 +72,28 @@ def get_filter_lists(permlen, blur, onlyblur):
                 lists.append([blur_path]+[os.path.join(filter_dir,f+".csv") for f in perm])
     return lists
 
+def extract(filter_list):
+    print "Extracting features under:", " and ".join([os.path.basename(f).split(".")[0] for f in filter_list])
+    check_call(["python", "feature_extraction/feature_extraction.py"]+[extract.image,extract.width,extract.height]+filter_list+["-output",extract.tmpdir])
+
+def init_filter_queue(q, image, width, height, tmpdir):
+    extract.q = q
+    extract.image = image
+    extract.width = width
+    extract.height = height
+    extract.tmpdir = tmpdir
+
 def main(image, width, height, intended, output, tmpdir, keeptmp, blur, onlyblur, permlen):
     os.mkdir(tmpdir)
 
-    for filter_list in get_filter_lists(permlen, blur, onlyblur):
-        print "Extracting features under:", " and ".join([os.path.basename(f).split(".")[0] for f in filter_list])
-        feature_extraction([image, width, height]+filter_list+["-output", tmpdir])
+    filter_lists = get_filter_lists(permlen, blur, onlyblur)
+    filter_queue = mp.Queue()
+    for filter_list in filter_lists:
+        filter_queue.put(filter_list)
+    pool = mp.Pool(None, init_filter_queue, [filter_queue, image, width, height, tmpdir])
+    reqults = pool.imap(extract, filter_lists)
+    pool.close()
+    pool.join()
 
     print "Transforming intended csv"
     map_pivot([intended, tmpdir+"intended.csv"])
