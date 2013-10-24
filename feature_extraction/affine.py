@@ -55,8 +55,9 @@ def applytopoint(matrix, point):
     return point.dot(matrix)
 
 
-def vars(a):
+def vars(b):
     """
     return the coefficients in the form which PIL likes.
     """
+    a = np.array(np.matrix(b).I)
     return [a[0][0], a[1][0], a[2][0], a[0][1], a[1][1], a[2][1]]
