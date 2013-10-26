@@ -41,8 +41,8 @@ def parse_args():
         args.output = os.path.join(args.output, os.path.basename(args.image).split(".")[0]+".csv")
     return(args)
 
-def map_pivot(args):
-    call(["python", "scripts/map_csv_pivot.py"] + args)
+def proximity_stats(args):
+    call(["python", "feature_extraction/proximity_statistics.py"] + args)
 
 def csv_join(files, output):
     w = open(output, "w")
@@ -95,8 +95,8 @@ def main(image, width, height, intended, output, tmpdir, keeptmp, blur, onlyblur
     pool.close()
     pool.join()
 
-    print "Transforming intended csv"
-    map_pivot([intended, tmpdir+"intended.csv"])
+    print "Transforming intended csv and acquiring class proximity stats"
+    proximity_stats([intended, "-output", tmpdir+"proximity_stats.csv"])
 
     print "Joining all intermediate csv files"
     csv_files = [tmpdir+csv_file for csv_file in os.listdir(tmpdir)]
