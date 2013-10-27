@@ -15,6 +15,13 @@ def parse_args():
 
     parser.add_argument('map_csv', help="A csv file representing a map.")
     parser.add_argument('-output', help="output file or directory to write csv data to, default=stdout")
+    parser.add_argument('-null_class', default="NULL", help="The name of the null class, default=NULL")
+    parser.add_argument('-min_n_size', type=int, default=15, help="""
+        The minimum number of examples to be statistically valid, default=15
+    """)
+    parser.add_argument('-map_source', default="intended", help="""
+        The source of the input csv file, default='intended'
+    """)
 
     args = parser.parse_args()
     return(args)
@@ -59,15 +66,10 @@ def get_dict_sum(stats, c_class, direction, n_class=None):
         ttl = stats[c_class][direction][n_class]
     return ttl
 
-def main(map_csv, out_fd):
+def main(map_csv, out_fd, null_class, min_n_size, map_source):
     r = csv.reader(open(map_csv, "r"))
     w = csv.writer(out_fd)
     directions = {'north':(0,1),'east':(1,0),'south':(0,-1),'west':(-1,0)}
-
-    #TODO add args for ne three
-    null_class = "NULL"
-    min_n_size = 15
-    map_source = "intended" # the source of the map 
 
     map_list = []
     for row in r:
@@ -101,28 +103,13 @@ def main(map_csv, out_fd):
                     else:
                         proximity_prob[c_class][direction][n_class] = None
 
-    for c_class in proximity_prob.keys():
-        print c_class, ":" 
-        for direct in proximity_prob[c_class]:
-            ssum = 0.0
-            print direct, ":",  proximity_prob[c_class][direct]
-            for n_class in proximity_prob[c_class][direct]:
-                if proximity_prob[c_class][direct][n_class]:
-                    ssum += proximity_prob[c_class][direct][n_class]
-            print ssum
-        print
-
-    
     prob_headers = dict()
     for c_class in proximity_prob.keys():
-
         prob_headers[c_class] = dict()
         for direction in proximity_prob[c_class].keys():
             for n_class in proximity_prob[c_class][direction].keys():
                 given_prob = proximity_prob[c_class][direction][n_class]
                 prob_headers[c_class]["prob_of_"+n_class+"_"+direction+"_given_"+map_source] = given_prob
-
-    print prob_headers.keys()
 
     header_names = ["i", "j", map_source] + prob_headers.get(prob_headers.keys()[0]).keys()
     w.writerow(header_names)
@@ -138,4 +125,4 @@ if __name__ == "__main__":
         out_fd = open(args.output, "w")
     else:
         out_fd = sys.stdout
-    main(args.map_csv, out_fd)
+    main(args.map_csv, out_fd, args.null_class, args.min_n_size, args.map_source)
