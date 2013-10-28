@@ -103,7 +103,7 @@ def count_max_peaks(a):
 
 
 def chi_mean(a):
-	return apply_index_weighting(a).mean()
+    return apply_index_weighting(a).mean()
 
 
 def get_vectors(image):
