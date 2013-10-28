@@ -45,3 +45,15 @@ transform.py
 
 vec_plot.py
 :   not useful yet.
+
+greyscale.py
+:   converts and image to greyscale
+
+black_and_white.py
+:   converts an image to black and white with optional threshold value
+
+compare_images.py
+:   computes a squared error for a pixel-pixel comparison
+
+image_replace.py
+:   uses fuzzy filter to find and replace a colour in an image

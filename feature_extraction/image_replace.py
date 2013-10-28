@@ -27,10 +27,8 @@ def image_search_replace(image, red, green, blue, new_red, new_green, new_blue, 
         last_accept = 0
         for y in range(image.size[1]):
             pix = pixels[x, y]
-            slack = 0
-            for i in range(3):
-                slack += abs(pix[i] - search[i]) / float(tolerance[i])
-            acceptance = (slack / 3.0) * fuzzy_factor + ((1 - fuzzy_factor) * (last_accept + last_col[y]) * .5)
+            slack = max(abs(p - s) / float(t) for p, s, t in zip(pix, search, tolerance))
+            acceptance = slack * fuzzy_factor + ((1 - fuzzy_factor) * (last_accept + last_col[y]) * .5)
             if acceptance < 1:
                 pixels[x, y] = replace
             last_accept = acceptance
