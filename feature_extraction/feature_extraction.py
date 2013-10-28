@@ -27,6 +27,8 @@ except ImportError:
     print "Numpy package required: easy_install Numpy"
     sys.exit(1)
 
+from greyscale import as_greyscale
+
 
 def parse_args():
     parser = ArgumentParser(
@@ -178,8 +180,7 @@ def filename_or_file_at(file_path, default_name):
 if __name__ == "__main__":
     try:
         args = parse_args()
-        image = Image.open(args.image)
-        image = image.convert('L')
+        image = as_greyscale(Image.open(args.image))
         image_name = base_name_no_ext(args.image)
         filters = read_filters(args.filters)
     except Exception as e:

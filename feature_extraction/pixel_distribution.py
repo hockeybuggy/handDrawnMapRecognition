@@ -2,7 +2,7 @@
 
 import math
 import sys
-#from argparse import ArgumentParser
+from argparse import ArgumentParser
 
 try:
     import Image
@@ -15,6 +15,8 @@ try:
 except ImportError:
     print "Numpy package required: easy_install Numpy"
     sys.exit(1)
+
+from greyscale import as_greyscale
 
 
 # TODO: weigh points based on value and get rid of black_points
@@ -43,8 +45,7 @@ def stats(black_points):
 
 def black_points(image_name, thresh=127):
     points = []
-    image = Image.open(image_name)
-    image = image.convert('L')
+    image = as_greyscale(Image.open(image_name))
     data = np.array(image.getdata())
     data.shape = image.size[:2]
     width, height = image.size[:2]

@@ -12,6 +12,13 @@ def parse_args():
     return parser.parse_args()
 
 
+def as_greyscale(image):
+    if image.getbands() == ('L', ):
+        return image
+    else:
+        return image.convert('L')
+
+
 if __name__ == "__main__":
     options = parse_args()
-    Image.open(options.input).convert('L').save(options.output)
+    as_greyscale(Image.open(options.input)).save(options.output)
