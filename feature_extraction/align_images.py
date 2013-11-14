@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 
 import argparse
+import math
 
 import Image
 import ImageDraw
@@ -63,7 +64,9 @@ def align_to(align_image, input_image):
     sx = astat[2] / istat[2]
     sy = astat[3] / istat[3]
     s = .5 * (sx + sy)
-    a = istat[4] - astat[4]
+    ai = istat[4]
+    aa = astat[4]
+    a = math.acos(np.sin(aa) * np.sin(ai) + np.cos(aa) * np.cos(ai))
     aff = transform.affine_transform(cx, cy, s, s, a, tx, ty)
     return transform.transform_image(original, aff)
 

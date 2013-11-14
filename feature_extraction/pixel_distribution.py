@@ -18,7 +18,6 @@ except ImportError:
 from greyscale import as_greyscale
 
 
-# TODO: weigh points based on value and get rid of black_points
 def stats(black_points):
     xs = [x for x, y in black_points]
     ys = [y for x, y in black_points]
@@ -29,11 +28,11 @@ def stats(black_points):
 
     sx = sy = 0
     for x, y in black_points:
-        dx = x - c_x
-        dy = y - c_y
-        r = math.sqrt(dx * dx + dy * dy)
-        sx += (dx / r)
-        sy += (dy / r)
+        dx = (x - c_x)
+        dy = (y - c_y)
+        r = dx * dx + dy * dy
+        sx += dx / r
+        sy += dy / r
     ex_a = math.atan2(sy, sx)
 
     return c_x, c_y, std_x, std_y, ex_a
