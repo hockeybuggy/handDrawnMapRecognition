@@ -6,10 +6,11 @@ from argparse import ArgumentParser
 
 try:
     import Image
-    import ImageFilter
 except ImportError:
     print "PIL package required: easy_install PIL"
     sys.exit(1)
+
+import align_images
 
 def parse_args():
     parser = ArgumentParser( description="Create an image with every example of each class in the map.")
@@ -22,7 +23,8 @@ def parse_args():
     images = []
     for image in args.images:
         images.append(Image.open(image))
-    return (args.data, args.output, args.image_prefix, images, label)
+    return (args.data, args.output, args.image_prefix, images, args.label)
+
 
 def main(data_file, outdir, image_prefix, cell_images, label):
     images_by_class = dict()
@@ -43,9 +45,15 @@ def main(data_file, outdir, image_prefix, cell_images, label):
         print key, "at a dilution of:", dilution
         # Create an image for each list of images
         mean_image = Image.new("L", images_by_class[key][0].size, "white")
+        template = None
         for image in images_by_class[key]:
+            if template:
+                image = align_images.align_to(template, image)
+            else:
+                template = image
             mean_image = Image.blend(mean_image, image, dilution)
         mean_image.save(os.path.join(outdir,key+".bmp") if outdir else key+".bmp")
+
 
 if __name__ == "__main__":
     main(*parse_args())
