@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
-import math
 import sys
-from argparse import ArgumentParser
+import math
 
 try:
     import Image
@@ -28,24 +27,21 @@ def stats(black_points):
     std_x = np.std(xs)
     std_y = np.std(ys)
 
-    a_sum = 0
-    count = 0
-
+    sx = sy = 0
     for x, y in black_points:
         dx = x - c_x
         dy = y - c_y
-        a = math.atan2(dy, dx)
-        a_sum += a
-        count += 1
-
-    ex_a = a_sum / count
+        r = math.sqrt(dx * dx + dy * dy)
+        sx += (dx / r)
+        sy += (dy / r)
+    ex_a = math.atan2(sy, sx)
 
     return c_x, c_y, std_x, std_y, ex_a
 
 
-def black_points(image_name, thresh=127):
+def black_points(image, thresh=127):
     points = []
-    image = as_greyscale(Image.open(image_name))
+    image = as_greyscale(image)
     data = np.array(image.getdata())
     data.shape = image.size[:2]
     width, height = image.size[:2]
@@ -59,4 +55,4 @@ def black_points(image_name, thresh=127):
 if __name__ == "__main__":
     print "mean-x, mean-y, std-x, std-y, mean-angle"
     for image in sys.argv[1:]:
-        print ','.join(map(str, stats(black_points(image))))
+        print ','.join(map(str, stats(black_points(Image.open(image)))))
