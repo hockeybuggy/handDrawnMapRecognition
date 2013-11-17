@@ -30,28 +30,30 @@ def main(data_file, outdir, image_prefix, cell_images, label):
     images_by_class = dict()
     image_name = image_prefix + "_y{:02d}_x{:02d}.bmp"
     # read csv file
-    r = csv.dictreader(data_file)
+    r = csv.DictReader(data_file)
     for row in r:
         # Create lists of images from each class
-        cell_image = Image.open(image_name.format(int(row["j"]), int(row["i"])))
-        if row[label] in images_by_class: # make intended. not hard coded.
-            images_by_class[row[label]].append(cell_image)
+        cell_image_name = image_name.format(int(row["j"]), int(row["i"]))
+        if row[label] in images_by_class:
+            images_by_class[row[label]].append(cell_image_name)
         else:
-            images_by_class[row[label]] = [ cell_image ]
+            images_by_class[row[label]] = [ cell_image_name ]
 
     for key in images_by_class:
         #print key, images_by_class[key], "\n"
         dilution = 1.0/float(len(images_by_class[key]))
         print key, "at a dilution of:", dilution
         # Create an image for each list of images
-        mean_image = Image.new("L", images_by_class[key][0].size, "white")
+        size = Image.open(images_by_class[key][0]).size
+        mean_image = Image.new("L", size, "white")
         template = None
-        for image in images_by_class[key]:
+        for image_name in images_by_class[key]:
+            cell = Image.open(image_name)
             if template:
-                image = align_images.align_to(template, image)
+                image = align_images.align_to(template, cell)
             else:
-                template = image
-            mean_image = Image.blend(mean_image, image, dilution)
+                template = cell
+            mean_image = Image.blend(mean_image, cell, dilution)
         mean_image.save(os.path.join(outdir,key+".bmp") if outdir else key+".bmp")
 
 

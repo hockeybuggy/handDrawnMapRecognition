@@ -18,7 +18,7 @@ def parse_args():
     parser.add_argument('-edge_class', default="EDGE", help="The name of the edge class, default=EDGE")
     parser.add_argument('-min_n_size', type=int, default=15, help="""
         The minimum number of examples to be statistically valid, default=15 """)
-    parser.add_argument('-map_classifications_type', default="intended", help="""
+    parser.add_argument('-map_classification_type', default="intended", help="""
         The method of creation of the input csv file. Either 'intended' or
         'classifier' recommenced. default='intended' """)
 
@@ -142,4 +142,5 @@ if __name__ == "__main__":
         out_fd = open(args.output, "w")
     else:
         out_fd = sys.stdout
-    main(args.map_csv, out_fd, args.edge_class, args.min_n_size, args.map_classifcation_type)
+    main(args.map_csv, out_fd, args.edge_class, args.min_n_size, args.map_classification_type)
+

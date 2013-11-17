@@ -20,9 +20,9 @@ def parse():
     return parser.parse_args()
 
 
-def transform_image(image, affine, bkg="white"):
+def transform_image(image, aff, bkg="white"):
     image = image.convert('RGBA') # add an alpha layer
-    result = image.transform(image.size, Image.AFFINE, affine.vars(affine))
+    result = image.transform(image.size, Image.AFFINE, affine.vars(aff))
     output = Image.new('RGBA', image.size[:2], bkg)
     output.paste(result, (0, 0), result) # make sure the background is white
     return output

@@ -3,4 +3,6 @@
 data/cropped
 data/greyscale
 data/lineless
+data/bandw
 data/old
+gold_images
