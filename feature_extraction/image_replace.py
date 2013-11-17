@@ -13,7 +13,7 @@ def parse_args():
     parser.add_argument('search', type=ImageColor.getrgb, help='rgb hex string, without #')
     parser.add_argument('replace', type=ImageColor.getrgb)
     parser.add_argument('-tolerance', type=ImageColor.getrgb, default=(0, 0, 0))
-    parser.add_argument('-fuzzy_factor', type=float, help="how much is based on current pixel, vs surrounding", default=1)
+    parser.add_argument('-fuzzy_factor', type=float, help="how much is based on current pixel, vs surrounding", default=1.0)
     return parser.parse_args()
 
 
