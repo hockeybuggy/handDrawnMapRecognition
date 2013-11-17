@@ -29,25 +29,37 @@ def parse_args():
         Do not collect results for unfilted images. default=false""")
     parser.add_argument("--permlen", type=int, default=2, help="""
         The permuation length of the filters. default=2""")
+    parser.add_argument("--map_name", help="""
+        The name of the given map in the output csv file, default=<same as filename>""")
 
     args = parser.parse_args()
+    image_name = os.path.basename(args.image).split(".")[0]
     if os.path.basename(os.getcwd()) != "handDrawnMapRecognition":
         raise Exception("Must be in root directory of the project")
     if os.path.exists(os.path.join(os.getcwd(),args.tmpdir)):
         raise Exception("Please clean up tmp dir. Exiting")
     if not args.output:
-        args.output = os.path.join(os.getcwd(), os.path.basename(args.image).split(".")[0]+".csv")
+        args.output = os.path.join(os.getcwd(), image_name+".csv")
     elif os.path.isdir(args.output):
-        args.output = os.path.join(args.output, os.path.basename(args.image).split(".")[0]+".csv")
+        args.output = os.path.join(args.output, image_name+".csv")
+    if not args.map_name:
+        args.map_name = image_name
     return(args)
+
 
 def proximity_stats(args):
     call(["python", "feature_extraction/proximity_statistics.py"] + args)
+
 
 def csv_join(files, output):
     w = open(output, "w")
     call(["python", "scripts/csv_join.py"]+files, stdout=w)
     w.close()
+
+
+def add_map_name(file_in, file_out, name):
+    call(["/bin/bash", "feature_extraction/add_map_name.sh", file_in, file_out, name])
+
 
 def get_filter_lists(permlen, blur, onlyblur):
     """
@@ -72,9 +84,11 @@ def get_filter_lists(permlen, blur, onlyblur):
                 lists.append([blur_path]+[os.path.join(filter_dir,f+".csv") for f in perm])
     return lists
 
+
 def extract(filter_list):
     print "Extracting features under:", " and ".join([os.path.basename(f).split(".")[0] for f in filter_list])
     check_call(["python", "feature_extraction/feature_extraction.py"]+[extract.image,extract.width,extract.height]+filter_list+["-output",extract.tmpdir])
+
 
 def init_filter_queue(q, image, width, height, tmpdir):
     extract.q = q
@@ -83,7 +97,8 @@ def init_filter_queue(q, image, width, height, tmpdir):
     extract.height = height
     extract.tmpdir = tmpdir
 
-def main(image, width, height, intended, output, tmpdir, keeptmp, blur, onlyblur, permlen):
+
+def main(image, width, height, intended, output, tmpdir, keeptmp, blur, onlyblur, permlen, map_name):
     os.mkdir(tmpdir)
 
     filter_lists = get_filter_lists(permlen, blur, onlyblur)
@@ -100,14 +115,17 @@ def main(image, width, height, intended, output, tmpdir, keeptmp, blur, onlyblur
 
     print "Joining all intermediate csv files"
     csv_files = [tmpdir+csv_file for csv_file in os.listdir(tmpdir)]
-    csv_join(csv_files, output)
+    csv_join(csv_files, os.path.join(tmpdir,"unnamed.csv"))
+
+    add_map_name(os.path.join(tmpdir, "unnamed.csv"), output, map_name)
 
     if not keeptmp:
         print "Removing intermediate csv files"
         rmtree(os.path.join(os.getcwd(),tmpdir))
 
+
 if __name__ == "__main__":
     args = parse_args()
     main(args.image, str(args.width), str(args.height), args.intended, args.output,\
-        args.tmpdir, args.keeptmp, args.blur, args.onlyblur, args.permlen)
+        args.tmpdir, args.keeptmp, args.blur, args.onlyblur, args.permlen, args.map_name)
 
