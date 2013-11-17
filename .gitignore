@@ -4,5 +4,6 @@ data/cropped
 data/greyscale
 data/lineless
 data/bandw
+data/final
 data/old
 gold_images
