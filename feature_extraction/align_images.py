@@ -2,6 +2,7 @@
 
 import argparse
 import math
+import csv
 
 import Image
 import ImageDraw
@@ -20,6 +21,8 @@ def parse_args():
                         help="copied and transformed to match first image")
     parser.add_argument('output',
                         help="path to write the transformed image to")
+    parser.add_argument("-transforms",
+                        help="csv file to write transformations to (first, second, between)")
     return parser.parse_args()
 
 
@@ -31,10 +34,8 @@ def bbcentre(x, y, w, h):
     return (tx, ly, lx, ty)
 
 
-def mark_stats(image):
-    image = black_and_white.as_black_and_white(image)
-    black = pixel_distribution.black_points(image)
-    stats = pixel_distribution.stats(black)
+def mark_align(image):
+    stats = cal_align(image)
     image = image.convert('RGB')
     draw = ImageDraw.Draw(image)
     box = bbcentre(stats[0], stats[1], 10, 10)
@@ -49,26 +50,30 @@ def mark_stats(image):
     return image
 
 
-def align_to(align_image, input_image):
-    original = input_image
-    align_image = black_and_white.as_black_and_white(align_image)
-    input_image = black_and_white.as_black_and_white(input_image)
-    ablack = pixel_distribution.black_points(align_image)
-    iblack = pixel_distribution.black_points(input_image)
-    astat = pixel_distribution.stats(ablack)
-    istat = pixel_distribution.stats(iblack)
-    cx = istat[0]
-    cy = istat[1]
-    tx = astat[0] - cx
-    ty = astat[1] - cy
-    sx = astat[2] / istat[2]
-    sy = astat[3] / istat[3]
-    s = .5 * (sx + sy)
-    ai = istat[4]
-    aa = astat[4]
+def cal_align(image):
+    image = black_and_white.as_black_and_white(image)
+    black = pixel_distribution.black_points(image)
+    return pixel_distribution.stats(black)
+
+
+def diff_align(to, from_):
+    cx = from_[0]
+    cy = from_[1]
+    tx = to[0] - cx
+    ty = to[1] - cy
+    assert(from_[2] != 0 and from_[3] != 0)
+    sx = to[2] / from_[2]
+    sy = to[3] / from_[3]
+    s = 0.5 * (sx + sy)
+    ai = from_[4]
+    aa = to[4]
     a = math.acos(np.sin(aa) * np.sin(ai) + np.cos(aa) * np.cos(ai))
-    aff = transform.affine_transform(cx, cy, s, s, a, tx, ty)
-    return transform.transform_image(original, aff)
+    return cx, cy, s, s, a, tx, ty
+
+
+def align_to(align_image, input_image):
+    aff = transform.affine_transform(*diff_align(cal_align(align_image), cal_align(input_image)))
+    return transform.transform_image(input_image, aff)
 
 
 if __name__ == "__main__":
@@ -77,5 +82,12 @@ if __name__ == "__main__":
     change = Image.open(args.image_transform)
     output = align_to(match, change)
     output.save(args.output)
-    mark_stats(match).save('match.png')
-    mark_stats(change).save('change.png')
+    if args.transforms:
+        with open(args.transforms, 'w') as f:
+            c = csv.writer(f)
+            from_ = cal_align(change)
+            to = cal_align(match)
+            c.writerow('cx cy sx sy a tx ty'.split())
+            c.writerow(to + (0,0))
+            c.writerow(from_ + (0,0))
+            c.writerow(diff_align(to, from_))
