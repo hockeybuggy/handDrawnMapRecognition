@@ -16,9 +16,10 @@ if __name__ == "__main__":
     ch = int(round(float(grid.size[1]) / args.rows))
     draw = ImageDraw.Draw(grid)
     colour = '#F00'
+    width = 3
     for i in range(args.cols):
-        draw.line((cw * i, 0, cw * i, grid.size[1]), fill=colour)
+        draw.line((cw * i, 0, cw * i, grid.size[1]), fill=colour, width=width)
     for i in range(args.rows):
-        draw.line((0, ch * i, grid.size[0], ch * i), fill=colour)
+        draw.line((0, ch * i, grid.size[0], ch * i), fill=colour, width=width)
     del draw
     grid.save(args.output)

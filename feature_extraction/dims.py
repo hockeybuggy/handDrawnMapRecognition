@@ -14,4 +14,5 @@ def celldims(size, rows, cols):
 
 
 if __name__ == "__main__":
-    print rows_cols(sys.argv[1])
+    d = rows_cols(sys.argv[1])
+    print d[0], d[1]
