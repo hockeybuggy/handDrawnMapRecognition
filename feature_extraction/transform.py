@@ -21,11 +21,12 @@ def parse():
 
 
 def transform_image(image, aff, bkg="white"):
+    mode = image.mode
     image = image.convert('RGBA') # add an alpha layer
     result = image.transform(image.size, Image.AFFINE, affine.vars(aff))
     output = Image.new('RGBA', image.size[:2], bkg)
     output.paste(result, (0, 0), result) # make sure the background is white
-    return output
+    return output.convert(mode)
 
 
 def affine_transform(ox=0, oy=0, sx=1, sy=1, a=0, tx=0, ty=0):

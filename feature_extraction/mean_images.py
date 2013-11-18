@@ -26,13 +26,13 @@ def blend_images(imgs):
     if not imgs:
         raise ValueError('Not images given to blend')
     if count == 1:
-        return imgs[0]
+        return imgs[0].convert('L')
     else:
         return Image.blend(blend_images(imgs[:count/2]), blend_images(imgs[count/2:]), .5)
 
 
-def bounding_box(x, y, w, h, inset=0):
-    return (x + inset, y + inset, x + w - inset, y + h - inset)
+def bounding_box(x, y, w, h, inset=7):
+    return (x + inset, y + inset, x + w - 2 * inset, y + h - 2 * inset)
 
 
 if __name__ == "__main__":
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     else:
         meta_data = dict()
 
-    grid = Image.open(args.map).convert('RGBA')
+    grid = Image.open(args.map)
     classes = [r for r in csv.reader(open(args.intended))]
     rows = len(classes)
     cols = len(classes[0])

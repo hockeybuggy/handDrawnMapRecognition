@@ -64,15 +64,18 @@ def diff_align(to, from_):
     assert(from_[2] != 0 and from_[3] != 0)
     sx = to[2] / from_[2]
     sy = to[3] / from_[3]
-    s = 0.5 * (sx + sy)
+    #s = 0.5 * (sx + sy)
     ai = from_[4]
     aa = to[4]
     a = math.acos(np.sin(aa) * np.sin(ai) + np.cos(aa) * np.cos(ai))
-    return cx, cy, s, s, a, tx, ty
+    return cx, cy, sx, sy, a, tx, ty
 
 
-def align_to(align_image, input_image):
-    aff = transform.affine_transform(*diff_align(cal_align(align_image), cal_align(input_image)))
+def align_to(align_image, input_image, ignore_angle=True):
+    diff = list(diff_align(cal_align(align_image), cal_align(input_image)))
+    if ignore_angle:
+        diff[4] = 0
+    aff = transform.affine_transform(*diff)
     return transform.transform_image(input_image, aff)
 
 

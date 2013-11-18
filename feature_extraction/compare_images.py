@@ -2,7 +2,7 @@
 
 from argparse import ArgumentParser
 
-import Image
+import Image, ImageFilter
 import numpy as np
 
 import align_images
@@ -14,14 +14,17 @@ def parse_args():
     return parser.parse_args()
 
 
-def compare_images(A, B, scale=.25, align=True):
+def compare_images(A, B, scale=.4, align=True):
     if align:
-        Bmatch = align_images.align_to(A, B)
+        Bmatch = align_images.align_to(A, B).convert('L')
     else:
-        Bmatch = B.copy()
+        Bmatch = B.convert('L')
+    A = A.convert('L')
     new_shape = (np.array(A.size) * scale).astype(int)
     A = A.resize(new_shape, Image.ANTIALIAS)
     Bmatch = Bmatch.resize(new_shape, Image.ANTIALIAS)
+    Bmatch = Bmatch.filter(ImageFilter.BLUR)
+    A = A.filter(ImageFilter.BLUR)
     dataA = np.array(A.getdata())
     dataB = np.array(Bmatch.getdata())
     diff = abs(dataA - dataB)
