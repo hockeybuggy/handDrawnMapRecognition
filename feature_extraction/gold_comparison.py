@@ -6,6 +6,7 @@ import csv
 import Image
 import simpleyaml as yaml
 
+import dims
 from compare_images import compare_images
 
 
@@ -32,8 +33,7 @@ def bounding_box(x, y, w, h):
 if __name__ == "__main__":
     args = parse_args()
     grid = Image.open(args.classify_this)
-    cell_w = grid.size[0] / args.cols
-    cell_h = grid.size[1] / args.rows
+    cell_w, cell_h = dims.celldims(grid.size, args.rows, args.cols)
     answer = []
 
     gold = yaml.load(open(args.gold))

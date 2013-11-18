@@ -18,7 +18,7 @@ def parse_args():
 
 def as_black_and_white(image, split_point=128):
     image = as_greyscale(image)
-    image = Image.eval(image, lambda px: 0 if px < split_point else 256)
+    image = Image.eval(image, lambda px: 0 if px < split_point else 255)
     return image.convert('1', dither=Image.NONE)
 
 

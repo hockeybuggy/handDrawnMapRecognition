@@ -27,6 +27,7 @@ except ImportError:
     print "Numpy package required: easy_install Numpy"
     sys.exit(1)
 
+import dims
 from greyscale import as_greyscale
 
 
@@ -79,9 +80,10 @@ def read_filters(filenames):
 
 
 def apply_filters(image, filters):
-    for f in filters:
-        image = image.filter(f)
-    return image
+    convo = filters[0]
+    for i in range(1, len(filters)):
+        convo = np.dot(convo, filters[i])
+    return image.filter(convo)
 
 
 def bounding_box(x, y, w, h, inset=0):
@@ -123,8 +125,7 @@ def dict_map(a, functions, key_prefix=""):
 
 def main(image, image_name, rows, columns, filter_list, csv_output,
         yaml_out=None, save_cell_images=False, filter_image_name=None):
-    cell_w = image.size[0] / columns
-    cell_h = image.size[1] / rows
+    cell_w, cell_h = dims.celldims(image.size, rows, columns)
     filter_name = "-".join(map(base_name_no_ext, args.filters))
     filtered_image = apply_filters(image, filter_list)
     if filter_image_name:
@@ -162,7 +163,7 @@ def main(image, image_name, rows, columns, filter_list, csv_output,
     stats_writer.writerow(['i', 'j'] + header_names)
     for i in range(columns):
         for j in range(rows):
-            row = [i, j]
+            row = [float(i) / columns, float(j) / rows]
             for k in stat_names:
                 row.append(stats_data[i][j][k])
             stats_writer.writerow(row)

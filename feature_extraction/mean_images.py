@@ -6,6 +6,7 @@ import csv
 import simpleyaml as yaml
 import Image
 
+import dims
 import align_images
 
 
@@ -49,8 +50,7 @@ if __name__ == "__main__":
     classes = [r for r in csv.reader(open(args.intended))]
     rows = len(classes)
     cols = len(classes[0])
-    width = grid.size[0] / cols
-    height = grid.size[1] / rows
+    width, height = dims.celldims(grid.size, rows, cols)
 
     # collect all cells by class name
     img_by_class = dict()
