@@ -31,25 +31,28 @@ def bounding_box(x, y, w, h):
 
 if __name__ == "__main__":
     args = parse_args()
-    grid = Image.open(args.grid)
-    cell_w = grid.size()[0] / args.cols
-    cell_h = grid.size()[1] / args.rows
+    grid = Image.open(args.classify_this)
+    cell_w = grid.size[0] / args.cols
+    cell_h = grid.size[1] / args.rows
     answer = []
-    
+
     gold = yaml.load(open(args.gold))
     for name, mean_img in gold.items():
-        gold[name] = Image.open(mean_img)
-    
+        if 'path' in mean_img:
+            gold[name] = Image.open(mean_img['path'])
+        else:
+            gold[name] = Image.open(mean_img)
+
     output = [gold_classify(gold,
                 grid.crop(bounding_box(
                     i * cell_w, j * cell_h, cell_w, cell_h)))
                     for j in range(args.cols) for i in range(args.rows)]
-    
+
     with open(args.output_csv, 'w') as out:
         write = csv.writer(out)
         for row in output:
             write.writerow(row)
-    
+
     if args.intended:
         diff = 0
         with open(args.intended) as f:
@@ -58,6 +61,5 @@ if __name__ == "__main__":
                 for a, b in zip(answer, guess):
                     if a != b:
                         diff += 1
-        print diff 
-            
+        print diff
 
