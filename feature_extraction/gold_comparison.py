@@ -42,7 +42,7 @@ if __name__ == "__main__":
     
     output = [gold_classify(gold,
                 grid.crop(bounding_box(
-                    i * cell_w, j * cell_h, cell_w, cell_h))))
+                    i * cell_w, j * cell_h, cell_w, cell_h)))
                     for j in range(args.cols) for i in range(args.rows)]
     
     with open(args.output_csv, 'w') as out:
