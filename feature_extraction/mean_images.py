@@ -19,6 +19,7 @@ def parse_args():
     return parser.parse_args()
 
 
+# evenly blends all images in lg(n) time
 def blend_images(imgs):
     count = len(imgs)
     if not imgs:
@@ -29,7 +30,7 @@ def blend_images(imgs):
         return Image.blend(blend_images(imgs[:count/2]), blend_images(imgs[count/2:]), .5)
 
 
-def bounding_box(x, y, w, h, inset=4):
+def bounding_box(x, y, w, h, inset=0):
     return (x + inset, y + inset, x + w - inset, y + h - inset)
 
 
@@ -63,20 +64,19 @@ if __name__ == "__main__":
                 img_by_class[name] = [cell]
 
     # align all the images to the first
-    for name, imgs in img_by_class.items():
-        for i in range(1, len(imgs)):
-            if not args.noalign:
+    if not args.noalign:
+        for name, imgs in img_by_class.items():
+            for i in range(1, len(imgs)):
                 imgs[i] = align_images.align_to(imgs[0], imgs[i])
 
     # blend all the images
     for name, imgs in img_by_class.items():
-        data = dict(
+        img_by_class[name]  = dict(
             template=imgs[0],
             image=blend_images(imgs),
             n=len(imgs))
-        img_by_class[name] = data
 
-    # update the meta_data and saved means
+    # update the meta_data and global means
     for name, newdata in img_by_class.items():
         if name in meta_data:
             data = meta_data[name]
@@ -87,9 +87,11 @@ if __name__ == "__main__":
             img = data['image']
             data['image'] = Image.blend(img, cell, newdata['n'] / data['n'])
         else:
-            meta_data[name] = dict(image=newdata['image'], n=newdata['n'],
-                path=name+'_mean.png',
-                template_path=name+'_temp_mean.png',
+            meta_data[name] = dict(
+                image=newdata['image'],
+                n=newdata['n'],
+                path=name + '_mean.png',
+                template_path=name + '_temp_mean.png',
                 template=newdata['template'])
 
     # write out images and remove PIL data
