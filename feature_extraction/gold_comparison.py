@@ -11,7 +11,7 @@ from compare_images import compare_images
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('classify_this', help='grid to classify')
+    parser.add_argument('image', help='grid to classify')
     parser.add_argument('rows', type=int, help='the number of rows in the grid')
     parser.add_argument('cols', type=int, help='the number of columns in the grid')
     parser.add_argument('gold', help='a yaml file of class: mean_image')
@@ -43,10 +43,10 @@ if __name__ == "__main__":
         else:
             gold[name] = Image.open(mean_img)
 
-    output = [gold_classify(gold,
+    output = [[gold_classify(gold,
                 grid.crop(bounding_box(
-                    i * cell_w, j * cell_h, cell_w, cell_h)))
-                    for j in range(args.cols) for i in range(args.rows)]
+                    j * cell_w, i * cell_h, cell_w, cell_h)))
+                    for j in range(args.cols)] for i in range(args.rows)]
 
     with open(args.output_csv, 'w') as out:
         write = csv.writer(out)
@@ -62,4 +62,3 @@ if __name__ == "__main__":
                     if a != b:
                         diff += 1
         print diff
-
