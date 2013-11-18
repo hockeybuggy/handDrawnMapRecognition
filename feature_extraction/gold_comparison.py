@@ -40,10 +40,10 @@ if __name__ == "__main__":
     for name, mean_img in gold.items():
         gold[name] = Image.open(mean_img)
     
-    output = [gold_classify(gold,
+    output = [[gold_classify(gold,
                 grid.crop(bounding_box(
                     i * cell_w, j * cell_h, cell_w, cell_h)))
-                    for j in range(args.cols) for i in range(args.rows)]
+                    for j in range(args.cols)] for i in range(args.rows)]
     
     with open(args.output_csv, 'w') as out:
         write = csv.writer(out)
