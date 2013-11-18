@@ -47,13 +47,16 @@ def main(data_file, outdir, image_prefix, cell_images, label):
         size = Image.open(images_by_class[key][0]).size
         mean_image = Image.new("L", size, "white")
         template = None
+        #print image_by_class[key]
         for image_name in images_by_class[key]:
-            cell = Image.open(image_name)
-            if template:
-                image = align_images.align_to(template, cell)
-            else:
-                template = cell
-            mean_image = Image.blend(mean_image, cell, dilution)
+            with open(image_name, "rb") as f:
+                cell = Image.open(f)
+                if template:
+                    image = align_images.align_to(template, cell)
+                else:
+                    template = cell
+                mean_image = Image.blend(mean_image, cell, dilution)
+                del cell
         mean_image.save(os.path.join(outdir,key+".bmp") if outdir else key+".bmp")
 
 

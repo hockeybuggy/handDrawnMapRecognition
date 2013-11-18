@@ -11,7 +11,7 @@ from compare_images import compare_images
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('classify_this', help='grid to classify')
+    parser.add_argument('image', help='grid to classify')
     parser.add_argument('rows', type=int, help='the number of rows in the grid')
     parser.add_argument('cols', type=int, help='the number of columns in the grid')
     parser.add_argument('gold', help='a yaml file of class: mean_image')
@@ -31,9 +31,10 @@ def bounding_box(x, y, w, h):
 
 if __name__ == "__main__":
     args = parse_args()
-    grid = Image.open(args.grid)
-    cell_w = grid.size()[0] / args.cols
-    cell_h = grid.size()[1] / args.rows
+    grid = Image.open(args.image)
+    print grid
+    cell_w = grid.size[0] / args.cols
+    cell_h = grid.size[1] / args.rows
     answer = []
     
     gold = yaml.load(open(args.gold))
