@@ -59,5 +59,3 @@ if __name__ == "__main__":
                     if a != b:
                         diff += 1
         print diff 
-            
-
