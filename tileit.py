@@ -20,9 +20,6 @@ def boundingbox(x, y, w, h):
     return (x, y, x + w, y + h)
 
 
-
-
-
 if __name__ == "__main__":
     args = parse_args()
     tile_set = yaml.load(open(os.path.join(args.tileset, 'tiles.yml')))
