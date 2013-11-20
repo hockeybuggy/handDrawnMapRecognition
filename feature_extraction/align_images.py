@@ -23,6 +23,8 @@ def parse_args():
                         help="path to write the transformed image to")
     parser.add_argument("-transforms",
                         help="csv file to write transformations to (first, second, between)")
+    parser.add_argument('-mark_align_to')
+    parser.add_argument('-mark_transform')
     return parser.parse_args()
 
 
@@ -34,18 +36,30 @@ def bbcentre(x, y, w, h):
     return (tx, ly, lx, ty)
 
 
+def draw_circle(draw, x, y, rx, ry=None, t=1, s=30, outline=(0, 0, 0)):
+    da = math.pi * 2.0 / s
+    if ry is None:
+        ry = rx
+    pts = [(math.cos(da * i) * rx + x, y + math.sin(da * i) * ry) for i in range(s)]
+    for i in range(s - 1):
+        a = pts[i]
+        b = pts[i + 1]
+        draw.line((a[0], a[1], b[0], b[1]), width=t, fill=outline)
+    draw.line((pts[-1][0], pts[-1][1], pts[0][0], pts[1][1]), width=t, fill=outline)
+
 def mark_align(image):
     stats = cal_align(image)
-    image = image.convert('RGB')
+    image = image.convert('RGBA')
     draw = ImageDraw.Draw(image)
-    box = bbcentre(stats[0], stats[1], 10, 10)
-    draw.ellipse(box, fill=(255, 0, 0) )
-    box = bbcentre(stats[0], stats[1], 2 * stats[2], 2 * stats[3])
-    draw.ellipse(box, outline=(255, 0, 0) )
+    W = 5
     r = 50
+    c = (0, 255, 0)
+    draw_circle(draw, stats[0], stats[1], rx=stats[2], ry=stats[3], t=W, outline=c)
     dx = np.cos(stats[4]) * r
     dy = np.sin(stats[4]) * r
-    draw.line((stats[0], stats[1], stats[0] + dx, stats[1] + dy), fill=(0, 0, 255))
+    draw.line((stats[0], stats[1], stats[0] + dx, stats[1] + dy), fill=c, width=W)
+    box = bbcentre(stats[0], stats[1], 10, 10)
+    draw.ellipse(box, fill=c)
     del draw
     return image
 
@@ -94,3 +108,8 @@ if __name__ == "__main__":
             c.writerow(to + (0,0))
             c.writerow(from_ + (0,0))
             c.writerow(diff_align(to, from_))
+    if args.mark_align_to:
+        mark_align(match).save(args.mark_align_to)
+    if args.mark_transform:
+        mark_align(change).save(args.mark_transform)
+

@@ -52,27 +52,31 @@ if __name__ == "__main__":
                     j * cell_w, i * cell_h, cell_w, cell_h)))
                     for j in range(args.cols)] for i in range(args.rows)]
 
+    output = [[min(class_errs[i][j])[1] for j in range(args.cols)] for i in range(args.rows)]
+
+    map_list = []
+    if args.intended_csv:
+        diff = 0
+        with open(args.intended_csv) as f:
+            intended = csv.reader(f)
+            for answer, guess in zip(intended, output):
+                map_list.append(answer)
+                for a, b in zip(answer, guess):
+                    if a != b:
+                        diff += 1
+        print diff
+
     if args.output_features:
         with open(args.output_features, 'w') as w:
             write = csv.writer(w)
-            write.writerow(['i', 'j'] + list(gold.keys()))
+            write.writerow(['i', 'j'] + list(gold.keys()) + ["intended"])
             for i in range(args.rows):
                 for j in range(args.cols):
-                    write.writerow([float(i) / args.rows, float(j) / args.cols] + [x[0] for x in class_errs[j][i]])
+                    write.writerow([float(i) / args.rows, float(j) / args.cols] + [x[0] for x in class_errs[j][i]] + [map_list[j][i]])
 
-    output = [[min(class_errs[i][j])[1] for j in range(args.cols)] for i in range(args.rows)]
 
     with open(args.output_csv, 'w') as out:
         write = csv.writer(out)
         for row in output:
             write.writerow(row)
 
-    if args.intended_csv:
-        diff = 0
-        with open(args.intended_csv) as f:
-            intended = csv.reader(f)
-            for answer, guess in zip(intended, output):
-                for a, b in zip(answer, guess):
-                    if a != b:
-                        diff += 1
-        print diff

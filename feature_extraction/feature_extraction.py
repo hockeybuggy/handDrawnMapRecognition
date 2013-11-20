@@ -133,12 +133,12 @@ def main(image, image_name, rows, columns, filter_list, csv_output,
     stats_data = []
     vector_data = []
     stat_functions = dict(mean=chi_mean, stddev=np.std, peaks=count_max_peaks)
-    for i in range(columns):
+    for i in range(rows):
         stats_data.append(list())
         vector_data.append(list())
-        for j in range(rows):
+        for j in range(columns):
             stats_data[i].append(dict())
-            bb = bounding_box(i * cell_w, j * cell_h, cell_w, cell_h)
+            bb = bounding_box(j * cell_w, i * cell_h, cell_w, cell_h)
             cell = filtered_image.crop(bb)
             if save_cell_images:
                 cell_name = "{:s}-{:s}_y{:02d}_x{:02d}.bmp".format(image_name, filter_name, i, j)
@@ -160,10 +160,10 @@ def main(image, image_name, rows, columns, filter_list, csv_output,
     stat_names = stats_data[0][0].keys()
     header_names = [filter_name + "-" + stat_name for stat_name in stat_names]
     stats_writer = csv.writer(csv_output)
-    stats_writer.writerow(['i', 'j'] + header_names)
-    for i in range(columns):
-        for j in range(rows):
-            row = [float(i) / columns, float(j) / rows]
+    stats_writer.writerow(['i', 'j', 'x', 'y'] + header_names)
+    for i in range(rows):
+        for j in range(columns):
+            row = [i, j, float(j) / columns, float(i) / rows]
             for k in stat_names:
                 row.append(stats_data[i][j][k])
             stats_writer.writerow(row)
