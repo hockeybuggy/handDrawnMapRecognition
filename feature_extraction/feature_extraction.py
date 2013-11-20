@@ -82,7 +82,7 @@ def read_filters(filenames):
 def apply_filters(image, filters):
     res = image
     for f in filters:
-        res = f.filter(res)
+        res = res.filter(f)
     return res
 
 
