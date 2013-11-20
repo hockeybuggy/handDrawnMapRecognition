@@ -80,10 +80,10 @@ def read_filters(filenames):
 
 
 def apply_filters(image, filters):
-    convo = filters[0]
-    for i in range(1, len(filters)):
-        convo = np.dot(convo, filters[i])
-    return image.filter(convo)
+    res = image
+    for f in filters:
+        res = f.filter(res)
+    return res
 
 
 def bounding_box(x, y, w, h, inset=0):
