@@ -48,7 +48,7 @@ def parse_args():
 
 
 def pivot_csv_map(args):
-    call(["python", "feature_extraction/pivot_csv_map.py"] + args)
+    call(["python", "scripts/pivot_csv_map.py"] + args)
 
 
 def csv_join(files, output):
@@ -58,14 +58,14 @@ def csv_join(files, output):
 
 
 def add_map_name(file_in, file_out, name):
-    call(["/bin/bash", "feature_extraction/add_map_name.sh", file_in, file_out, name])
+    call(["/bin/bash", "scripts/add_map_name.sh", file_in, file_out, name])
 
 
 def get_filter_lists(permlen, blur, onlyblur):
     """
     Creates a list of filters be be applied s.t. main can simply loop though them.
     """
-    filter_dir = "feature_extraction/filters/"
+    filter_dir = "input_data/filters/"
     idenity_filter = "iden"
     filters = ["horz", "vert", "dia1", "dia2"]
     blur_path = os.path.join(filter_dir,"lblur.csv")
@@ -87,7 +87,7 @@ def get_filter_lists(permlen, blur, onlyblur):
 
 def extract(filter_list):
     print "Extracting features under:", " and ".join([os.path.basename(f).split(".")[0] for f in filter_list])
-    check_call(["python", "feature_extraction/feature_extraction.py"]+[extract.image,extract.width,extract.height]+filter_list+["-output",extract.tmpdir])
+    check_call(["python", "scripts/feature_extraction.py"]+[extract.image,extract.width,extract.height]+filter_list+["-output",extract.tmpdir])
 
 
 def init_filter_queue(q, image, width, height, tmpdir):

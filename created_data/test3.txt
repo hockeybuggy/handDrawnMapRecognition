@@ -1,0 +1,1189 @@
+=== Run information ===
+
+Scheme:weka.classifiers.trees.J48 -C 0.25 -M 2
+Relation:     training-weka.filters.unsupervised.attribute.Remove-R1-3-weka.filters.unsupervised.attribute.Remove-R1-2
+Instances:    9888
+Attributes:   205
+[list of attributes omitted]
+Test mode:10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+J48 pruned tree
+------------------
+
+lblur-horz-y_stddev <= 0.010364
+|   lblur-vert-dia1-x_stddev <= 0.017867
+|   |   lblur-vert-dia1-y_stddev <= 0.008774
+|   |   |   vert-horz-y_stddev <= 0.0108: d (2326.0/2.0)
+|   |   |   vert-horz-y_stddev > 0.0108
+|   |   |   |   vert-horz-x_stddev <= 0.013268: d (22.0)
+|   |   |   |   vert-horz-x_stddev > 0.013268: f (3.0)
+|   |   lblur-vert-dia1-y_stddev > 0.008774
+|   |   |   lblur-iden-y_mean <= 0.478628: f (4.0/1.0)
+|   |   |   lblur-iden-y_mean > 0.478628
+|   |   |   |   lblur-dia1-dia2-x_mean <= 0.560068: d (12.0)
+|   |   |   |   lblur-dia1-dia2-x_mean > 0.560068: m (9.0)
+|   lblur-vert-dia1-x_stddev > 0.017867
+|   |   lblur-iden-x_stddev <= 0.001431
+|   |   |   dia1-dia2-x_peaks <= 9: f (2.0)
+|   |   |   dia1-dia2-x_peaks > 9: m (100.0)
+|   |   lblur-iden-x_stddev > 0.001431
+|   |   |   vert-dia2-x_peaks <= 15: f (14.0)
+|   |   |   vert-dia2-x_peaks > 15: m (4.0)
+lblur-horz-y_stddev > 0.010364
+|   lblur-horz-x_stddev <= 0.006381
+|   |   lblur-iden-y_stddev <= 0.001802
+|   |   |   lblur-horz-dia1-y_stddev <= 0.016948: d (10.0/1.0)
+|   |   |   lblur-horz-dia1-y_stddev > 0.016948
+|   |   |   |   lblur-vert-y_peaks <= 5
+|   |   |   |   |   vert-dia1-x_peaks <= 14: g (4.0)
+|   |   |   |   |   vert-dia1-x_peaks > 14: w (4.0/1.0)
+|   |   |   |   lblur-vert-y_peaks > 5
+|   |   |   |   |   lblur-dia2-dia1-y_peaks <= 8
+|   |   |   |   |   |   dia1-dia2-y_peaks <= 13: g (6.0/1.0)
+|   |   |   |   |   |   dia1-dia2-y_peaks > 13
+|   |   |   |   |   |   |   lblur-dia1-horz-y_peaks <= 10: f (2.0)
+|   |   |   |   |   |   |   lblur-dia1-horz-y_peaks > 10: m (6.0)
+|   |   |   |   |   lblur-dia2-dia1-y_peaks > 8
+|   |   |   |   |   |   lblur-iden-y_stddev <= 0.00172
+|   |   |   |   |   |   |   lblur-dia2-y_stddev <= 0.015116: m (423.0/2.0)
+|   |   |   |   |   |   |   lblur-dia2-y_stddev > 0.015116
+|   |   |   |   |   |   |   |   lblur-dia2-vert-x_peaks <= 11: g (2.0)
+|   |   |   |   |   |   |   |   lblur-dia2-vert-x_peaks > 11
+|   |   |   |   |   |   |   |   |   dia1-horz-y_mean <= 0.368927: f (2.0)
+|   |   |   |   |   |   |   |   |   dia1-horz-y_mean > 0.368927: m (5.0)
+|   |   |   |   |   |   lblur-iden-y_stddev > 0.00172
+|   |   |   |   |   |   |   lblur-dia2-y_peaks <= 8: w (3.0/1.0)
+|   |   |   |   |   |   |   lblur-dia2-y_peaks > 8: m (5.0)
+|   |   lblur-iden-y_stddev > 0.001802
+|   |   |   dia1-x_mean <= 0.655502
+|   |   |   |   lblur-horz-y_stddev <= 0.011426
+|   |   |   |   |   dia2-horz-x_stddev <= 0.008748: d (10.0)
+|   |   |   |   |   dia2-horz-x_stddev > 0.008748: f (5.0/1.0)
+|   |   |   |   lblur-horz-y_stddev > 0.011426
+|   |   |   |   |   iden-x_stddev <= 0.00255
+|   |   |   |   |   |   lblur-dia1-horz-y_mean <= 0.292267: g (4.0/1.0)
+|   |   |   |   |   |   lblur-dia1-horz-y_mean > 0.292267
+|   |   |   |   |   |   |   dia2-y_peaks <= 16
+|   |   |   |   |   |   |   |   iden-x_peaks <= 8: f (4.0/1.0)
+|   |   |   |   |   |   |   |   iden-x_peaks > 8
+|   |   |   |   |   |   |   |   |   lblur-dia2-x_mean <= 0.508404
+|   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-y_stddev <= 0.009589
+|   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_peaks <= 14: f (9.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_peaks > 14: w (2.0)
+|   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-y_stddev > 0.009589
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev <= 0.006477: f (4.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev > 0.006477
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_mean <= 0.508836
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_mean <= 0.481178: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_mean > 0.481178: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001842: w (124.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001842: f (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_mean > 0.508836
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia1-y_peaks <= 13: f (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia1-y_peaks > 13: w (4.0)
+|   |   |   |   |   |   |   |   |   lblur-dia2-x_mean > 0.508404
+|   |   |   |   |   |   |   |   |   |   lblur-dia1-y_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_peaks <= 10: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_peaks > 10: f (6.0/1.0)
+|   |   |   |   |   |   |   |   |   |   lblur-dia1-y_peaks > 10: m (3.0)
+|   |   |   |   |   |   |   dia2-y_peaks > 16: g (3.0/1.0)
+|   |   |   |   |   iden-x_stddev > 0.00255: f (14.0/1.0)
+|   |   |   dia1-x_mean > 0.655502: m (6.0)
+|   lblur-horz-x_stddev > 0.006381
+|   |   vert-dia2-x_mean <= 0.347469
+|   |   |   lblur-iden-y_stddev <= 0.001146
+|   |   |   |   lblur-horz-dia2-y_mean <= 0.468975
+|   |   |   |   |   horz-vert-x_stddev <= 0.01629: m (6.0/1.0)
+|   |   |   |   |   horz-vert-x_stddev > 0.01629
+|   |   |   |   |   |   lblur-dia2-dia1-y_peaks <= 6: g (5.0/1.0)
+|   |   |   |   |   |   lblur-dia2-dia1-y_peaks > 6
+|   |   |   |   |   |   |   lblur-iden-x_mean <= 0.504889
+|   |   |   |   |   |   |   |   lblur-vert-dia1-x_mean <= 0.348652: s (47.0/1.0)
+|   |   |   |   |   |   |   |   lblur-vert-dia1-x_mean > 0.348652: f (2.0/1.0)
+|   |   |   |   |   |   |   lblur-iden-x_mean > 0.504889: b (4.0/1.0)
+|   |   |   |   lblur-horz-dia2-y_mean > 0.468975
+|   |   |   |   |   lblur-dia2-vert-x_peaks <= 9: b (3.0/1.0)
+|   |   |   |   |   lblur-dia2-vert-x_peaks > 9
+|   |   |   |   |   |   lblur-dia1-x_mean <= 0.369607: w (3.0)
+|   |   |   |   |   |   lblur-dia1-x_mean > 0.369607: f (9.0)
+|   |   |   lblur-iden-y_stddev > 0.001146
+|   |   |   |   dia1-horz-y_stddev <= 0.046686
+|   |   |   |   |   lblur-dia2-horz-y_mean <= 0.294581
+|   |   |   |   |   |   lblur-horz-vert-x_peaks <= 14
+|   |   |   |   |   |   |   vert-x_peaks <= 15
+|   |   |   |   |   |   |   |   horz-vert-y_mean <= 0.437632
+|   |   |   |   |   |   |   |   |   lblur-vert-dia2-y_peaks <= 4: g (2.0)
+|   |   |   |   |   |   |   |   |   lblur-vert-dia2-y_peaks > 4
+|   |   |   |   |   |   |   |   |   |   horz-dia2-x_stddev <= 0.011964: w (10.0)
+|   |   |   |   |   |   |   |   |   |   horz-dia2-x_stddev > 0.011964
+|   |   |   |   |   |   |   |   |   |   |   vert-dia2-x_mean <= 0.231897: w (3.0)
+|   |   |   |   |   |   |   |   |   |   |   vert-dia2-x_mean > 0.231897: b (11.0)
+|   |   |   |   |   |   |   |   horz-vert-y_mean > 0.437632: g (4.0)
+|   |   |   |   |   |   |   vert-x_peaks > 15: g (2.0/1.0)
+|   |   |   |   |   |   lblur-horz-vert-x_peaks > 14: m (2.0)
+|   |   |   |   |   lblur-dia2-horz-y_mean > 0.294581
+|   |   |   |   |   |   iden-x_peaks <= 6
+|   |   |   |   |   |   |   lblur-dia1-horz-y_peaks <= 9: f (3.0/1.0)
+|   |   |   |   |   |   |   lblur-dia1-horz-y_peaks > 9: b (3.0)
+|   |   |   |   |   |   iden-x_peaks > 6
+|   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001575
+|   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev <= 0.006968
+|   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_mean <= 0.454937
+|   |   |   |   |   |   |   |   |   |   lblur-vert-y_stddev <= 0.008164: f (2.0)
+|   |   |   |   |   |   |   |   |   |   lblur-vert-y_stddev > 0.008164: w (40.0/1.0)
+|   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_mean > 0.454937
+|   |   |   |   |   |   |   |   |   |   horz-x_peaks <= 4
+|   |   |   |   |   |   |   |   |   |   |   dia1-y_peaks <= 13: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   dia1-y_peaks > 13: m (3.0)
+|   |   |   |   |   |   |   |   |   |   horz-x_peaks > 4: f (29.0)
+|   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev > 0.006968
+|   |   |   |   |   |   |   |   |   dia2-vert-x_mean <= 0.199524: f (5.0/1.0)
+|   |   |   |   |   |   |   |   |   dia2-vert-x_mean > 0.199524
+|   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_stddev <= 0.014117
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_stddev <= 0.015509
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001437
+|   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_stddev <= 0.021167: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_stddev > 0.021167: w (36.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001437: f (3.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_stddev > 0.015509: w (276.0/1.0)
+|   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_stddev > 0.014117
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_mean <= 0.578931: w (8.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_mean > 0.578931: b (3.0/1.0)
+|   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001575
+|   |   |   |   |   |   |   |   lblur-vert-dia2-y_peaks <= 7: w (7.0/1.0)
+|   |   |   |   |   |   |   |   lblur-vert-dia2-y_peaks > 7
+|   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev <= 0.008446
+|   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_mean <= 0.405683: w (3.0)
+|   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_mean > 0.405683: f (35.0/1.0)
+|   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev > 0.008446: w (5.0/1.0)
+|   |   |   |   dia1-horz-y_stddev > 0.046686
+|   |   |   |   |   lblur-dia1-vert-y_stddev <= 0.0093
+|   |   |   |   |   |   lblur-horz-dia1-x_stddev <= 0.013964: b (7.0)
+|   |   |   |   |   |   lblur-horz-dia1-x_stddev > 0.013964: s (4.0/1.0)
+|   |   |   |   |   lblur-dia1-vert-y_stddev > 0.0093: g (3.0)
+|   |   vert-dia2-x_mean > 0.347469
+|   |   |   lblur-vert-horz-y_stddev <= 0.019484
+|   |   |   |   lblur-iden-x_stddev <= 0.000756
+|   |   |   |   |   lblur-horz-vert-y_stddev <= 0.011027
+|   |   |   |   |   |   iden-x_peaks <= 8: s (2.0)
+|   |   |   |   |   |   iden-x_peaks > 8
+|   |   |   |   |   |   |   vert-horz-y_stddev <= 0.017519: m (43.0)
+|   |   |   |   |   |   |   vert-horz-y_stddev > 0.017519: f (3.0/1.0)
+|   |   |   |   |   lblur-horz-vert-y_stddev > 0.011027
+|   |   |   |   |   |   lblur-vert-dia2-x_mean <= 0.569345
+|   |   |   |   |   |   |   dia2-x_peaks <= 14: w (3.0)
+|   |   |   |   |   |   |   dia2-x_peaks > 14: s (2.0)
+|   |   |   |   |   |   lblur-vert-dia2-x_mean > 0.569345: g (21.0)
+|   |   |   |   lblur-iden-x_stddev > 0.000756
+|   |   |   |   |   lblur-dia1-horz-y_mean <= 0.31727
+|   |   |   |   |   |   lblur-horz-vert-y_stddev <= 0.007809
+|   |   |   |   |   |   |   lblur-horz-dia2-y_peaks <= 12: f (2.0/1.0)
+|   |   |   |   |   |   |   lblur-horz-dia2-y_peaks > 12
+|   |   |   |   |   |   |   |   lblur-dia2-x_stddev <= 0.013998: m (24.0)
+|   |   |   |   |   |   |   |   lblur-dia2-x_stddev > 0.013998: s (2.0)
+|   |   |   |   |   |   lblur-horz-vert-y_stddev > 0.007809
+|   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001557
+|   |   |   |   |   |   |   |   lblur-vert-x_peaks <= 12
+|   |   |   |   |   |   |   |   |   lblur-vert-horz-x_stddev <= 0.009221: r (3.0/1.0)
+|   |   |   |   |   |   |   |   |   lblur-vert-horz-x_stddev > 0.009221
+|   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_stddev <= 0.009352
+|   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks <= 15: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks > 15: w (2.0)
+|   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_stddev > 0.009352
+|   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_mean <= 0.578092
+|   |   |   |   |   |   |   |   |   |   |   |   dia1-x_peaks <= 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev <= 0.006989
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-x_stddev <= 0.02544: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-x_stddev > 0.02544: s (6.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev > 0.006989
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_mean <= 0.526645: f (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_mean > 0.526645
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-dia1-x_peaks <= 5: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-dia1-x_peaks > 5
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks <= 5: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks > 5
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-y_peaks <= 7: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-y_peaks > 7
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_stddev <= 0.03594
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-y_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-x_mean <= 0.513932: g (9.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-x_mean > 0.513932: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-y_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-x_stddev <= 0.021105
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-x_stddev <= 0.025344: g (12.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-x_stddev > 0.025344
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-y_peaks <= 14: b (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-y_peaks > 14: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-x_stddev > 0.021105: g (75.0/2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_stddev > 0.03594
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_stddev <= 0.03783: b (6.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_stddev > 0.03783: g (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   dia1-x_peaks > 15: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_mean > 0.578092: w (4.0/1.0)
+|   |   |   |   |   |   |   |   lblur-vert-x_peaks > 12
+|   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001751
+|   |   |   |   |   |   |   |   |   |   dia2-x_peaks <= 13: b (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   dia2-x_peaks > 13: m (4.0/1.0)
+|   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001751: w (6.0)
+|   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001557
+|   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev <= 0.011772
+|   |   |   |   |   |   |   |   |   vert-horz-x_stddev <= 0.018427
+|   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_mean <= 0.278272: g (4.0)
+|   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_mean > 0.278272: r (16.0/1.0)
+|   |   |   |   |   |   |   |   |   vert-horz-x_stddev > 0.018427
+|   |   |   |   |   |   |   |   |   |   lblur-dia1-y_mean <= 0.414879: r (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   lblur-dia1-y_mean > 0.414879
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_mean <= 0.308776: b (8.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_mean > 0.308776: f (3.0)
+|   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev > 0.011772
+|   |   |   |   |   |   |   |   |   dia1-vert-y_mean <= 0.464848: f (21.0/1.0)
+|   |   |   |   |   |   |   |   |   dia1-vert-y_mean > 0.464848: g (2.0/1.0)
+|   |   |   |   |   lblur-dia1-horz-y_mean > 0.31727
+|   |   |   |   |   |   horz-dia2-y_stddev <= 0.04184
+|   |   |   |   |   |   |   lblur-vert-horz-x_stddev <= 0.008642
+|   |   |   |   |   |   |   |   lblur-horz-dia1-x_stddev <= 0.011839
+|   |   |   |   |   |   |   |   |   lblur-vert-x_mean <= 0.582971
+|   |   |   |   |   |   |   |   |   |   dia2-x_peaks <= 11
+|   |   |   |   |   |   |   |   |   |   |   horz-vert-y_peaks <= 14: w (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   horz-vert-y_peaks > 14: r (2.0)
+|   |   |   |   |   |   |   |   |   |   dia2-x_peaks > 11
+|   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001532
+|   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_stddev <= 0.013194
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_peaks <= 13
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_stddev <= 0.013662: f (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_stddev > 0.013662
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev <= 0.006996: f (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev > 0.006996: w (20.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_peaks > 13: d (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_stddev > 0.013194: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001532
+|   |   |   |   |   |   |   |   |   |   |   |   horz-vert-y_stddev <= 0.011568: d (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   horz-vert-y_stddev > 0.011568
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_peaks <= 6: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_peaks > 6
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_mean <= 0.32073
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-y_stddev <= 0.019909: w (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-y_stddev > 0.019909: f (7.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_mean > 0.32073: f (60.0/2.0)
+|   |   |   |   |   |   |   |   |   lblur-vert-x_mean > 0.582971
+|   |   |   |   |   |   |   |   |   |   lblur-horz-vert-y_stddev <= 0.009952: m (5.0/1.0)
+|   |   |   |   |   |   |   |   |   |   lblur-horz-vert-y_stddev > 0.009952: w (23.0/1.0)
+|   |   |   |   |   |   |   |   lblur-horz-dia1-x_stddev > 0.011839
+|   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001822
+|   |   |   |   |   |   |   |   |   |   vert-horz-y_stddev <= 0.016997: m (62.0/1.0)
+|   |   |   |   |   |   |   |   |   |   vert-horz-y_stddev > 0.016997: g (2.0)
+|   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001822: f (4.0)
+|   |   |   |   |   |   |   lblur-vert-horz-x_stddev > 0.008642
+|   |   |   |   |   |   |   |   iden-y_stddev <= 0.001006
+|   |   |   |   |   |   |   |   |   dia2-vert-x_stddev <= 0.045549
+|   |   |   |   |   |   |   |   |   |   lblur-vert-x_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_mean <= 0.304912: s (3.0)
+|   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_mean > 0.304912
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-x_mean <= 0.581364: b (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-x_mean > 0.581364: g (22.0)
+|   |   |   |   |   |   |   |   |   |   lblur-vert-x_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks <= 12: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks > 12: b (2.0/1.0)
+|   |   |   |   |   |   |   |   |   dia2-vert-x_stddev > 0.045549: f (11.0)
+|   |   |   |   |   |   |   |   iden-y_stddev > 0.001006
+|   |   |   |   |   |   |   |   |   lblur-vert-x_mean <= 0.593904
+|   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.000948
+|   |   |   |   |   |   |   |   |   |   |   dia2-vert-y_stddev <= 0.011638
+|   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_peaks <= 13: f (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_peaks > 13: m (12.0)
+|   |   |   |   |   |   |   |   |   |   |   dia2-vert-y_stddev > 0.011638
+|   |   |   |   |   |   |   |   |   |   |   |   vert-horz-y_peaks <= 9: f (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   vert-horz-y_peaks > 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-x_stddev <= 0.013644
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001287: b (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001287: w (24.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-x_stddev > 0.013644
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-x_stddev <= 0.001208: g (11.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-x_stddev > 0.001208: b (3.0/2.0)
+|   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.000948
+|   |   |   |   |   |   |   |   |   |   |   iden-y_stddev <= 0.001148
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-x_mean <= 0.573713
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-x_mean <= 0.561859: f (11.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-x_mean > 0.561859: b (8.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-x_mean > 0.573713
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks <= 8: f (8.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks > 8: g (11.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   iden-y_stddev > 0.001148
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_stddev <= 0.006649
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_stddev <= 0.032403
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-y_peaks <= 13
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-x_mean <= 0.586472
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-y_stddev <= 0.008778
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001342: w (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001342
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_peaks <= 6: w (5.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_peaks > 6
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-x_mean <= 0.264182: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-x_mean > 0.264182
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-y_mean <= 0.497103: f (77.0/2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-y_mean > 0.497103: b (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-y_stddev > 0.008778
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-x_peaks <= 11: r (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-x_peaks > 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-y_mean <= 0.540152
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_peaks <= 10: f (5.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-y_peaks <= 14: w (33.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-y_peaks > 14
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-x_peaks <= 14: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-x_peaks > 14: w (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-y_mean > 0.540152: f (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-x_mean > 0.586472: b (5.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-y_peaks > 13: m (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_stddev > 0.032403
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-y_peaks <= 10: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-y_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_peaks <= 12: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_peaks > 12: g (9.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_stddev > 0.006649
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-x_mean <= 0.588193
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_stddev <= 0.031635
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-x_stddev <= 0.001375
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-x_peaks <= 9: b (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-x_peaks > 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_stddev <= 0.006922: m (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_stddev > 0.006922
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_mean <= 0.490444: w (6.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_mean > 0.490444
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_peaks <= 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_peaks <= 5
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_peaks <= 10: g (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_peaks > 10: f (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_peaks > 5
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_peaks <= 14
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-y_peaks <= 5
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-y_peaks <= 7: f (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-y_peaks > 7: w (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-y_peaks > 5
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_stddev <= 0.01875
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-y_peaks <= 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001106
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001451: f (9.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001451: w (8.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001106: f (48.0/2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-y_peaks > 15: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_stddev > 0.01875
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-dia1-x_peaks <= 11: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-dia1-x_peaks > 11: b (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks > 10: w (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_peaks > 14: b (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_peaks > 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-x_peaks <= 11: b (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-x_peaks > 11: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-x_stddev > 0.001375
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001217
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_peaks <= 13
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_peaks <= 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001675
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001079
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_peaks <= 10: g (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_peaks > 10: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001079: f (11.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001675: w (13.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_peaks > 11: g (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_peaks > 13: m (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001217
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_peaks <= 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_mean <= 0.348988
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_stddev <= 0.014962
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-x_peaks <= 12: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-x_peaks > 12: w (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_stddev > 0.014962
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_peaks <= 14
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_peaks <= 16
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks <= 10: f (56.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_peaks <= 6: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_peaks > 6
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean <= 0.560107: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean > 0.560107: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks <= 8
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-x_peaks <= 11: f (23.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-x_peaks > 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_peaks <= 11: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_peaks > 11: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks > 8: w (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_peaks > 16: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_peaks > 14: b (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_mean > 0.348988
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_peaks <= 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_mean <= 0.348598
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-y_mean <= 0.477124
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001512
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks <= 6: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks > 6: r (12.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001512
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_stddev <= 0.007204: r (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_stddev > 0.007204
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-y_peaks <= 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-y_stddev <= 0.009162: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-y_stddev > 0.009162: f (54.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-y_peaks > 15: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-y_mean > 0.477124: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_mean > 0.348598
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_mean <= 0.482227
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_stddev <= 0.017459
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_mean <= 0.493507
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_peaks <= 11: r (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_peaks > 11: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_mean > 0.493507
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-y_stddev <= 0.021234: f (67.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-y_stddev > 0.021234
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-y_peaks <= 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_peaks <= 9: f (6.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_peaks > 9: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-y_peaks > 11: r (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_peaks > 10: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_stddev > 0.017459: f (643.0/16.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_mean > 0.482227
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001269
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-y_peaks <= 13: f (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-y_peaks > 13: b (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001269
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_stddev <= 0.015979
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks <= 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-x_peaks <= 12
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev <= 0.008438: f (127.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev > 0.008438
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-x_peaks <= 10: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-x_peaks > 10: f (16.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-x_peaks > 12
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_stddev <= 0.017321: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_stddev > 0.017321: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks > 9: r (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_stddev > 0.015979
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev <= 0.010977
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_peaks <= 8: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_peaks > 8
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_stddev <= 0.027094: r (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_stddev > 0.027094: b (10.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev > 0.010977
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-x_peaks <= 14
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-y_peaks <= 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_peaks <= 11: f (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_peaks > 11: b (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-y_peaks > 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev <= 0.008367: f (50.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev > 0.008367
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-x_stddev <= 0.009048: f (13.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-x_stddev > 0.009048
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks <= 8: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks > 8: r (8.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-x_peaks > 14: b (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean <= 0.490715: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean > 0.490715: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_peaks > 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_mean <= 0.565223
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_peaks <= 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_peaks <= 8: w (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_peaks > 8
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks <= 14
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_peaks <= 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-y_mean <= 0.63591
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_peaks <= 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_peaks <= 11: r (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_peaks > 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-y_peaks <= 11: r (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-y_peaks > 11: f (8.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_peaks > 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-x_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-y_peaks <= 10: f (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-y_peaks > 10: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-x_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_peaks <= 11: f (53.0/4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_peaks > 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-x_peaks <= 11: b (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-x_peaks > 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_peaks <= 12
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean <= 0.481614: b (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean > 0.481614: f (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_peaks > 12: f (31.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-y_mean > 0.63591
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks <= 13: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks > 13: b (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_peaks > 11: b (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks > 14
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean <= 0.549879: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean > 0.549879: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_peaks > 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-x_stddev <= 0.002382: b (6.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-x_stddev > 0.002382: f (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_mean > 0.565223: w (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_peaks > 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-x_peaks <= 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean <= 0.591187: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean > 0.591187: f (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-x_peaks > 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-y_stddev <= 0.014542: w (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-y_stddev > 0.014542
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_stddev <= 0.014571: b (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_stddev > 0.014571
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks <= 8: f (32.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks > 8
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-y_peaks <= 12: f (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-y_peaks > 12: b (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_stddev > 0.031635
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_peaks <= 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_peaks <= 6
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_stddev <= 0.023568: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_stddev > 0.023568: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_peaks > 6
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001265
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_peaks <= 9: f (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_peaks > 9: g (13.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001265
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_stddev <= 0.021416: g (5.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_stddev > 0.021416
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_peaks <= 13
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_mean <= 0.498314: f (47.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_mean > 0.498314
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-y_stddev <= 0.025908: r (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-y_stddev > 0.025908
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_peaks <= 8: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_peaks > 8: f (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_peaks > 13: r (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_peaks > 11: b (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-x_mean > 0.588193
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-vert-x_stddev <= 0.016221: r (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-vert-x_stddev > 0.016221
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-vert-y_stddev <= 0.018493
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-y_peaks <= 13: f (43.0/2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-y_peaks > 13
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-y_peaks <= 13: b (6.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-y_peaks > 13: f (7.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-vert-y_stddev > 0.018493
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-horz-x_mean <= 0.518039: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-horz-x_mean > 0.518039: b (21.0/1.0)
+|   |   |   |   |   |   |   |   |   lblur-vert-x_mean > 0.593904
+|   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001515
+|   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_mean <= 0.48403
+|   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_peaks <= 12: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_peaks > 12: m (6.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_mean > 0.48403
+|   |   |   |   |   |   |   |   |   |   |   |   iden-y_stddev <= 0.002045
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_peaks <= 6
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-horz-x_peaks <= 8: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-horz-x_peaks > 8
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia2-y_mean <= 0.54232: f (15.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia2-y_mean > 0.54232: m (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_peaks > 6
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_mean <= 0.629983
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-x_peaks <= 16
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean <= 0.568889: b (16.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean > 0.568889
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-y_stddev <= 0.008679: b (6.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-y_stddev > 0.008679
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-y_peaks <= 12
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001334
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia2-y_stddev <= 0.016618: g (27.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia2-y_stddev > 0.016618: f (5.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001334: f (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-y_peaks > 12: b (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-x_peaks > 16: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_mean > 0.629983
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-dia1-x_mean <= 0.491294
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_peaks <= 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-y_stddev <= 0.014152
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks <= 12: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks > 12: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-y_stddev > 0.014152
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_stddev <= 0.023969
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_peaks <= 8: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_peaks > 8: w (25.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_stddev > 0.023969
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_mean <= 0.749562: g (6.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_mean > 0.749562: w (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_peaks > 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_peaks <= 11: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_peaks > 11: g (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-dia1-x_mean > 0.491294: b (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   iden-y_stddev > 0.002045
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-y_mean <= 0.5297
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_mean <= 0.608164: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_mean > 0.608164: w (37.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-y_mean > 0.5297: b (5.0)
+|   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001515
+|   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_mean <= 0.47168: g (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_mean > 0.47168
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.002173
+|   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-x_peaks <= 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_peaks <= 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_peaks <= 13
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_stddev <= 0.007135: g (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_stddev > 0.007135
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-x_peaks <= 12
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_peaks <= 12
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_peaks <= 8: f (39.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_peaks > 8
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_peaks <= 8: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_peaks > 8
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-x_peaks <= 8: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-x_peaks > 8: f (18.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_peaks > 12: b (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-x_peaks > 12
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_peaks <= 14: b (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_peaks > 14: f (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_peaks > 13
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_peaks <= 12: b (7.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_peaks > 12: f (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_peaks > 11: b (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-x_peaks > 15: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.002173
+|   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-y_peaks <= 13
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_peaks <= 9: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_peaks > 9: r (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-y_peaks > 13: w (2.0)
+|   |   |   |   |   |   horz-dia2-y_stddev > 0.04184
+|   |   |   |   |   |   |   lblur-vert-dia2-x_mean <= 0.566252
+|   |   |   |   |   |   |   |   horz-vert-x_peaks <= 9: f (3.0)
+|   |   |   |   |   |   |   |   horz-vert-x_peaks > 9: b (11.0/1.0)
+|   |   |   |   |   |   |   lblur-vert-dia2-x_mean > 0.566252
+|   |   |   |   |   |   |   |   vert-x_stddev <= 0.042694
+|   |   |   |   |   |   |   |   |   lblur-vert-y_stddev <= 0.008425: b (4.0)
+|   |   |   |   |   |   |   |   |   lblur-vert-y_stddev > 0.008425
+|   |   |   |   |   |   |   |   |   |   dia2-dia1-x_peaks <= 8
+|   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_stddev <= 0.012649: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_stddev > 0.012649: b (2.0)
+|   |   |   |   |   |   |   |   |   |   dia2-dia1-x_peaks > 8: g (34.0)
+|   |   |   |   |   |   |   |   vert-x_stddev > 0.042694
+|   |   |   |   |   |   |   |   |   horz-dia1-y_peaks <= 11: b (3.0)
+|   |   |   |   |   |   |   |   |   horz-dia1-y_peaks > 11: w (4.0)
+|   |   |   lblur-vert-horz-y_stddev > 0.019484
+|   |   |   |   vert-horz-x_stddev <= 0.01202
+|   |   |   |   |   horz-dia2-y_stddev <= 0.045899
+|   |   |   |   |   |   lblur-iden-x_stddev <= 0.001367
+|   |   |   |   |   |   |   dia2-y_stddev <= 0.02446
+|   |   |   |   |   |   |   |   dia1-horz-y_peaks <= 9: g (3.0/1.0)
+|   |   |   |   |   |   |   |   dia1-horz-y_peaks > 9: m (33.0)
+|   |   |   |   |   |   |   dia2-y_stddev > 0.02446
+|   |   |   |   |   |   |   |   lblur-dia2-y_peaks <= 10
+|   |   |   |   |   |   |   |   |   horz-x_stddev <= 0.009335
+|   |   |   |   |   |   |   |   |   |   dia2-horz-y_stddev <= 0.034486: f (2.0)
+|   |   |   |   |   |   |   |   |   |   dia2-horz-y_stddev > 0.034486: w (21.0)
+|   |   |   |   |   |   |   |   |   horz-x_stddev > 0.009335: f (6.0)
+|   |   |   |   |   |   |   |   lblur-dia2-y_peaks > 10: m (2.0)
+|   |   |   |   |   |   lblur-iden-x_stddev > 0.001367
+|   |   |   |   |   |   |   lblur-vert-dia1-y_stddev <= 0.012406: g (2.0/1.0)
+|   |   |   |   |   |   |   lblur-vert-dia1-y_stddev > 0.012406
+|   |   |   |   |   |   |   |   horz-dia1-x_mean <= 0.539053: f (75.0)
+|   |   |   |   |   |   |   |   horz-dia1-x_mean > 0.539053: w (2.0/1.0)
+|   |   |   |   |   horz-dia2-y_stddev > 0.045899
+|   |   |   |   |   |   dia1-horz-x_peaks <= 7: b (4.0)
+|   |   |   |   |   |   dia1-horz-x_peaks > 7: g (2.0)
+|   |   |   |   vert-horz-x_stddev > 0.01202
+|   |   |   |   |   lblur-dia2-vert-y_stddev <= 0.007427
+|   |   |   |   |   |   lblur-horz-vert-x_stddev <= 0.017185
+|   |   |   |   |   |   |   lblur-horz-dia1-x_stddev <= 0.012227
+|   |   |   |   |   |   |   |   dia2-dia1-y_peaks <= 9: f (3.0)
+|   |   |   |   |   |   |   |   dia2-dia1-y_peaks > 9
+|   |   |   |   |   |   |   |   |   lblur-dia2-y_peaks <= 9: b (7.0/1.0)
+|   |   |   |   |   |   |   |   |   lblur-dia2-y_peaks > 9: g (6.0)
+|   |   |   |   |   |   |   lblur-horz-dia1-x_stddev > 0.012227: m (7.0)
+|   |   |   |   |   |   lblur-horz-vert-x_stddev > 0.017185
+|   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001281
+|   |   |   |   |   |   |   |   lblur-dia1-horz-y_mean <= 0.383787
+|   |   |   |   |   |   |   |   |   iden-x_mean <= 0.492464
+|   |   |   |   |   |   |   |   |   |   horz-dia1-x_stddev <= 0.015359: g (4.0)
+|   |   |   |   |   |   |   |   |   |   horz-dia1-x_stddev > 0.015359: f (2.0/1.0)
+|   |   |   |   |   |   |   |   |   iden-x_mean > 0.492464: s (42.0/1.0)
+|   |   |   |   |   |   |   |   lblur-dia1-horz-y_mean > 0.383787
+|   |   |   |   |   |   |   |   |   dia2-vert-y_mean <= 0.421103: s (2.0)
+|   |   |   |   |   |   |   |   |   dia2-vert-y_mean > 0.421103
+|   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev <= 0.015099
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_peaks <= 13
+|   |   |   |   |   |   |   |   |   |   |   |   vert-x_stddev <= 0.029203: g (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   vert-x_stddev > 0.029203
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks <= 12: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks > 12: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_peaks > 10: b (20.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_peaks > 13: f (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev > 0.015099: f (7.0)
+|   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001281
+|   |   |   |   |   |   |   |   lblur-dia1-vert-x_stddev <= 0.043851
+|   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev <= 0.013572
+|   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001052: w (3.0)
+|   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001052
+|   |   |   |   |   |   |   |   |   |   |   vert-y_stddev <= 0.008503: f (10.0)
+|   |   |   |   |   |   |   |   |   |   |   vert-y_stddev > 0.008503
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.002231
+|   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_stddev <= 0.049822
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-horz-x_mean <= 0.481943
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_stddev <= 0.032673
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-y_mean <= 0.471417: b (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-y_mean > 0.471417: f (21.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_stddev > 0.032673
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_peaks <= 4: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_peaks > 4: b (18.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-horz-x_mean > 0.481943
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_peaks <= 13: b (68.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_peaks > 13
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-y_peaks <= 12: b (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-y_peaks > 12: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_stddev > 0.049822: w (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.002231
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_mean <= 0.486469: f (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_mean > 0.486469: w (2.0)
+|   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev > 0.013572
+|   |   |   |   |   |   |   |   |   |   vert-horz-y_stddev <= 0.024118
+|   |   |   |   |   |   |   |   |   |   |   horz-dia2-x_peaks <= 14: f (72.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   horz-dia2-x_peaks > 14
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_peaks <= 8: w (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_peaks > 8: f (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   vert-horz-y_stddev > 0.024118
+|   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001714: b (9.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001714: f (2.0/1.0)
+|   |   |   |   |   |   |   |   lblur-dia1-vert-x_stddev > 0.043851: w (5.0)
+|   |   |   |   |   lblur-dia2-vert-y_stddev > 0.007427
+|   |   |   |   |   |   lblur-horz-vert-y_stddev <= 0.019502
+|   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001979
+|   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001807
+|   |   |   |   |   |   |   |   |   lblur-vert-dia2-x_mean <= 0.576781
+|   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.000843
+|   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-y_mean <= 0.373034: s (11.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-y_mean > 0.373034
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-x_peaks <= 7: g (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-x_peaks > 7
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-dia1-y_peaks <= 9: b (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-dia1-y_peaks > 9: f (2.0)
+|   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.000843
+|   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_mean <= 0.351139
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-dia1-y_mean <= 0.313428
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_stddev <= 0.012746: f (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_stddev > 0.012746: s (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-dia1-y_mean > 0.313428: g (26.0)
+|   |   |   |   |   |   |   |   |   |   |   dia1-dia2-y_mean > 0.351139
+|   |   |   |   |   |   |   |   |   |   |   |   iden-x_stddev <= 0.000977
+|   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-x_peaks <= 9: f (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-x_peaks > 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-x_stddev <= 0.013296: w (7.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-x_stddev > 0.013296
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-x_peaks <= 9: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-x_peaks > 9: g (13.0)
+|   |   |   |   |   |   |   |   |   |   |   |   iden-x_stddev > 0.000977
+|   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia2-x_mean <= 0.654906
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001818
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_mean <= 0.269026
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_stddev <= 0.021516: g (36.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_stddev > 0.021516
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-x_peaks <= 12: g (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-x_peaks > 12: b (12.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_mean > 0.269026
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-y_mean <= 0.459048
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev <= 0.012725
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_peaks <= 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_peaks <= 10: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_peaks > 10: b (8.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_peaks > 9: g (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev > 0.012725
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_mean <= 0.440121: b (5.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_mean > 0.440121
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-x_mean <= 0.547838: f (24.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-x_mean > 0.547838: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia1-y_mean > 0.459048
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001136
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001631
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_mean <= 0.612234
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-x_mean <= 0.53256
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.000925: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.000925: b (16.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-x_mean > 0.53256
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_mean <= 0.651449
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_peaks <= 12
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-x_stddev <= 0.012428: f (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-x_stddev > 0.012428
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-vert-y_peaks <= 12
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-y_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_mean <= 0.479394: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_mean > 0.479394: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-y_peaks > 10: g (11.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-vert-y_peaks > 12: b (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_peaks > 12: g (31.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_mean > 0.651449
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-x_mean <= 0.626667: b (8.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-x_mean > 0.626667: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_mean > 0.612234: w (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001631: w (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001136
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_stddev <= 0.019159
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-x_stddev <= 0.014329: f (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-x_stddev > 0.014329
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_peaks <= 10: g (11.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks <= 8
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-y_peaks <= 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_peaks <= 12: b (14.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_peaks > 12: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-y_peaks > 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001488: g (20.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001488
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_stddev <= 0.009336: g (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_stddev > 0.009336: b (13.0/2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks > 8: b (20.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_stddev > 0.019159
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_peaks <= 7: g (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-x_peaks > 7
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-x_stddev <= 0.015972
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-y_stddev <= 0.029404: f (12.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-y_stddev > 0.029404: b (9.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-x_stddev > 0.015972
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-x_mean <= 0.331526
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-y_peaks <= 13: b (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-y_peaks > 13: g (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-x_mean > 0.331526
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-y_peaks <= 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks <= 6
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks <= 5: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks > 5
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia2-x_peaks <= 14
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-y_stddev <= 0.026055
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_peaks <= 11: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_peaks > 11: f (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-y_stddev > 0.026055: b (15.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia2-x_peaks > 14: f (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks > 6
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_stddev <= 0.040992: b (240.0/10.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_stddev > 0.040992
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-x_peaks <= 12: g (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-x_peaks > 12: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-y_peaks > 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_stddev <= 0.037295
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-y_stddev <= 0.01731: g (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-y_stddev > 0.01731: b (12.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_stddev > 0.037295: g (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001818
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001504
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_stddev <= 0.029873
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-y_peaks <= 12: r (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-y_peaks > 12: f (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_stddev > 0.029873: w (10.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001504
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_stddev <= 0.031278: f (6.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_stddev > 0.031278: b (9.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia2-x_mean > 0.654906
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_peaks <= 10: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-y_peaks <= 14: w (10.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-y_peaks > 14: b (2.0)
+|   |   |   |   |   |   |   |   |   lblur-vert-dia2-x_mean > 0.576781
+|   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001688
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_stddev <= 0.038522
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks <= 7
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001564
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-x_mean <= 0.598776
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-x_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-y_peaks <= 8
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_peaks <= 5: b (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_peaks > 5
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001524
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-y_peaks <= 8: g (64.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-y_peaks > 8
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-y_stddev <= 0.013799: g (10.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-y_stddev > 0.013799
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks <= 11: b (6.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks > 11: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001524: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-y_peaks > 8
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_mean <= 0.584813
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-horz-y_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_peaks <= 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_mean <= 0.316819
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_peaks <= 6: g (24.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_peaks > 6
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_peaks <= 12
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-x_stddev <= 0.032121: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-x_stddev > 0.032121: g (10.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_peaks > 12: b (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_mean > 0.316819: g (90.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_peaks > 9: b (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-horz-y_peaks > 10: g (649.0/20.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_mean > 0.584813
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_peaks <= 11: g (7.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_peaks > 11: b (5.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-x_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_stddev <= 0.012204
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_peaks <= 15: g (15.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_peaks > 15: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_stddev > 0.012204: b (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia1-x_mean > 0.598776
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_mean <= 0.641469
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-x_peaks <= 6: f (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-x_peaks > 6: b (6.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_mean > 0.641469: g (6.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001564
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-x_stddev <= 0.002161
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean <= 0.594286: b (8.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean > 0.594286: f (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-x_stddev > 0.002161
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_stddev <= 0.043402
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_stddev <= 0.032243: g (27.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_stddev > 0.032243: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   vert-x_stddev > 0.043402: b (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks > 7
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_mean <= 0.641168
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-y_stddev <= 0.008492
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-y_peaks <= 16
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.00091: s (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.00091
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_peaks <= 8
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-x_peaks <= 10: b (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-x_peaks > 10: g (6.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_peaks > 8: b (6.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-y_peaks > 16: f (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-y_stddev > 0.008492
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001514
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001627
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks <= 6
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_stddev <= 0.041299
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_stddev <= 0.016752: b (10.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_stddev > 0.016752: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_stddev > 0.041299: g (6.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks > 6
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev <= 0.008283
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_mean <= 0.321678: g (15.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_mean > 0.321678
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-y_stddev <= 0.040222
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_mean <= 0.50415
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-y_stddev <= 0.025445: g (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-horz-y_stddev > 0.025445: b (20.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_mean > 0.50415: g (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-y_stddev > 0.040222: g (6.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev > 0.008283
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-x_peaks <= 4
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_peaks <= 9: g (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_peaks > 9: b (6.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-x_peaks > 4
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-y_stddev <= 0.000795
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks <= 8: g (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_peaks > 8: s (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-y_stddev > 0.000795
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001485
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_peaks <= 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-x_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-x_peaks <= 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_stddev <= 0.033144
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_stddev <= 0.024887
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-y_stddev <= 0.009053: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-y_stddev > 0.009053
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev <= 0.012668
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.001393: g (86.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001393
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-y_peaks <= 12: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-y_peaks > 12: g (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-y_stddev > 0.012668: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-y_stddev > 0.024887: b (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_stddev > 0.033144: g (204.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-x_peaks > 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_stddev <= 0.025442
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_stddev <= 0.035153: b (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_stddev > 0.035153: g (8.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia1-y_peaks > 10: g (31.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_stddev > 0.025442: b (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-x_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001248: g (18.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001248: b (10.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-x_peaks > 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_stddev <= 0.010499: g (19.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-x_stddev > 0.010499
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_peaks <= 9: b (10.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_peaks > 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_mean <= 0.308571: b (6.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_mean > 0.308571
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_peaks <= 6: b (4.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-x_peaks > 6: g (17.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001485
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-y_mean <= 0.479257: b (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-y_mean > 0.479257: g (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001627
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-y_peaks <= 9: g (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-y_peaks > 9: b (8.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001514
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_stddev <= 0.037235
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001081: w (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001081
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_mean <= 0.267536: g (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_mean > 0.267536
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-x_peaks <= 9: g (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-x_peaks > 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-x_mean <= 0.625228: b (26.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-x_mean > 0.625228: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_stddev > 0.037235: g (22.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia1-vert-x_mean > 0.641168
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001087: w (5.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001087
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_mean <= 0.527488
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-x_mean <= 0.55026
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_mean <= 0.611265: f (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_mean > 0.611265: b (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-x_mean > 0.55026
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_stddev <= 0.026468: f (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_stddev > 0.026468: g (20.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_mean > 0.527488
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-y_peaks <= 10: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-y_peaks > 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_stddev <= 0.018386: g (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_stddev > 0.018386: b (23.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_stddev > 0.038522
+|   |   |   |   |   |   |   |   |   |   |   |   vert-y_peaks <= 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001104
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_stddev <= 0.021191: w (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-horz-y_stddev > 0.021191: g (19.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001104
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_mean <= 0.319061
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-vert-y_mean <= 0.364011: f (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-vert-y_mean > 0.364011: g (11.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-y_mean > 0.319061
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_stddev <= 0.010146: g (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_stddev > 0.010146
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_stddev <= 0.010313
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_peaks <= 8: w (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-dia1-y_peaks > 8: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-x_stddev > 0.010313
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-x_stddev <= 0.05769
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-y_stddev <= 0.025635: f (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   horz-dia2-y_stddev > 0.025635
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-y_mean <= 0.482759: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   iden-y_mean > 0.482759: b (43.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-vert-x_stddev > 0.05769: w (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   vert-y_peaks > 15: s (2.0)
+|   |   |   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001688
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_mean <= 0.279796: w (6.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia2-vert-x_mean > 0.279796
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_stddev <= 0.027311
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001511
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_peaks <= 8: w (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_peaks > 8: f (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001511: r (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-dia2-horz-y_stddev > 0.027311
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia2-y_mean <= 0.377851
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-x_peaks <= 11: g (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   dia2-horz-x_peaks > 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks <= 14: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks > 14: w (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   dia2-y_mean > 0.377851
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_stddev <= 0.020264
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-y_peaks <= 10
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_stddev <= 0.022587: b (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_stddev > 0.022587: g (12.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-vert-dia2-y_peaks > 10: b (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_stddev > 0.020264
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_peaks <= 6: f (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-y_peaks > 6: b (33.0/1.0)
+|   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001807
+|   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_peaks <= 6: g (7.0)
+|   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_peaks > 6
+|   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev <= 0.012002
+|   |   |   |   |   |   |   |   |   |   |   horz-y_mean <= 0.335176: g (3.0)
+|   |   |   |   |   |   |   |   |   |   |   horz-y_mean > 0.335176
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks <= 8: r (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_peaks > 8
+|   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia2-y_stddev <= 0.01395: b (13.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   vert-dia2-y_stddev > 0.01395: r (2.0)
+|   |   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev > 0.012002
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_stddev <= 0.02839
+|   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_stddev <= 0.024487: f (2.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_stddev > 0.024487: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-dia1-vert-x_stddev > 0.02839: f (25.0)
+|   |   |   |   |   |   |   lblur-iden-y_stddev > 0.001979
+|   |   |   |   |   |   |   |   lblur-iden-y_stddev <= 0.002651
+|   |   |   |   |   |   |   |   |   dia1-x_peaks <= 7: g (2.0)
+|   |   |   |   |   |   |   |   |   dia1-x_peaks > 7
+|   |   |   |   |   |   |   |   |   |   horz-y_mean <= 0.301878: g (2.0)
+|   |   |   |   |   |   |   |   |   |   horz-y_mean > 0.301878
+|   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev <= 0.001634
+|   |   |   |   |   |   |   |   |   |   |   |   dia1-y_peaks <= 15
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_peaks <= 9: f (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-horz-vert-x_peaks > 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_stddev <= 0.032157: w (29.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_stddev > 0.032157
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_peaks <= 13: b (4.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-dia2-x_peaks > 13: w (3.0)
+|   |   |   |   |   |   |   |   |   |   |   |   dia1-y_peaks > 15: r (2.0)
+|   |   |   |   |   |   |   |   |   |   |   lblur-iden-x_stddev > 0.001634
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_peaks <= 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-x_peaks <= 9: b (5.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-x_peaks > 9: r (6.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   lblur-dia1-horz-y_peaks > 9
+|   |   |   |   |   |   |   |   |   |   |   |   |   horz-vert-y_peaks <= 11: f (3.0/1.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   horz-vert-y_peaks > 11
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks <= 16
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean <= 0.598361: b (13.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_mean > 0.598361: f (2.0)
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   dia1-dia2-x_peaks > 16: f (3.0)
+|   |   |   |   |   |   |   |   lblur-iden-y_stddev > 0.002651
+|   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev <= 0.012583: g (7.0)
+|   |   |   |   |   |   |   |   |   lblur-vert-dia1-y_stddev > 0.012583
+|   |   |   |   |   |   |   |   |   |   dia1-vert-x_peaks <= 9: g (2.0)
+|   |   |   |   |   |   |   |   |   |   dia1-vert-x_peaks > 9: f (18.0)
+|   |   |   |   |   |   lblur-horz-vert-y_stddev > 0.019502
+|   |   |   |   |   |   |   horz-y_stddev <= 0.040479
+|   |   |   |   |   |   |   |   lblur-vert-dia1-y_peaks <= 13
+|   |   |   |   |   |   |   |   |   lblur-dia2-y_stddev <= 0.015965
+|   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_mean <= 0.439847: w (4.0)
+|   |   |   |   |   |   |   |   |   |   lblur-horz-dia2-x_mean > 0.439847: f (59.0)
+|   |   |   |   |   |   |   |   |   lblur-dia2-y_stddev > 0.015965: w (7.0)
+|   |   |   |   |   |   |   |   lblur-vert-dia1-y_peaks > 13: g (2.0/1.0)
+|   |   |   |   |   |   |   horz-y_stddev > 0.040479
+|   |   |   |   |   |   |   |   dia1-x_peaks <= 9: b (5.0)
+|   |   |   |   |   |   |   |   dia1-x_peaks > 9: g (8.0)
+
+Number of Leaves  :     566
+
+Size of the tree :  1131
+
+
+Time taken to build model: 9.12 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances        7974               80.6432 %
+Incorrectly Classified Instances      1914               19.3568 %
+Kappa statistic                          0.7627
+Mean absolute error                      0.0506
+Root mean squared error                  0.213 
+Relative absolute error                 24.7943 %
+Root relative squared error             66.6558 %
+Total Number of Instances             9888     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.794     0.064      0.791     0.794     0.793      0.853    f
+                 0.82      0.053      0.797     0.82      0.809      0.874    g
+                 0.997     0.003      0.99      0.997     0.994      0.997    d
+                 0.543     0.052      0.569     0.543     0.556      0.765    b
+                 0.724     0.031      0.718     0.724     0.721      0.86     w
+                 0.878     0.009      0.898     0.878     0.888      0.929    m
+                 0.184     0.013      0.194     0.184     0.189      0.68     r
+                 0.556     0.005      0.617     0.556     0.585      0.793    s
+Weighted Avg.    0.806     0.036      0.804     0.806     0.805      0.885
+
+=== Confusion Matrix ===
+
+    a    b    c    d    e    f    g    h   <-- classified as
+ 1840   83   11  130  145   29   72    8 |    a = f
+   63 1643    2  206   41   18   13   17 |    b = g
+    3    0 2375    2    0    1    0    0 |    c = d
+  177  234    1  603   54    7   24   11 |    d = b
+  120   47    2   66  707   13   16    5 |    e = w
+   27   24    8   12   18  697    0    8 |    f = m
+   83   11    0   22   14    3   30    0 |    g = r
+   12   19    0   18    6    8    0   79 |    h = s
+
