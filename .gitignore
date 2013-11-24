@@ -1,11 +1,6 @@
 .DS_Store
 *.pyc
-data/cropped
-data/greyscale
-data/lineless
-data/bandw
-data/final
-data/results
-data/old
-data/second_run/*
-gold_images
+*.aux
+*.log
+*.fdb_latexmk
+*.spl

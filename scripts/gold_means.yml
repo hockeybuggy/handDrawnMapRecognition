@@ -1,0 +1,7 @@
+w: gold_images/water-mean.png
+g: gold_images/grass-mean.png
+m: gold_images/mountain-mean.png
+r: gold_images/rock-mean.png
+b: gold_images/building-mean.png
+s: gold_images/sand-mean.png
+f: gold_images/forest-mean.png
