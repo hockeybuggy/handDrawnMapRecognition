@@ -20,8 +20,9 @@
 %% $Id: elsarticle-template-1-num.tex 149 2009-10-08 05:01:15Z rishi $
 %% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1-num.tex $
 %%
-%\documentclass[preprint,12pt]{elsarticle}
-\documentclass[final,5p,times,twocolumn]{elsarticle}
+
+\documentclass[preprint,5p,times,twocolumn]{elsarticle}
+%\documentclass[final,5p,times,twocolumn]{elsarticle}
 
 %% Use the option review to obtain double line spacing
 %% \documentclass[preprint,review,12pt]{elsarticle}
@@ -45,34 +46,19 @@
 
 %% The amssymb package provides various useful mathematical symbols
 \usepackage{amssymb}
-%% The amsthm package provides extended theorem environments
-%% \usepackage{amsthm}
 
-%% The lineno packages adds line numbers. Start line numbering with
-%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
-%% for the whole article with \linenumbers after \end{frontmatter}.
-%% \usepackage{lineno}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows}
 
-%% natbib.sty is loaded by default. However, natbib options can be
-%% provided with \biboptions{...} command. Following options are
-%% valid:
 
-%%   round  -  round parentheses are used (default)
-%%   square -  square brackets are used   [option]
-%%   curly  -  curly braces are used      {option}
-%%   angle  -  angle brackets are used    <option>
-%%   semicolon  -  multiple citations separated by semi-colon
-%%   colon  - same as semicolon, an earlier confusion
-%%   comma  -  separated by comma
-%%   numbers-  selects numerical citations
-%%   super  -  numerical citations as superscripts
-%%   sort   -  sorts multiple citations according to order in ref. list
-%%   sort&compress   -  like sort, but also compresses numerical citations
-%%   compress - compresses without sorting
-%%
-%% \biboptions{comma,round}
-
-% \biboptions{}
+%% Styles for proximity flow chart
+\tikzstyle{bcell} = [rectangle, draw, fill=red!20, minimum width=3em, text centered, minimum height=3em]
+\tikzstyle{dcell} = [rectangle, draw, fill=yellow!20, minimum width=3em, text centered, minimum height=3em]
+\tikzstyle{ecell} = [rectangle, draw, fill=black!20, minimum width=3em, text centered, minimum height=3em]
+\tikzstyle{fcell} = [rectangle, draw, fill=green!20, minimum width=3em, text centered, minimum height=3em]
+\tikzstyle{ucell} = [rectangle, draw, fill=white!20, minimum width=3em, text centered, minimum height=3em]
+\tikzstyle{wcell} = [rectangle, draw, fill=blue!20, minimum width=3em, text centered, minimum height=3em]
+\tikzstyle{line} = [draw, -latex']
 
 
 \journal{University of Guelph; CIS*4780}
@@ -81,27 +67,6 @@
 
 \begin{frontmatter}
 
-%% Title, authors and addresses
-
-%% use the tnoteref command within \title for footnotes;
-%% use the tnotetext command for the associated footnote;
-%% use the fnref command within \author or \address for footnotes;
-%% use the fntext command for the associated footnote;
-%% use the corref command within \author for corresponding author footnotes;
-%% use the cortext command for the associated footnote;
-%% use the ead command for the email address,
-%% and the form \ead[url] for the home page:
-%%
-%% \title{Title\tnoteref{label1}}
-%% \tnotetext[label1]{}
-%% \author{Name\corref{cor1}\fnref{label2}}
-%% \ead{email address}
-%% \ead[url]{home page}
-%% \fntext[label2]{}
-%% \cortext[cor1]{}
-%% \address{Address\fnref{label3}}
-%% \fntext[label3]{}
-
 \title{Two Dimensional Intelligent Character Recognition; A Rope Of Sand}
 
 %% use optional labels to link authors explicitly to addresses:
@@ -109,10 +74,12 @@
 %% \address[label1]{<address>}
 %% \address[label2]{<address>}
 
-\author{Ryan Pattison, Douglas Anderson, and Oliver Cook}
+\author[ryan,doug,oliver]{Ryan Pattison, Douglas Anderson, and Oliver Cook}
 
-\address{ryan.m.pattison@gmail.com, dander01@guelph.ca, cooko@uoguelph.ca}
-
+\address[ryan]{ryan.m.pattison@gmail.com}
+\address[doug]{dander01@guelph.ca}
+\address[oliver]{cooko@uoguelph.ca}
+ 
 \begin{abstract}
 %% Text of abstract
 
@@ -186,6 +153,7 @@ pharetra, vitae suscipit lectus ultricies. In varius augue ac lacinia viverra.
 
 Cras condimentum mauris at dolor faucibus ornare. Sed eu mauris id ipsum
 vehicula pharetra. Pellentesque laoreet tempor volutpat. Nulla dapibus sodales
+q
 blandit. Curabitur vel dui ante. Interdum et malesuada fames ac ante ipsum
 primis in faucibus. Nullam vestibulum leo orci, vitae sagittis massa blandit
 quis. Integer venenatis urna ut urna ornare lacinia. Nam semper, leo non
@@ -233,6 +201,35 @@ non. Cras eu feugiat diam. Aliquam quis nisi a tortor interdum ultrices.
 Maecenas tincidunt pellentesque lectus eu tincidunt. Etiam commodo tellus sed
 consequat molestie. Proin semper molestie dui, a tincidunt urna ornare sed.
 
+\begin{center}
+\begin{tikzpicture}[node distance = 3.2 cm, auto]
+    \node[bcell](top){B};
+    \node[ucell, below of=top](center){?};
+    \node[bcell, left of=center](left){B};
+    \node[dcell, right of=center](right){D};
+    \node[wcell, below of=center](bottom){W};
+
+    \path[line] (top)   -- node {P(south \textbar \, B)} (center);
+    \path[line] (left)  -- node {P(east \textbar \, B)} (center);
+    \path[line] (right) -- node {P(west \textbar \, D)} (center);
+    \path[line] (bottom) -- node {P(north \textbar \, W)} (center);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}[node distance = 3.2 cm, auto]
+    \node[fcell](top){F};
+    \node[ucell, below of=top](center){?};
+    \node[dcell, left of=center](left){D};
+    \node[ecell, right of=center](right){edge};
+    \node[fcell, below of=center](bottom){F};
+
+    \path[line] (top)   -- node {P(south \textbar \, F)} (center);
+    \path[line] (left)  -- node {P(east \textbar \, D)} (center);
+    \path[line] (right) -- node {P(west \textbar \, edge)} (center);
+    \path[line] (bottom) -- node {P(north \textbar \, F)} (center);
+\end{tikzpicture}
+\end{center}
 Quisque viverra pretium urna et pharetra. Nunc facilisis, justo vel luctus
 convallis, dolor tortor varius diam, eget semper massa arcu eu tortor. Duis a
 nibh mauris. Suspendisse facilisis erat ultricies fermentum adipiscing. Aliquam
