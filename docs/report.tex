@@ -193,13 +193,7 @@ sapien pharetra, lobortis risus nec, sodales felis. Aliquam sed faucibus est.
 \subsection{Proximity Approach}
 \label{process:proximity}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus suscipit augue
-eget erat semper cursus. Sed malesuada, neque in aliquet dictum, leo massa
-lacinia tellus, in fringilla velit erat in arcu. In vulputate nibh urna, sit
-amet sodales turpis feugiat quis. Sed varius nulla arcu, eu rutrum est porta
-non. Cras eu feugiat diam. Aliquam quis nisi a tortor interdum ultrices.
-Maecenas tincidunt pellentesque lectus eu tincidunt. Etiam commodo tellus sed
-consequat molestie. Proin semper molestie dui, a tincidunt urna ornare sed.
+Summary of approach
 
 \begin{center}
 \begin{tikzpicture}[node distance = 3.2 cm, auto]
@@ -209,12 +203,35 @@ consequat molestie. Proin semper molestie dui, a tincidunt urna ornare sed.
     \node[dcell, right of=center](right){D};
     \node[wcell, below of=center](bottom){W};
 
-    \path[line] (top)   -- node {P(south \textbar \, B)} (center);
-    \path[line] (left)  -- node {P(east \textbar \, B)} (center);
-    \path[line] (right) -- node {P(west \textbar \, D)} (center);
-    \path[line] (bottom) -- node {P(north \textbar \, W)} (center);
+    \path[line] (top)   -- node {$P_{south}(X | \, B)$} (center);
+
+    \path[line] (left)  -- node {$P_{east}(X | \, B)$} (center);
+    \path[line] (right) -- node {$P_{west}(X | \, D)$} (center);
+    \path[line] (bottom) -- node {$P_{north}(X | \, W)$} (center);
 \end{tikzpicture}
 \end{center}
+
+Let $V_{d}$ be a vector of probabilities, where $n$ is the number of classes,
+$d$ is a direction.
+
+\begin{equation}
+V_{d} = \{P_{d}{(X_{1} | \, C_{d})}, P_{d}{(X_{2} | \, C_{d}),\; \ldots \; , P_{d}{(X_{n}) | \, C_{d}}}\}
+\end{equation}
+
+ To determine the probability of a cell being in a particular class
+we can multiply the vectors of all directions together using the scalar
+product.
+
+\begin{equation}
+C = V_{north} \cdot V_{east} \cdot V_{south} \cdot V_{west}
+\end{equation}
+
+This new vector $C$ will contain $n$ probabilities that this cell should be
+classified a particular class. Since the vectors were multiplied together the
+range of the values in $C$ is no longer $\in[0,1]$. We can select the maximum
+value in $C$ to choose a class.
+
+An example of this process can be seen with the following situation:
 
 \begin{center}
 \begin{tikzpicture}[node distance = 3.2 cm, auto]
@@ -224,12 +241,26 @@ consequat molestie. Proin semper molestie dui, a tincidunt urna ornare sed.
     \node[ecell, right of=center](right){edge};
     \node[fcell, below of=center](bottom){F};
 
-    \path[line] (top)   -- node {P(south \textbar \, F)} (center);
-    \path[line] (left)  -- node {P(east \textbar \, D)} (center);
-    \path[line] (right) -- node {P(west \textbar \, edge)} (center);
-    \path[line] (bottom) -- node {P(north \textbar \, F)} (center);
+    \path[line] (top)   -- node {$P_{south}(X | \, F)$} (center);
+    \path[line] (left)  -- node {$P_{east}(X | \, D)$} (center);
+    \path[line] (right) -- node {$P_{west}(X | \, edge)$} (center);
+    \path[line] (bottom) -- node {$P_{north}(X | \, F)$} (center);
 \end{tikzpicture}
 \end{center}
+
+Suppose that the training set has the following characteristics:
+
+\begin{table}
+\begin{tabular}{ l c r }
+    class & $x_{0}$ & $x_{1}$ \\
+    north & 2 & 3 \\
+    east  & 8 & 9 \\
+    south & 5 & 6 \\
+    west  & 5 & 6 \\
+\end{tabular}
+\caption{The probability data is...} %TODO
+\end{table}
+
 Quisque viverra pretium urna et pharetra. Nunc facilisis, justo vel luctus
 convallis, dolor tortor varius diam, eget semper massa arcu eu tortor. Duis a
 nibh mauris. Suspendisse facilisis erat ultricies fermentum adipiscing. Aliquam
