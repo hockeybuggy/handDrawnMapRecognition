@@ -155,16 +155,30 @@ and complete but for now... pfffft %TODO
 \caption{This figure describes the probability of class $X$ neighbouring cells $C_{i,j}$}
 \end{figure}
 
+We want to classify the symbol $X$, and we do this by first calculating the
+probability that $X$ belongs to each class, $P(X)\quad X_i = P(x\!=\!C_i)$.
+The proximity classifier is given the classes of the symbols in each of the
+cardinal directions: north, south, east, and west. Using this information
+we restrict the probability calculation to only consider the subspace
+where a symbol has the given classes neighbouring it using
+conditional probability $P(X|\,N\!=\!c_1,\,E\!=\!c_2,\,S\!=\!c_3,\,W\!=\!c_4)$.
+In calculating probabilities, we can only approximate them using relative-frequencies collected
+from our sample data. For a set of $k$ classes, there are $k^4$ possible combinations of neighbouring
+cells and too many of these combinations occur rarely in our dataset to make
+confident approximations of the true probabilities. To resolve this, we assume that
+the conditional probabilities are independent in each direction. Under this
+assumption, the calculation becomes much more reasonable for our small data set
+since there are only $4k$ possible combinations. Our resulting calculation becomes:
+$P(X|\,N\!=\!c_1)P(X|\,S\!=\!c_2)P(X|\,E\!=\!c_3)P(X|\,W\!=\!c_4)$. From the
+definition of conditional probability we have that $P(X|\,D\!=\!c) = P(X \cap D\!=\!c)/P(D=c)$
+for some class $c$ in the direction $D$. To calculate each of the conditional probabilities,
+we calculate a table of observed samples $P(X\cap D\!=\!c)$ and $P(D\!=\!c)$ for each class and direction.
+We can then use this to calculate the relative conditional frequencies, and under the assumption
+of independence we can approximate $P(X)$.
+
+
 Let $V_{d}$ be a vector of probabilities, where $n$ is the number of classes,
 $d$ is a direction.
-
-\[
-\begin{array}{l}
-V = P(X),\quad P(X \in C_i) = V_i \\
-V = P(X|\,N\!=\!g,\,S\!=\!g,\,E\!=\!d,\,W\!=\!d)  \\
-= P(X|\,N\!=\!g)P(X|\,S\!=\!g)P(X|\,E\!=\!d)P(X|\,W\!=\!d) \\
-\end{array}
-\]
 
 \begin{equation}
 V_{d} = \left(P_{d}{(X_{1} | \, C_{d})}, P_{d}{(X_{2} | \, C_{d}),\; \ldots \; , P_{d}{(X_{n} | \, C_{d}})}\right)
