@@ -22,7 +22,7 @@
 %%
 
 %\documentclass[]{article}
-\documentclass[preprint,5p,times,twocolumn]{elsarticle}
+\documentclass[preprint,3p,12pt]{elsarticle}
 %\documentclass[final,5p,times,twocolumn]{elsarticle}
 
 %% Use the option review to obtain double line spacing
@@ -105,16 +105,11 @@ Intelligent Character Recognition
 
 \end{frontmatter}
 
-%%
-%% Start line numbering here if you want
-%%
-%%\linenumbers
 
 %% main text
 \section{Introduction}
 \label{intro}
 \lipsum[1-2]
-
 
 \section{Process}
 \label{process}
@@ -128,8 +123,33 @@ Intelligent Character Recognition
 \lipsum[1-2]
 
 \subsection{Gold Comparison Approach}
-\label{process:gold}
-\lipsum{1-3}
+\lipsum[1]
+
+\begin{equation}
+A =
+\left [
+    \begin{array}{r r r r}
+        a_{00} & a_{10} & \cdots & a_{n0} \\
+        a_{01} & a_{11} & \cdots & a_{n1}\\
+        \vdots  & \vdots  & \ddots & \vdots\\
+        a_{0m} & a_{1m} & \cdots & a_{nm}\\
+    \end{array}
+\right ]
+\end{equation}
+
+Where $a_{ij} \in [0,1]$
+\[
+x_{i} = \sum_{j}{A_{i,j}} \quad
+y_{j} = \sum_{i}{A_{i,j}}
+\]
+
+\begin{equation} \label{eq:gold}
+x^{\prime} = (x - \mu^{B}_{x}) \, \frac{\sigma^{G}_{x}}{\sigma^{C}_{x}} + \mu^{G}_{x}
+\end{equation}
+
+\[
+\xi_{k}(A) = \sum_{i}\sum_{j}{(A_{ij} \cdot G_{kij})^{2}}
+\]
 
 \subsection{Proximity Approach}
 \label{process:proximity}
@@ -151,9 +171,11 @@ confident approximations of the true probabilities. To resolve this, we assume t
 the conditional probabilities are independent in each direction. Under this
 assumption, the calculation becomes much more reasonable for our small data set
 since there are only $4k$ possible combinations. Our resulting calculation becomes:
+
 \begin{equation} \label{eq:prox}
 P(X) \approx P(X|\,N\!=\!c_1)P(X|\,S\!=\!c_2)P(X|\,E\!=\!c_3)P(X|\,W\!=\!c_4)
 \end{equation}
+
 From the definition of conditional probability we have that for some class $c$ in
 the direction $D$:
 \[ P(X|\,D\!=\!c) = \frac{P(X \cap D\!=\!c)}{P(D=c)} \]
@@ -267,6 +289,7 @@ Suppose that the training set has the following characteristics:
 \label{results:proximity}
 \lipsum[1-3]
 
+
 \section{Conclusions}
 \label{conclusions}
 \lipsum[1-3]
@@ -291,8 +314,8 @@ Suppose that the training set has the following characteristics:
 
 %% References with bibTeX database:
 
-\bibliographystyle{plain}
-\bibliography{refs}
+%\bibliographystyle{plain}
+%\bibliography{refs}
 
 %% Authors are advised to submit their bibtex database files. They are
 %% requested to list a bibtex style file in the manuscript if they do
