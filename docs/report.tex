@@ -52,12 +52,11 @@
 
 
 %% Styles for proximity flow chart
-\tikzstyle{bcell} = [rectangle, draw, fill=red!20, minimum width=3em, text centered, minimum height=3em]
-\tikzstyle{dcell} = [rectangle, draw, fill=yellow!20, minimum width=3em, text centered, minimum height=3em]
-\tikzstyle{ecell} = [rectangle, draw, fill=black!20, minimum width=3em, text centered, minimum height=3em]
+\tikzstyle{ccell} = [rectangle, draw, fill=red!20, minimum width=3em, text centered, minimum height=3em]
+\tikzstyle{dcell} = [rectangle, draw, fill=brown!20, minimum width=3em, text centered, minimum height=3em]
+\tikzstyle{gcell} = [rectangle, draw, fill=yellow!20, minimum width=3em, text centered, minimum height=3em]
 \tikzstyle{fcell} = [rectangle, draw, fill=green!20, minimum width=3em, text centered, minimum height=3em]
 \tikzstyle{ucell} = [rectangle, draw, fill=white!20, minimum width=3em, text centered, minimum height=3em]
-\tikzstyle{wcell} = [rectangle, draw, fill=blue!20, minimum width=3em, text centered, minimum height=3em]
 \tikzstyle{line} = [draw, -latex']
 
 
@@ -193,23 +192,27 @@ sapien pharetra, lobortis risus nec, sodales felis. Aliquam sed faucibus est.
 \subsection{Proximity Approach}
 \label{process:proximity}
 
-Summary of approach
+Summary of approach paragrah. When it's done this is gonna be flowing elegant
+and complete but for now... pfffft %TODO
 
+\begin{figure}[h]
 \begin{center}
 \begin{tikzpicture}[node distance = 3.2 cm, auto]
-    \node[bcell](top){B};
+    \node[ccell](top){$C_{i,j+1}$};
     \node[ucell, below of=top](center){?};
-    \node[bcell, left of=center](left){B};
-    \node[dcell, right of=center](right){D};
-    \node[wcell, below of=center](bottom){W};
+    \node[ccell, left of=center](left){$C_{i-1,j}$};
+    \node[ccell, right of=center](right){$C_{i+1,j}$};
+    \node[ccell, below of=center](bottom){$C_{i,j-1}$};
 
-    \path[line] (top)   -- node {$P_{south}(X | \, B)$} (center);
+    \path[line] (top)   -- node {$P_{south}(X | \, C_{i,j+1})$} (center);
 
-    \path[line] (left)  -- node {$P_{east}(X | \, B)$} (center);
-    \path[line] (right) -- node {$P_{west}(X | \, D)$} (center);
-    \path[line] (bottom) -- node {$P_{north}(X | \, W)$} (center);
+    \path[line] (left)  -- node {$P_{east}(X | \, C_{i-1,j})$} (center);
+    \path[line] (right) -- node {$P_{west}(X | \, C_{i+1,j})$} (center);
+    \path[line] (bottom) -- node {$P_{north}(X | \, C_{i,j-1})$} (center);
 \end{tikzpicture}
 \end{center}
+\caption{This figure describes the probability of class $X$ neighbouring cells $C_{i,j}$}
+\end{figure}
 
 Let $V_{d}$ be a vector of probabilities, where $n$ is the number of classes,
 $d$ is a direction.
@@ -233,43 +236,44 @@ value in $C$ to choose a class.
 
 An example of this process can be seen with the following situation:
 
+\begin{figure}[h]
 \begin{center}
 \begin{tikzpicture}[node distance = 3.2 cm, auto]
-    \node[fcell](top){F};
+    \node[dcell](top){D};
     \node[ucell, below of=top](center){?};
-    \node[dcell, left of=center](left){D};
-    \node[ecell, right of=center](right){edge};
-    \node[fcell, below of=center](bottom){F};
+    \node[fcell, left of=center](left){F};
+    \node[gcell, right of=center](right){G};
+    \node[gcell, below of=center](bottom){G};
 
-    \path[line] (top)   -- node {$P_{south}(X | \, F)$} (center);
-    \path[line] (left)  -- node {$P_{east}(X | \, D)$} (center);
-    \path[line] (right) -- node {$P_{west}(X | \, edge)$} (center);
-    \path[line] (bottom) -- node {$P_{north}(X | \, F)$} (center);
+    \path[line] (top)   -- node {$P_{south}(X | \, D)$} (center);
+    \path[line] (left)  -- node {$P_{east}(X | \, F)$} (center);
+    \path[line] (right) -- node {$P_{west}(X | \, G)$} (center);
+    \path[line] (bottom) -- node {$P_{north}(X | \, G)$} (center);
 \end{tikzpicture}
 \end{center}
 
+\caption{This situation includes a grass to the south and east, a dirt to the
+    north and a forest to the west. It is similar to cell 2,19 in pallet town
+    (when indexed from zero at the top left)}
+
+\end{figure}
+
 Suppose that the training set has the following characteristics:
 
-\begin{table}
-\begin{tabular}{ l c r }
-    class & $x_{0}$ & $x_{1}$ \\
-    north & 2 & 3 \\
-    east  & 8 & 9 \\
-    south & 5 & 6 \\
-    west  & 5 & 6 \\
+\begin{table}[h]
+\small
+\begin{tabular}{ l | r r r r r r }
+              & B      & D      & EDGE   & F      & G      & W \\
+    \hline
+    north     & 0      & 0.1558 & 0.0519 & 0.0519 & 0.7403 & 0.0325\\
+    east      & 0.0779 & 0.0974 & 0      & 0.1493 & 0.6428 & 0\\
+    south     & 0      & 0.2403 & 0.0130 & 0.0065 & 0.7403 & 0\\
+    west      & 0.0519 & 0.2273 & 0      & 0.0519 & 0.6428 & 0.0260\\
 \end{tabular}
-\caption{The probability data is...} %TODO
+\caption{The probability of the class of neighbours in each direction for a
+    grass cell from the map that we created entitled PalletTown} 
 \end{table}
 
-Quisque viverra pretium urna et pharetra. Nunc facilisis, justo vel luctus
-convallis, dolor tortor varius diam, eget semper massa arcu eu tortor. Duis a
-nibh mauris. Suspendisse facilisis erat ultricies fermentum adipiscing. Aliquam
-erat volutpat. Proin blandit mauris nec justo fringilla, consectetur hendrerit
-augue interdum. Pellentesque habitant morbi tristique senectus et netus et
-malesuada fames ac turpis egestas. Aenean viverra augue diam, eu laoreet dolor
-tristique eget. Nam fringilla lectus sem, sed aliquet ante dictum vel. Vivamus
-nec pellentesque dolor. Pellentesque condimentum augue dui, ut mattis est
-blandit at.
 
 \subsection{Classifier Training}
 \label{process:training}
