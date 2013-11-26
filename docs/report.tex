@@ -52,12 +52,11 @@
 
 
 %% Styles for proximity flow chart
-\tikzstyle{bcell} = [rectangle, draw, fill=red!20, minimum width=3em, text centered, minimum height=3em]
-\tikzstyle{dcell} = [rectangle, draw, fill=yellow!20, minimum width=3em, text centered, minimum height=3em]
-\tikzstyle{ecell} = [rectangle, draw, fill=black!20, minimum width=3em, text centered, minimum height=3em]
+\tikzstyle{ccell} = [rectangle, draw, fill=red!20, minimum width=3em, text centered, minimum height=3em]
+\tikzstyle{dcell} = [rectangle, draw, fill=brown!20, minimum width=3em, text centered, minimum height=3em]
+\tikzstyle{gcell} = [rectangle, draw, fill=yellow!20, minimum width=3em, text centered, minimum height=3em]
 \tikzstyle{fcell} = [rectangle, draw, fill=green!20, minimum width=3em, text centered, minimum height=3em]
 \tikzstyle{ucell} = [rectangle, draw, fill=white!20, minimum width=3em, text centered, minimum height=3em]
-\tikzstyle{wcell} = [rectangle, draw, fill=blue!20, minimum width=3em, text centered, minimum height=3em]
 \tikzstyle{line} = [draw, -latex']
 
 
@@ -77,11 +76,10 @@
 \author[ryan,doug,oliver]{Ryan Pattison, Douglas Anderson, and Oliver Cook}
 
 \address[ryan]{ryan.m.pattison@gmail.com}
-\address[doug]{dander01@guelph.ca}
+\address[doug]{dander01@uoguelph.ca}
 \address[oliver]{cooko@uoguelph.ca}
  
 \begin{abstract}
-%% Text of abstract
 
 For quite some time computer vision has been used to extract characters from
 images in order to gain knowledge from text. In recent years many of the
@@ -91,7 +89,11 @@ techniques for recognizing characters has been based on machine learning.
 
 \begin{keyword}
 %% keywords here, in the form: keyword \sep keyword
-Machine Learning \sep Data Mining \sep Computer Vision
+Machine Learning \sep
+Data Mining \sep
+Computer Vision \sep
+Intelligent Character Recognition
+
 %% MSC codes here, in the form: \MSC code \sep code
 %% or \MSC[2008] code \sep code (2000 is the default)
 
@@ -193,52 +195,88 @@ sapien pharetra, lobortis risus nec, sodales felis. Aliquam sed faucibus est.
 \subsection{Proximity Approach}
 \label{process:proximity}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus suscipit augue
-eget erat semper cursus. Sed malesuada, neque in aliquet dictum, leo massa
-lacinia tellus, in fringilla velit erat in arcu. In vulputate nibh urna, sit
-amet sodales turpis feugiat quis. Sed varius nulla arcu, eu rutrum est porta
-non. Cras eu feugiat diam. Aliquam quis nisi a tortor interdum ultrices.
-Maecenas tincidunt pellentesque lectus eu tincidunt. Etiam commodo tellus sed
-consequat molestie. Proin semper molestie dui, a tincidunt urna ornare sed.
+Summary of approach paragrah. When it's done this is gonna be flowing elegant
+and complete but for now... pfffft %TODO
 
+\begin{figure}[h]
 \begin{center}
 \begin{tikzpicture}[node distance = 3.2 cm, auto]
-    \node[bcell](top){B};
+    \node[ccell](top){$C_{i,j+1}$};
     \node[ucell, below of=top](center){?};
-    \node[bcell, left of=center](left){B};
-    \node[dcell, right of=center](right){D};
-    \node[wcell, below of=center](bottom){W};
+    \node[ccell, left of=center](left){$C_{i-1,j}$};
+    \node[ccell, right of=center](right){$C_{i+1,j}$};
+    \node[ccell, below of=center](bottom){$C_{i,j-1}$};
 
-    \path[line] (top)   -- node {P(south \textbar \, B)} (center);
-    \path[line] (left)  -- node {P(east \textbar \, B)} (center);
-    \path[line] (right) -- node {P(west \textbar \, D)} (center);
-    \path[line] (bottom) -- node {P(north \textbar \, W)} (center);
+    \path[line] (top)   -- node {$P_{south}(X | \, C_{i,j+1})$} (center);
+
+    \path[line] (left)  -- node {$P_{east}(X | \, C_{i-1,j})$} (center);
+    \path[line] (right) -- node {$P_{west}(X | \, C_{i+1,j})$} (center);
+    \path[line] (bottom) -- node {$P_{north}(X | \, C_{i,j-1})$} (center);
+\end{tikzpicture}
+\end{center}
+\caption{This figure describes the probability of class $X$ neighbouring cells $C_{i,j}$}
+\end{figure}
+
+Let $V_{d}$ be a vector of probabilities, where $n$ is the number of classes,
+$d$ is a direction.
+
+\begin{equation}
+V_{d} = \{P_{d}{(X_{1} | \, C_{d})}, P_{d}{(X_{2} | \, C_{d}),\; \ldots \; , P_{d}{(X_{n}) | \, C_{d}}}\}
+\end{equation}
+
+ To determine the probability of a cell being in a particular class
+we can multiply the vectors of all directions together using the scalar
+product.
+
+\begin{equation}
+C = V_{north} \cdot V_{east} \cdot V_{south} \cdot V_{west}
+\end{equation}
+
+This new vector $C$ will contain $n$ probabilities that this cell should be
+classified a particular class. Since the vectors were multiplied together the
+range of the values in $C$ is no longer $\in[0,1]$. We can select the maximum
+value in $C$ to choose a class.
+
+An example of this process can be seen with the following situation:
+
+\begin{figure}[h]
+\begin{center}
+\begin{tikzpicture}[node distance = 3.2 cm, auto]
+    \node[dcell](top){D};
+    \node[ucell, below of=top](center){?};
+    \node[fcell, left of=center](left){F};
+    \node[gcell, right of=center](right){G};
+    \node[gcell, below of=center](bottom){G};
+
+    \path[line] (top)   -- node {$P_{south}(X | \, D)$} (center);
+    \path[line] (left)  -- node {$P_{east}(X | \, F)$} (center);
+    \path[line] (right) -- node {$P_{west}(X | \, G)$} (center);
+    \path[line] (bottom) -- node {$P_{north}(X | \, G)$} (center);
 \end{tikzpicture}
 \end{center}
 
-\begin{center}
-\begin{tikzpicture}[node distance = 3.2 cm, auto]
-    \node[fcell](top){F};
-    \node[ucell, below of=top](center){?};
-    \node[dcell, left of=center](left){D};
-    \node[ecell, right of=center](right){edge};
-    \node[fcell, below of=center](bottom){F};
+\caption{This situation includes a grass to the south and east, a dirt to the
+    north and a forest to the west. It is similar to cell 2,19 in pallet town
+    (when indexed from zero at the top left)}
 
-    \path[line] (top)   -- node {P(south \textbar \, F)} (center);
-    \path[line] (left)  -- node {P(east \textbar \, D)} (center);
-    \path[line] (right) -- node {P(west \textbar \, edge)} (center);
-    \path[line] (bottom) -- node {P(north \textbar \, F)} (center);
-\end{tikzpicture}
-\end{center}
-Quisque viverra pretium urna et pharetra. Nunc facilisis, justo vel luctus
-convallis, dolor tortor varius diam, eget semper massa arcu eu tortor. Duis a
-nibh mauris. Suspendisse facilisis erat ultricies fermentum adipiscing. Aliquam
-erat volutpat. Proin blandit mauris nec justo fringilla, consectetur hendrerit
-augue interdum. Pellentesque habitant morbi tristique senectus et netus et
-malesuada fames ac turpis egestas. Aenean viverra augue diam, eu laoreet dolor
-tristique eget. Nam fringilla lectus sem, sed aliquet ante dictum vel. Vivamus
-nec pellentesque dolor. Pellentesque condimentum augue dui, ut mattis est
-blandit at.
+\end{figure}
+
+Suppose that the training set has the following characteristics:
+
+\begin{table}[h]
+\small
+\begin{tabular}{ l | r r r r r r }
+              & B      & D      & EDGE   & F      & G      & W \\
+    \hline
+    north     & 0      & 0.1558 & 0.0519 & 0.0519 & 0.7403 & 0.0325\\
+    east      & 0.0779 & 0.0974 & 0      & 0.1493 & 0.6428 & 0\\
+    south     & 0      & 0.2403 & 0.0130 & 0.0065 & 0.7403 & 0\\
+    west      & 0.0519 & 0.2273 & 0      & 0.0519 & 0.6428 & 0.0260\\
+\end{tabular}
+\caption{The probability of the class of neighbours in each direction for a
+    grass cell from the map that we created entitled PalletTown} 
+\end{table}
+
 
 \subsection{Classifier Training}
 \label{process:training}
