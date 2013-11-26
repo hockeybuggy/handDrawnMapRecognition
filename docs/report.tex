@@ -140,16 +140,16 @@ and complete but for now... pfffft %TODO
 \begin{center}
 \begin{tikzpicture}[node distance = 3.2 cm, auto]
     \node[ccell](top){$C_{i,j+1}$};
-    \node[ucell, below of=top](center){?};
+    \node[ucell, below of=top](center){$X$~?};
     \node[ccell, left of=center](left){$C_{i-1,j}$};
     \node[ccell, right of=center](right){$C_{i+1,j}$};
     \node[ccell, below of=center](bottom){$C_{i,j-1}$};
 
-    \path[line] (top)   -- node {$P_{south}(X | \, C_{i,j+1})$} (center);
+    \path[line] (top)   -- node[right] {$P_{south}(X | \, C_{i,j+1})$} (center);
 
-    \path[line] (left)  -- node {$P_{east}(X | \, C_{i-1,j})$} (center);
-    \path[line] (right) -- node {$P_{west}(X | \, C_{i+1,j})$} (center);
-    \path[line] (bottom) -- node {$P_{north}(X | \, C_{i,j-1})$} (center);
+    \path[line] (left)  -- node[above] {$P_{east}(X | \, C_{i-1,j})$} (center);
+    \path[line] (right) -- node[above] {$P_{west}(X | \, C_{i+1,j})$} (center);
+    \path[line] (bottom) -- node[right] {$P_{north}(X | \, C_{i,j-1})$} (center);
 \end{tikzpicture}
 \end{center}
 \caption{This figure describes the probability of class $X$ neighbouring cells $C_{i,j}$}
@@ -158,21 +158,28 @@ and complete but for now... pfffft %TODO
 Let $V_{d}$ be a vector of probabilities, where $n$ is the number of classes,
 $d$ is a direction.
 
+\[
+\begin{array}{l}
+V = P(X),\quad P(X \in C_i) = V_i \\
+V = P(X|\,N\!=\!g,\,S\!=\!g,\,E\!=\!d,\,W\!=\!d)  \\
+= P(X|\,N\!=\!g)P(X|\,S\!=\!g)P(X|\,E\!=\!d)P(X|\,W\!=\!d) \\
+\end{array}
+\]
+
 \begin{equation}
-V_{d} = \{P_{d}{(X_{1} | \, C_{d})}, P_{d}{(X_{2} | \, C_{d}),\; \ldots \; , P_{d}{(X_{n} | \, C_{d}})}\}
+V_{d} = \left(P_{d}{(X_{1} | \, C_{d})}, P_{d}{(X_{2} | \, C_{d}),\; \ldots \; , P_{d}{(X_{n} | \, C_{d}})}\right)
 \end{equation}
 
- To determine the probability of a cell being in a particular class
-we can multiply the vectors of all directions together using the element-wise
-product.
+To determine the probability of a cell belonging in a particular class, we assume independence
+so that we can multiply the vectors of all directions together using the element-wise product.
 
 \begin{equation}
-C = V_{north} \circ V_{east} \circ V_{south} \circ V_{west}
+C_{centre} = V_{north} \circ V_{east} \circ V_{south} \circ V_{west}
 \end{equation}
 
-This new vector $C$ will contain $n$ probabilities that this cell should be
-classified a particular class. We can select the maximum
-value in $C$ to choose a class.
+This new vector $C_{centre}$ contains $n$ probabilities that this cell should be
+classified as a particular class. One approach to classifying the unknown symbol
+would be to choose the class corresponding to the maximum probability in $C_{centre}$.
 
 An example of this process can be seen with the following situation:
 
@@ -180,7 +187,7 @@ An example of this process can be seen with the following situation:
 \begin{center}
 \begin{tikzpicture}[node distance = 3.2 cm, auto]
     \node[dcell](top){D};
-    \node[ucell, below of=top](center){?};
+    \node[ucell, below of=top](center){$X$~?};
     \node[fcell, left of=center](left){F};
     \node[gcell, right of=center](right){G};
     \node[gcell, below of=center](bottom){G};
