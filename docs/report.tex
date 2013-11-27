@@ -51,6 +51,9 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes, arrows}
 
+\usepackage{graphicx}
+\graphicspath{ {./graphics/} }
+
 
 %% Styles for proximity flow chart
 \tikzstyle{ccell} = [rectangle, draw, fill=red!20, minimum width=3em, text centered, minimum height=3em]
@@ -150,7 +153,20 @@ y_{j} = \sum_{i}{A_{i,j}}
 \]
 
 \subsection{Gold Comparison Approach}
+
 \lipsum[1]
+
+\begin{figure}[h]
+\includegraphics{building-mean}
+\includegraphics{dirt-mean}
+\includegraphics{forest-mean}
+\includegraphics{grass-mean}
+\includegraphics{rocks-mean}
+\includegraphics{water-mean}
+
+\caption{The gold images created as a mean of all examples of each symbol. In order we have symbols reprenting buildings, dirt, forest, grass, rocks, and water.}
+
+\end{figure}
 
 
 \begin{equation} \label{eq:gold}
