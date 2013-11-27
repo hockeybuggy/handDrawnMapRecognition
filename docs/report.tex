@@ -116,14 +116,20 @@ Intelligent Character Recognition
 
 \subsection{Overview}
 \label{process:overview}
-\lipsum[1-3]
+
+\subsection{Preprocessing}
+\label{process:preprocessing}
+
+For all of our analysis we preprocess colour images images into black and white
+images. To do this we first remove the blue grid lines from the image and
+replace them with white. We then remove all colour information from the image
+and resize it such that every cell of the grid is 75 pixels by 75 pixels.
+
+% TODO pictures of the preprocessing
 
 \subsection{Feature-Based Approach}
 \label{process:featurebased}
-\lipsum[1-2]
 
-\subsection{Gold Comparison Approach}
-\lipsum[1]
 
 \begin{equation}
 A =
@@ -142,6 +148,10 @@ Where $a_{ij} \in [0,1]$
 x_{i} = \sum_{j}{A_{i,j}} \quad
 y_{j} = \sum_{i}{A_{i,j}}
 \]
+
+\subsection{Gold Comparison Approach}
+\lipsum[1]
+
 
 \begin{equation} \label{eq:gold}
 x^{\prime} = (x - \mu^{B}_{x}) \, \frac{\sigma^{G}_{x}}{\sigma^{C}_{x}} + \mu^{G}_{x}
@@ -227,45 +237,44 @@ This new vector $C_{centre}$ contains $n$ probabilities that this cell should be
 classified as a particular class. One approach to classifying the unknown symbol
 would be to choose the class corresponding to the maximum probability in $C_{centre}$.
 
-An example of this process can be seen with the following situation:
+An example of this process can be seen with the following situation. Suppose
+that the training set has the following characteristics:
+
+\begin{table}[h]
+\small
+\begin{center}
+\begin{tabular}{ l | r r r r r r }
+              & $c_{B}$& $c_{D}$& $c_{EDGE}$& $c_{F}$& $c_{G}$& $c_{W}$ \\ 
+              \hline
+    north     & 0      & 0.1558 & 0.0519    & 0.0519 & 0.7403 & 0.0325\\
+    east      & 0.0779 & 0.0974 & 0         & 0.1493 & 0.6428 & 0\\
+    south     & 0      & 0.2403 & 0.0130    & 0.0065 & 0.7403 & 0\\
+    west      & 0.0519 & 0.2273 & 0         & 0.0519 & 0.6428 & 0.0260\\
+\end{tabular}
+\caption{The probability of the class of neighbours in each direction for a
+    grass cell from the map that we created entitled PalletTown} 
+\end{center}
+\end{table}
 
 \begin{figure}[h]
 \begin{center}
-\begin{tikzpicture}[node distance = 3.2 cm, auto]
+\begin{tikzpicture}[node distance = 3.5 cm, auto]
     \node[dcell](top){D};
     \node[ucell, below of=top](center){$X$~?};
     \node[fcell, left of=center](left){F};
     \node[gcell, right of=center](right){G};
     \node[gcell, below of=center](bottom){G};
 
-    \path[line] (top)   -- node[right] {$P_{south}(X | \, D)$} (center);
-    \path[line] (left)  -- node[above] {$P_{east}(X | \, F)$} (center);
-    \path[line] (right) -- node[above] {$P_{west}(X | \, G)$} (center);
-    \path[line] (bottom) -- node[right] {$P_{north}(X | \, G)$} (center);
+    \path[line] (center)   -- node[right] {$(X|\,N\!=\!c_{D})$} (top);
+    \path[line] (center)   -- node[above] {$(X|\,W\!=\!c_{F})$} (left);
+    \path[line] (center)   -- node[above] {$(X|\,E\!=\!c_{G})$} (right);
+    \path[line] (center)   -- node[right] {$(X|\,S\!=\!c_{G})$} (bottom);
 \end{tikzpicture}
 \end{center}
-
 \caption{This situation includes a grass to the south and east, a dirt to the
     north and a forest to the west. It is similar to cell 2,19 in pallet town
     (when indexed from zero at the top left)}
-
 \end{figure}
-
-Suppose that the training set has the following characteristics:
-
-\begin{table}[h]
-\small
-\begin{tabular}{ l | r r r r r r }
-              & B      & D      & EDGE   & F      & G      & W \\ \hline
-    north     & 0      & 0.1558 & 0.0519 & 0.0519 & 0.7403 & 0.0325\\
-    east      & 0.0779 & 0.0974 & 0      & 0.1493 & 0.6428 & 0\\
-    south     & 0      & 0.2403 & 0.0130 & 0.0065 & 0.7403 & 0\\
-    west      & 0.0519 & 0.2273 & 0      & 0.0519 & 0.6428 & 0.0260\\
-\end{tabular}
-\caption{The probability of the class of neighbours in each direction for a
-    grass cell from the map that we created entitled PalletTown} 
-\end{table}
-
 
 \subsection{Classifier Training}
 \label{process:training}
@@ -289,6 +298,9 @@ Suppose that the training set has the following characteristics:
 \label{results:proximity}
 \lipsum[1-3]
 
+\section{Further Work}
+\label{further work}
+\lipsum[1-3]
 
 \section{Conclusions}
 \label{conclusions}
