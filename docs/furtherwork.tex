@@ -1,12 +1,22 @@
 Future expansion of this design is possible and encouraged. After asessing the results, we have identified various aspects of our current design that can be changed in order to improve functionality and classification results.
 
-Future work may include combining the proximity classifier with the gold 
-comparison classifier to improve accuracy. 
+One thing that we would like to work on the in future is to use the methods in
+conjunction to play off of each others strengths. For example if we were to run
+the Gold Comparison method to get a rough approximation of the layout of the
+shapes, we could then use the Proximity method to clean up the results.
+Combining method would allow a more hands off approach to solving the problem
 
 Feature based classification may see improvement from considering other
 transformations of the pixels when calculating statistics, such as distance
 from the centre.
 
-Non mean golds
+An experiment that we would like to run is to use ``ideal'' gold images rather
+then mean gold images. We suspect that performance of the gold method could be
+improved by using images selected from the images that illustrate the intended
+shape of the character.
 
-Regions with the feature extraction method
+Another approach that we would like to attempt is to limit the region of cell
+image used in the feature-based method. By only taking statistics of smaller
+sections of the images we could eliminate areas of the image that are largely
+noise, such as the edges of each cell.
+
