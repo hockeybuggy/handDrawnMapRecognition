@@ -49,6 +49,7 @@
 \usepackage{amssymb}
 \usepackage{wrapfig}
 \usepackage{lipsum}
+\usepackage{natbib}
 
 \usepackage{tikz}
 \usepackage{mathdots}
@@ -140,13 +141,14 @@ hand drawn map and produce a computer generated image showing the same map.
 \begin{center}
 \includegraphics[width=2in]{PokemonPalletTown.png}
 \end{center}
-\caption{Pallet Town map from Pok\'{e}mon} 
+\caption{Pallet Town map from Pok\'{e}mon\cite{firered}} 
 \end{figure}
 
 
 We have created 6 symbols to be used to recreate maps for a popular video game
 Pok\'{e}mon to ensure that our data set is sampled from some well defined distribution.
 
+\cite{hall2009}
 
 \begin{tabular}{llll}
 Water & \includegraphics[width=.5in]{water.png} &
@@ -449,7 +451,6 @@ Regions with the feature extraction method
 
 \section{References}
 \label{references}
-Pallet Town, Pokemon FireRed [screenshot]. Retreived from http://strategywiki.org/wiki/Pok%C3%A9mon_FireRed_and_LeafGreen/Pallet_Town
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
@@ -469,7 +470,7 @@ Pallet Town, Pokemon FireRed [screenshot]. Retreived from http://strategywiki.or
 %% References with bibTeX database:
 
 \bibliographystyle{plain}
-\bibliography{refs}
+\bibliography{report}
 
 %% Authors are advised to submit their bibtex database files. They are
 %% requested to list a bibtex style file in the manuscript if they do
