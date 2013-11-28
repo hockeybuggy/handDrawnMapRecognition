@@ -1,0 +1,50 @@
+EDGE:
+  east: {EDGE: 0, F: 0, b: 0, d: 0, f: 0, g: 0, m: 0, r: 0, s: 0, w: 0}
+  north: {EDGE: 0, F: 0, b: 0, d: 0, f: 0, g: 0, m: 0, r: 0, s: 0, w: 0}
+  south: {EDGE: 0, F: 0, b: 0, d: 0, f: 0, g: 0, m: 0, r: 0, s: 0, w: 0}
+  west: {EDGE: 0, F: 0, b: 0, d: 0, f: 0, g: 0, m: 0, r: 0, s: 0, w: 0}
+F:
+  east: {EDGE: 0, F: 0, b: 0, d: 0, f: 1, g: 0, m: 0, r: 0, s: 0, w: 0}
+  north: {EDGE: 0, F: 0, b: 0, d: 0, f: 1, g: 0, m: 0, r: 0, s: 0, w: 0}
+  south: {EDGE: 1, F: 0, b: 0, d: 0, f: 0, g: 0, m: 0, r: 0, s: 0, w: 0}
+  west: {EDGE: 1, F: 0, b: 0, d: 0, f: 0, g: 0, m: 0, r: 0, s: 0, w: 0}
+b:
+  east: {EDGE: 0, F: 0, b: 905, d: 50, f: 11, g: 45, m: 0, r: 1, s: 6, w: 3}
+  north: {EDGE: 0, F: 0, b: 759, d: 167, f: 23, g: 66, m: 0, r: 0, s: 6, w: 0}
+  south: {EDGE: 0, F: 0, b: 759, d: 152, f: 36, g: 52, m: 0, r: 0, s: 2, w: 20}
+  west: {EDGE: 0, F: 0, b: 905, d: 42, f: 4, g: 59, m: 0, r: 1, s: 7, w: 3}
+d:
+  east: {EDGE: 3, F: 0, b: 42, d: 1862, f: 82, g: 119, m: 0, r: 0, s: 0, w: 18}
+  north: {EDGE: 15, F: 0, b: 152, d: 1706, f: 11, g: 196, m: 7, r: 22, s: 0, w: 17}
+  south: {EDGE: 4, F: 0, b: 167, d: 1706, f: 61, g: 152, m: 0, r: 23, s: 0, w: 13}
+  west: {EDGE: 6, F: 0, b: 50, d: 1862, f: 69, g: 120, m: 3, r: 0, s: 0, w: 16}
+f:
+  east: {EDGE: 148, F: 0, b: 4, d: 69, f: 1830, g: 65, m: 0, r: 1, s: 0, w: 0}
+  north: {EDGE: 136, F: 0, b: 36, d: 61, f: 1792, g: 90, m: 0, r: 0, s: 0, w: 2}
+  south: {EDGE: 167, F: 1, b: 23, d: 11, f: 1792, g: 122, m: 1, r: 0, s: 0, w: 0}
+  west: {EDGE: 95, F: 1, b: 11, d: 82, f: 1830, g: 84, m: 12, r: 2, s: 0, w: 0}
+g:
+  east: {EDGE: 14, F: 0, b: 59, d: 120, f: 84, g: 1225, m: 0, r: 4, s: 7, w: 12}
+  north: {EDGE: 10, F: 0, b: 52, d: 152, f: 122, g: 1085, m: 0, r: 54, s: 30, w: 20}
+  south: {EDGE: 15, F: 0, b: 66, d: 196, f: 90, g: 1085, m: 8, r: 53, s: 6, w: 6}
+  west: {EDGE: 6, F: 0, b: 45, d: 119, f: 65, g: 1225, m: 20, r: 4, s: 25, w: 16}
+m:
+  east: {EDGE: 5, F: 0, b: 0, d: 3, f: 12, g: 20, m: 255, r: 1, s: 0, w: 0}
+  north: {EDGE: 6, F: 0, b: 0, d: 0, f: 1, g: 8, m: 274, r: 0, s: 0, w: 7}
+  south: {EDGE: 8, F: 0, b: 0, d: 7, f: 0, g: 0, m: 274, r: 0, s: 0, w: 7}
+  west: {EDGE: 36, F: 0, b: 0, d: 0, f: 0, g: 0, m: 255, r: 0, s: 0, w: 5}
+r:
+  east: {EDGE: 0, F: 0, b: 1, d: 0, f: 2, g: 4, m: 0, r: 68, s: 0, w: 1}
+  north: {EDGE: 0, F: 0, b: 0, d: 23, f: 0, g: 53, m: 0, r: 0, s: 0, w: 0}
+  south: {EDGE: 0, F: 0, b: 0, d: 22, f: 0, g: 54, m: 0, r: 0, s: 0, w: 0}
+  west: {EDGE: 0, F: 0, b: 1, d: 0, f: 1, g: 4, m: 1, r: 68, s: 0, w: 1}
+s:
+  east: {EDGE: 0, F: 0, b: 7, d: 0, f: 0, g: 25, m: 0, r: 0, s: 104, w: 6}
+  north: {EDGE: 0, F: 0, b: 2, d: 0, f: 0, g: 6, m: 0, r: 0, s: 101, w: 33}
+  south: {EDGE: 0, F: 0, b: 6, d: 0, f: 0, g: 30, m: 0, r: 0, s: 101, w: 5}
+  west: {EDGE: 0, F: 0, b: 6, d: 0, f: 0, g: 7, m: 0, r: 0, s: 104, w: 25}
+w:
+  east: {EDGE: 14, F: 0, b: 3, d: 16, f: 0, g: 16, m: 5, r: 1, s: 25, w: 872}
+  north: {EDGE: 49, F: 0, b: 20, d: 13, f: 0, g: 6, m: 7, r: 0, s: 5, w: 852}
+  south: {EDGE: 21, F: 0, b: 0, d: 17, f: 2, g: 20, m: 7, r: 0, s: 33, w: 852}
+  west: {EDGE: 40, F: 0, b: 3, d: 18, f: 0, g: 12, m: 0, r: 1, s: 6, w: 872}
