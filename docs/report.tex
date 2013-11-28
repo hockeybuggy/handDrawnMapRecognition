@@ -47,6 +47,7 @@
 
 %% The amssymb package provides various useful mathematical symbols
 \usepackage{amssymb}
+\usepackage{wrapfig}
 \usepackage{lipsum}
 \usepackage{tikz}
 \usepackage{mathdots}
@@ -133,23 +134,25 @@ hand drawn map and produce a computer generated image showing the same map.
 \subsection{Overview}
 \label{process:overview}
 
-We have created 6 symbols to be used to recreate maps for a popular video game
-Pokemon to ensure that our data set is sampled from some well defined distribution.
-
-\begin{tabular}{llr}
-\begin{tabular}{ll}
-Water & \includegraphics[width=.5in]{water.png} \\
-Grass & \includegraphics[width=.5in]{grass.png} \\
-Rock & \includegraphics[width=.5in]{rocks.png} \\
-\end{tabular} &
-\begin{tabular}{ll}
-Tree & \includegraphics[width=.5in]{tree.png} \\
-Dirt & \includegraphics[width=.5in]{dirt.png} \\
-Sand & \includegraphics[width=.5in]{sand.png} \\
-\end{tabular} &
-\begin{tabular}{c}
+\begin{figure}
+\begin{center}
 \includegraphics[width=2in]{PokemonPalletTown.png}
-\end{tabular}
+\end{center}
+\caption{Pallet Town map from Pok\'{e}mon} 
+\end{figure}
+
+
+We have created 6 symbols to be used to recreate maps for a popular video game
+Pok\'{e}mon to ensure that our data set is sampled from some well defined distribution.
+
+
+\begin{tabular}{llll}
+Water & \includegraphics[width=.5in]{water.png} &
+Grass & \includegraphics[width=.5in]{grass.png} \\
+Rock & \includegraphics[width=.5in]{rocks.png} &
+Tree & \includegraphics[width=.5in]{tree.png} \\
+Dirt & \includegraphics[width=.5in]{dirt.png} &
+Sand & \includegraphics[width=.5in]{sand.png} \\
 \end{tabular}
 
 \subsection{Preprocessing}
