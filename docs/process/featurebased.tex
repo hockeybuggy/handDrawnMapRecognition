@@ -2,6 +2,9 @@ The Feature-Based approach used here applies convolution filters to the
 cell images and then gathers statistics based on the distribution of black
 pixels in each of the $x$ and $y$ dimensions. A convolution filter is matrix
 of coefficients of odd size. Below is a convolution filter for a mean blur.
+A new pixel is created by multiplying the surrounding values by those in
+the convolution filter and summing the result. The sum is then the new value
+for the pixel.
 
 \[ F_{blur} = \left[
 \begin{array}{ccc}
@@ -11,7 +14,7 @@ of coefficients of odd size. Below is a convolution filter for a mean blur.
 \end{array}\right] \]
 
 If we consider a single cell of the grid, a portion of the image with one symbol in it,
-as a matrix of luminance values like in the matrix $A$. A new image is created as the
+as a matrix of luminance values like in the matrix $I$. A new image is created as the
 result of the convolution matrix being applied to each pixel.
 
 \begin{figure}[h] \[
@@ -34,12 +37,13 @@ result of the convolution matrix being applied to each pixel.
 \iddots & \vdots & \ddots \\
 \end{array}
 \end{array} \]
+\caption{Applying the convolution filter to the centred pixel area}
 \end{figure}
 
 The filtering process repeats for each pixel until all pixels have been replaced.
-The resulting image has the luminance matrix $B$.
+The resulting image has the luminance matrix $A$.
 
-\[B = \left [
+\[A = \left [
     \begin{array}{r r r r}
         a_{00} & a_{10} & \cdots & a_{n0} \\
         a_{01} & a_{11} & \cdots & a_{n1}\\
@@ -51,8 +55,8 @@ The resulting image has the luminance matrix $B$.
 We define $x$ and $y$ to be the row and column sum functions.
 
 \begin{equation}
-x(i) = \sum_{j}{B_{i,j}} \quad
-y(j) = \sum_{i}{B_{i,j}}
+x(i) = \sum_{j}{A_{i,j}} \quad
+y(j) = \sum_{i}{A_{i,j}}
 \end{equation}
 
 Next we record $\mu_x, \mu_y, \sigma_x, \sigma_y$ as the feature set for this filter.

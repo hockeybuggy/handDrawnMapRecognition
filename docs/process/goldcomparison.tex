@@ -8,6 +8,7 @@
 \includegraphics{rocks-mean}
 \caption{The gold images created as the mean image of all examples of each symbol.
 In order we have symbols representing buildings, dirt, forest, grass, water, and rocks.}
+\label{figure:means}
 \end{figure}
 
 Similar to the feature-based approach, we define $x$ and $y$ to be the row and column sums
@@ -30,3 +31,7 @@ The result is a vector of size $k$, the number of classes, with an error measure
 comparison against the corresponding class. We then input this vector into WEKA along
 with the correct answer for training purposes. We use a J48 decision tree with 10-fold
 validation to train WEKA to classify using these error measures.
+
+To create the gold images, we collected all the samples in our data set and 
+created a mean gold image by overlapping all the smaples belonging to the same class,
+the results can be seen in Figure \ref{figure:means}
