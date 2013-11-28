@@ -11,7 +11,7 @@ In order we have symbols representing buildings, dirt, forest, grass, water, and
 \end{figure}
 
 Similar to the feature-based approach, we define $x$ and $y$ to be the row and column sums
-and calculate the mean and standard deviation. To get the symbols to overlap we apply a
+and calculate the mean and standard deviation of $x$ and $y$. To get the symbols to overlap we apply a
 linear transformation to each pixel using the statistics gathered in each dimension.
 
 \begin{equation} \label{eq:gold}
@@ -20,8 +20,7 @@ y^{\prime} = (y - \mu^{B}_{y}) \, \frac{\sigma^{G}_{y}}{\sigma^{C}_{y}} + \mu^{G
 \end{equation}
 
 These new transformed pixels are placed into a new image $A$ which now overlaps with the
-gold image $G$.
-We then compare the overlapping image $A$ to the gold standard image $G$ by taking the sum
+gold image $G$. We then compare the overlapping image $A$ to the gold standard image $G$ by taking the sum
 of the squared difference at each pixel position. This gives us an error measure which we
 record for each of the $k$ classes.
 
