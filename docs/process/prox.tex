@@ -1,8 +1,8 @@
 
-The proximity classifier learns the patterns of symbols present in the data set
-and then classifies any unknown symbols using the surrounding symbols and its
+The proximity classifier learns the patterns of symbols present in the data set,
+and then classifies any unknown symbols using the surrounding symbols, and its
 knowledge of the patterns and relationships of the symbols. Here we begin by
-outlining the methodology used.  We want to classify the symbol $x$ at a given
+outlining the methodology used; We want to classify the symbol $x$ at a given
 position, as Figure~\ref{fig:neighbours} illustrates.
 
 \begin{figure}[h]
@@ -25,11 +25,11 @@ position, as Figure~\ref{fig:neighbours} illustrates.
 \end{figure}
 
 To classify x, we first calculate the probability that $x$ belongs to each
-class, $P(X)\quad X_i = P(x\!\in\! C_i)$.  The proximity classifier is given
-the class of each symbol in the cardinal directions: north, south, east, and
-west. Using this information, we restrict the probability calculation to only
-consider the subspace where a symbol has the given classes neighbouring it.
-Such a restriction is the conditional probability:
+class, $P(X)\quad X_i = P(x\!\in\! C_i)$. The proximity classifier is given the
+class of each symbol in the cardinal directions: north, south, east, and west.
+Using this information, we restrict the probability calculation to consider
+only the subspace where a symbol has the given classes neighbouring it. Such a
+restriction is the conditional probability:
 
 \[
 P(X) = P(X|\,N\!=\!c_1,\,E\!=\!c_2,\,S\!=\!c_3,\,W\!=\!c_4)
@@ -60,15 +60,16 @@ An example is shown in Figure~\ref{fig:conditionalprob}.
 
 In calculating probabilities, we can only approximate them using relative
 frequencies collected from our sample data. For a set of $k$ classes, there are
-$k^5$ possible combinations of neighbouring cells and the centre and too many
-of these combinations occur rarely in our dataset to make confident
-approximations of the true probabilities. To resolve this, we assume that the
-conditional probabilities are independent in each direction. Under this
-assumption, the calculation becomes much more reasonable for our small data set
-since there are only $4k$ pieces of data to record for each symbol.  Our
-resulting calculation becomes:
+$k^5$ possible combinations of cells, 4 neighbouring cells and the centre, and
+too many of these combinations occur rarely in our dataset to make confident
+approximations of the true probabilities. To resolve this problem, we assume
+that the conditional probabilities are independent in each direction. Under
+this assumption, the calculation becomes much more reasonable for our small
+data set, since there are only $4k$ pieces of data to record for each symbol.
+Our resulting calculation is given in Equation~\ref{eq:prox}.
 
-\begin{equation} \label{eq:prox}
+\begin{equation}[h]
+\label{eq:prox}
 P(X) \approx P(X|\,N\!=\!c_1)P(X|\,S\!=\!c_2)P(X|\,E\!=\!c_3)P(X|\,W\!=\!c_4)
 \end{equation}
 
@@ -102,6 +103,6 @@ approximate $P(X)$ using equation~\ref{eq:prox}.
 Having the probability vector $P(X)$ we create an input file for WEKA.  This
 file includes the probability vector, the neighbouring classes, and the class
 of the symbol being classified for training. WEKA creates a decision tree which
-is used to reduce the error in the probability calculation introduced under the
-assumption of independence.
+is used to reduce the error in the probability calculation that is introduced
+under the assumption of independence.
 

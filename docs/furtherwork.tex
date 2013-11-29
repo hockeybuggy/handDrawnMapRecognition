@@ -2,28 +2,23 @@
 Future expansion of this design is possible and we believe the results are
 encouraging.  After assessing the results, we have identified various aspects
 of our current design that can be changed to improve the functionality and
-classification results.
-
-For example, we would like to use all the methods presented here in conjunction
-to improve the accuracy and the robustness of the system.  One such system,
-could run the gold comparison method to get a rough approximation of the layout
-of the symbols and then use the proximity method to improve the confidence in
-the results.
-
-Feature based classification may see improvement from considering other
-transformations of the pixels when calculating statistics, such as the distance
-from the centre which is especially useful for symmetric shapes.
-
-An interesting experiment would be to use ``ideal'' gold images rather than
-mean gold images. We suspect that the performance of the gold method could be
-improved by using carefully selected images that better illustrate the intended
-shape of the character. Also, adding more than one ``gold'' symbol for each
-class may allow for more variations than the mean of each variation.
-
-Another approach that we would have like to attempt is to limit the region of
-the cell which the feature based method analyses.  By only taking statistics on
-these smaller sections of the images we could eliminate areas of the image that
-are largely noise, such as the edges of the cell.
+classification results. For example, we would like to use all the methods
+presented here in conjunction to improve the accuracy and the robustness of the
+system.  One such system, could run the gold comparison method to get a rough
+approximation of the layout of the symbols and then use the proximity method to
+improve the confidence in the results. Improving on the individual methods is
+also possible as the feature based classification may see improvement from
+considering other transformations of the pixels when calculating statistics,
+such as the distance from the centre which is especially useful for symmetric
+shapes. Another improvement that we would have like to make is to limit the
+region of the cell which the feature based method analyses.  By only taking
+statistics on these smaller sections of the images we could eliminate areas of
+the image that are largely noise, such as the edges of the cell. The gold
+comparison method could use ``ideal'' gold images rather than mean gold images
+and we suspect that the performance of the gold method could be improved by
+using carefully selected images that better illustrate the intended shape of
+the character. Also, adding more than one ``gold'' symbol for each class may
+allow for more variations than the mean of each variation.
 
 Given the strength of the patterns and relationships found by the proximity
 statistics, the extensibility of the feature based method, and the accuracy of
