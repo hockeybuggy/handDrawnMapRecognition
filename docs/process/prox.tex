@@ -39,18 +39,17 @@ An example is shown in Figure~\ref{fig:conditionalprob}.
 
 \begin{figure}[h]
 \begin{center}
-\begin{tikzpicture}[node distance = 5 cm, auto]
+\begin{tikzpicture}[node distance=3cm, auto]
     \node[ccell](top){$C_{i,j+1}$};
-    \node[ucell, below of=top](center){$X_{i,j}$};
-    \node[ccell, left of=center](left){$C_{i-1,j}$};
-    \node[ccell, right of=center](right){$C_{i+1,j}$};
-    \node[ccell, below of=center](bottom){$C_{i,j-1}$};
+    \node[ucell, below=of top](center){$X_{i,j}$};
+    \node[ccell, left=of center](left){$C_{i-1,j}$};
+    \node[ccell, right=of center](right){$C_{i+1,j}$};
+    \node[ccell, below=of center](bottom){$C_{i,j-1}$};
 
-    \path[line] (top)   -- node[right] {$P(X | \, N=C_{i,j+1})$} (center);
-
-    \path[line] (left)  -- node[above] {$P(X | \, W=C_{i-1,j})$} (center);
-    \path[line] (right) -- node[above] {$P(X | \, E=C_{i+1,j})$} (center);
-    \path[line] (bottom) -- node[right] {$P(X | \, S=C_{i,j-1})$} (center);
+    \path[line] (top)   -- node[above right] {$P(X | \, N=C_{i,j+1})$} (center);
+    \path[line] (left)  -- node[above=.75cm] {$P(X | \, W=C_{i-1,j})$} (center);
+    \path[line] (right) -- node[above=.75cm] {$P(X | \, E=C_{i+1,j})$} (center);
+    \path[line] (bottom) -- node[below right] {$P(X | \, S=C_{i,j-1})$} (center);
 \end{tikzpicture}
 \end{center}
 \caption{The conditional probability of the classes for $X_{i,j}$, given the neighbouring cells}
