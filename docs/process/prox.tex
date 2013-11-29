@@ -1,7 +1,9 @@
-The proximity classifier learns the patterns of symbols present in the data set and then
-classifies any unknown symbols using the surrounding symbols and its knowledge of the
-patterns and relationships of the symbols. Here we begin by outlining the methodology used.
-We want to classify the symbol $x$ at a given position, as Figure~\ref{fig:neighbours} illustrates.
+
+The proximity classifier learns the patterns of symbols present in the data set
+and then classifies any unknown symbols using the surrounding symbols and its
+knowledge of the patterns and relationships of the symbols. Here we begin by
+outlining the methodology used.  We want to classify the symbol $x$ at a given
+position, as Figure~\ref{fig:neighbours} illustrates.
 
 \begin{figure}[h]
 \begin{center}
@@ -22,13 +24,12 @@ We want to classify the symbol $x$ at a given position, as Figure~\ref{fig:neigh
 \label{fig:neighbours}
 \end{figure}
 
-To classify x, we first calculate the
-probability that $x$ belongs to each class, $P(X)\quad X_i = P(x\!\in\! C_i)$.
-The proximity classifier is given the class of each symbol in the
-cardinal directions: north, south, east, and west. Using this information,
-we restrict the probability calculation to only consider the subspace
-where a symbol has the given classes neighbouring it. Such a restriction is
-the conditional probability:
+To classify x, we first calculate the probability that $x$ belongs to each
+class, $P(X)\quad X_i = P(x\!\in\! C_i)$.  The proximity classifier is given
+the class of each symbol in the cardinal directions: north, south, east, and
+west. Using this information, we restrict the probability calculation to only
+consider the subspace where a symbol has the given classes neighbouring it.
+Such a restriction is the conditional probability:
 
 \[
 P(X) = P(X|\,N\!=\!c_1,\,E\!=\!c_2,\,S\!=\!c_3,\,W\!=\!c_4)
@@ -57,15 +58,15 @@ An example is shown in Figure~\ref{fig:conditionalprob}.
 \end{figure}
 
 
-
 In calculating probabilities, we can only approximate them using relative
-frequencies collected from our sample data. For a set of $k$ classes, there are $k^5$ possible combinations of neighbouring
-cells and the centre and too many of these combinations occur rarely in our dataset to make
-confident approximations of the true probabilities. To resolve this, we assume that
-the conditional probabilities are independent in each direction. Under this
+frequencies collected from our sample data. For a set of $k$ classes, there are
+$k^5$ possible combinations of neighbouring cells and the centre and too many
+of these combinations occur rarely in our dataset to make confident
+approximations of the true probabilities. To resolve this, we assume that the
+conditional probabilities are independent in each direction. Under this
 assumption, the calculation becomes much more reasonable for our small data set
-since there are only $4k$ pieces of data to record for each symbol.
-Our resulting calculation becomes:
+since there are only $4k$ pieces of data to record for each symbol.  Our
+resulting calculation becomes:
 
 \begin{equation} \label{eq:prox}
 P(X) \approx P(X|\,N\!=\!c_1)P(X|\,S\!=\!c_2)P(X|\,E\!=\!c_3)P(X|\,W\!=\!c_4)
@@ -91,14 +92,16 @@ the direction $D$:
 \end{table}
 
 
-To calculate each of the conditional probabilities,
-we compute a table from the samples recording $P(X\cap D\!=\!c)$ and $P(D\!=\!c)$ for each
-class  $c$, and direction $D$ and example is given for a single class in Table~\ref{table:relativefreq}.
-We use the table to calculate the relative conditional frequencies and, under the assumption
-of independence, we approximate $P(X)$ using equation~\ref{eq:prox}.
+To calculate each of the conditional probabilities, we compute a table from the
+samples recording $P(X\cap D\!=\!c)$ and $P(D\!=\!c)$ for each class  $c$, and
+direction $D$ and example is given for a single class in
+Table~\ref{table:relativefreq}.  We use the table to calculate the relative
+conditional frequencies and, under the assumption of independence, we
+approximate $P(X)$ using equation~\ref{eq:prox}.
 
-Having the probability vector $P(X)$ we create an input file for WEKA.
-This file includes the probability vector, the neighbouring classes, and the class of the
-symbol being classified for training. WEKA creates a decision tree which is used to reduce the error in the probability
-calculation introduced under the assumption of independence.
+Having the probability vector $P(X)$ we create an input file for WEKA.  This
+file includes the probability vector, the neighbouring classes, and the class
+of the symbol being classified for training. WEKA creates a decision tree which
+is used to reduce the error in the probability calculation introduced under the
+assumption of independence.
 
