@@ -1,18 +1,18 @@
-Before analysis, data must be preproccessed in order to standardize image
-properties and reduce the likelyhood of errors in classififcation. A collection
-of scripts were run on each of the maps prior to classification. Images were
-rotated and scaled and Blue lines were removed using colour filter masks.
-Colour information was also removed from the images bringing them to a black
-and white only state. Each cell was scaled to a standard 75 by 75 pixels and
-seperated from the map as a whole such that each cell contrains only a single
-symbol.
-
 \begin{figure}[h]
     \begin{center}
     \includegraphics[width=7.5cm, height=7.5cm]{preprocessing-initial}
     \includegraphics[width=7.5cm, height=7.5cm]{preprocessing-final}
-    \caption{Image before preprocessing and image after preprocessing. Notice
-        that the contrast has increased and the blue lines have been partially
-        removed}
+    \label{figure:preprocess}
+    \caption{Image before and after preprocessing. Note the increased contrast and faint grid lines}
     \end{center}
 \end{figure}
+
+Before analysis, the data must be preproccessed in order to standardize image
+properties and reduce the risk of errors in classififcation. A collection
+of scripts are run on each of the maps prior to classification to
+rotate, scale, and remove the blue lines using colour filter masks.
+Colour information is removed from the images by converting them to black
+and white. Each cell is scaled to a standard 75 by 75 pixels and
+seperated from the map such that each cell contains a single symbol.
+The results of preprocessing are shown in Figure \ref{figure:preprocess}
+

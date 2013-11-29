@@ -1,5 +1,27 @@
+The proximity classifier learns the patterns of symbols present in the data set and then
+classifies any unknown symbols using the surrounding symbols and its knowledge of the
+patterns and relationships of the symbols. Here we begin by outlining the methodology used.
+We want to classify the symbol $x$ at a given position, as Figure~\ref{fig:neighbours} illustrates.
 
-We want to classify the symbol $x$ at a given position.
+\begin{figure}[h]
+\begin{center}
+\begin{tikzpicture}[node distance=2cm, auto]
+    \node[dcell](top){D};
+    \node[ucell, below of=top](center){$X$~?};
+    \node[fcell, left of=center](left){F};
+    \node[gcell, right of=center](right){G};
+    \node[gcell, below of=center](bottom){G};
+
+    \path[line] (center)   -- node[right] {} (top);
+    \path[line] (center)   -- node[above] {} (left);
+    \path[line] (center)   -- node[above] {} (right);
+    \path[line] (center)   -- node[right] {} (bottom);
+\end{tikzpicture}
+\end{center}
+\caption{Cell 2,19 in Pallet Town, Note: $G$=grass, $D$=dirt, $F$=forest}
+\label{fig:neighbours}
+\end{figure}
+
 To classify x, we first calculate the
 probability that $x$ belongs to each class, $P(X)\quad X_i = P(x\!\in\! C_i)$.
 The proximity classifier is given the class of each symbol in the
@@ -7,16 +29,43 @@ cardinal directions: north, south, east, and west. Using this information,
 we restrict the probability calculation to only consider the subspace
 where a symbol has the given classes neighbouring it. Such a restriction is
 the conditional probability:
+
 \[
 P(X) = P(X|\,N\!=\!c_1,\,E\!=\!c_2,\,S\!=\!c_3,\,W\!=\!c_4)
 \]
+
+An example is shown in Figure~\ref{fig:conditionalprob}.
+
+\begin{figure}[h]
+\begin{center}
+\begin{tikzpicture}[node distance = 5 cm, auto]
+    \node[ccell](top){$C_{i,j+1}$};
+    \node[ucell, below of=top](center){$X_{i,j}$};
+    \node[ccell, left of=center](left){$C_{i-1,j}$};
+    \node[ccell, right of=center](right){$C_{i+1,j}$};
+    \node[ccell, below of=center](bottom){$C_{i,j-1}$};
+
+    \path[line] (top)   -- node[right] {$P(X | \, N=C_{i,j+1})$} (center);
+
+    \path[line] (left)  -- node[above] {$P(X | \, W=C_{i-1,j})$} (center);
+    \path[line] (right) -- node[above] {$P(X | \, E=C_{i+1,j})$} (center);
+    \path[line] (bottom) -- node[right] {$P(X | \, S=C_{i,j-1})$} (center);
+\end{tikzpicture}
+\end{center}
+\caption{The conditional probability of the classes for $X_{i,j}$, given the neighbouring cells}
+\label{fig:conditionalprob}
+\end{figure}
+
+
+
 In calculating probabilities, we can only approximate them using relative
-frequencies collected from our sample data. For a set of $k$ classes, there are $k^4$ possible combinations of neighbouring
-cells and too many of these combinations occur rarely in our dataset to make
+frequencies collected from our sample data. For a set of $k$ classes, there are $k^5$ possible combinations of neighbouring
+cells and the centre and too many of these combinations occur rarely in our dataset to make
 confident approximations of the true probabilities. To resolve this, we assume that
 the conditional probabilities are independent in each direction. Under this
 assumption, the calculation becomes much more reasonable for our small data set
-since there are only $4k$ possible combinations. Our resulting calculation becomes:
+since there are only $4k$ pieces of data to record for each symbol.
+Our resulting calculation becomes:
 
 \begin{equation} \label{eq:prox}
 P(X) \approx P(X|\,N\!=\!c_1)P(X|\,S\!=\!c_2)P(X|\,E\!=\!c_3)P(X|\,W\!=\!c_4)
@@ -25,59 +74,9 @@ P(X) \approx P(X|\,N\!=\!c_1)P(X|\,S\!=\!c_2)P(X|\,E\!=\!c_3)P(X|\,W\!=\!c_4)
 From the definition of conditional probability we have that for some class $c$ in
 the direction $D$:
 \[ P(X|\,D\!=\!c) = \frac{P(X \cap D\!=\!c)}{P(D=c)} \]
-To calculate each of the conditional probabilities,
-we compute a table from the samples which records $P(X\cap D\!=\!c)$ and $P(D\!=\!c)$ for each class and direction.
-We use the table to calculate the relative conditional frequencies and, under the assumption
-of independence, we approximate $P(X)$ using equation ~\ref{eq:prox}.
-
-Having the probability vector $P(X)$ under the assumption of independence, we create an input file for WEKA.
-This file includes the probability vector, the neighbouring classes, and the class of the
-symbol being classified for training. WEKA creates a decision tree which is used to reduce the error in the probability
-calculation introduced under the assumption of independence.
-
-\begin{figure}[h]
-\begin{center}
-\begin{tikzpicture}[node distance = 4 cm, auto]
-    \node[ccell](top){$C_{i,j+1}$};
-    \node[ucell, below of=top](center){$X$~?};
-    \node[ccell, left of=center](left){$C_{i-1,j}$};
-    \node[ccell, right of=center](right){$C_{i+1,j}$};
-    \node[ccell, below of=center](bottom){$C_{i,j-1}$};
-
-    \path[line] (top)   -- node[right] {$P_{south}(X | \, C_{i,j+1})$} (center);
-
-    \path[line] (left)  -- node[above] {$P_{east}(X | \, C_{i-1,j})$} (center);
-    \path[line] (right) -- node[above] {$P_{west}(X | \, C_{i+1,j})$} (center);
-    \path[line] (bottom) -- node[right] {$P_{north}(X | \, C_{i,j-1})$} (center);
-\end{tikzpicture}
-\end{center}
-\caption{This figure describes the probability of class $X$ neighbouring cells $C_{i,j}$}
-\end{figure}
-
-
-Let $V_{d}$ be a vector of probabilities, where $n$ is the number of classes,
-$d$ is a direction.
-
-\begin{equation}
-V_{d} = \left(P_{d}{(X_{1} | \, C_{d})}, P_{d}{(X_{2} | \, C_{d}),\; \ldots \; , P_{d}{(X_{n} | \, C_{d}})}\right)
-\end{equation}
-
-To determine the probability of a cell belonging in a particular class, we assume independence
-so that we can multiply the vectors of all directions together using the element-wise product.
-
-\begin{equation}
-C_{centre} = V_{north} \circ V_{east} \circ V_{south} \circ V_{west}
-\end{equation}
-
-This new vector $C_{centre}$ contains $n$ probabilities that this cell should be
-classified as a particular class. One approach to classifying the unknown symbol
-would be to choose the class corresponding to the maximum probability in $C_{centre}$.
-
-An example of this process can be seen with the following situation. Suppose
-that the training set has the following characteristics:
 
 \begin{table}[h]
-\small
+\label{table:relativefreq}
 \begin{center}
 \begin{tabular}{ l | r r r r r r }
               & $c_{B}$& $c_{D}$& $c_{EDGE}$& $c_{F}$& $c_{G}$& $c_{W}$ \\ 
@@ -87,27 +86,19 @@ that the training set has the following characteristics:
     south     & 0      & 0.2403 & 0.0130    & 0.0065 & 0.7403 & 0\\
     west      & 0.0519 & 0.2273 & 0         & 0.0519 & 0.6428 & 0.0260\\
 \end{tabular}
-\caption{The probability of the class of neighbours in each direction for a
-    grass cell from the map that we created entitled PalletTown} 
+\caption{Probability of the neighbours for a grass cell in Pallet Town}
 \end{center}
 \end{table}
 
-\begin{figure}[h]
-\begin{center}
-\begin{tikzpicture}[node distance = 3.5 cm, auto]
-    \node[dcell](top){D};
-    \node[ucell, below of=top](center){$X$~?};
-    \node[fcell, left of=center](left){F};
-    \node[gcell, right of=center](right){G};
-    \node[gcell, below of=center](bottom){G};
 
-    \path[line] (center)   -- node[right] {$(X|\,N\!=\!c_{D})$} (top);
-    \path[line] (center)   -- node[above] {$(X|\,W\!=\!c_{F})$} (left);
-    \path[line] (center)   -- node[above] {$(X|\,E\!=\!c_{G})$} (right);
-    \path[line] (center)   -- node[right] {$(X|\,S\!=\!c_{G})$} (bottom);
-\end{tikzpicture}
-\end{center}
-\caption{This situation includes a grass to the south and east, a dirt to the
-    north and a forest to the west. It is similar to cell 2,19 in pallet town
-    (when indexed from zero at the top left)}
-\end{figure}
+To calculate each of the conditional probabilities,
+we compute a table from the samples recording $P(X\cap D\!=\!c)$ and $P(D\!=\!c)$ for each
+class  $c$, and direction $D$ and example is given for a single class in Table~\ref{table:relativefreq}.
+We use the table to calculate the relative conditional frequencies and, under the assumption
+of independence, we approximate $P(X)$ using equation~\ref{eq:prox}.
+
+Having the probability vector $P(X)$ we create an input file for WEKA.
+This file includes the probability vector, the neighbouring classes, and the class of the
+symbol being classified for training. WEKA creates a decision tree which is used to reduce the error in the probability
+calculation introduced under the assumption of independence.
+

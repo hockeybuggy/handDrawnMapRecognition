@@ -1,10 +1,13 @@
-The Feature-Based approach used here applies convolution filters to the
+The feature based method is used to extract geometric information about the shape
+and distribution of the points which make up the symbol.
+The feature based approach used here applies convolution filters to the
 cell images and then gathers statistics based on the distribution of black
-pixels in each of the $x$ and $y$ dimensions. A convolution filter is matrix
-of coefficients of odd size. Below is a convolution filter for a mean blur.
-A new pixel is created by multiplying the surrounding values by those in
-the convolution filter and summing the result. The sum is then the new value
-for the pixel.
+pixels in each of the $x$ and $y$ dimensions. A convolution filter is a matrix
+of coefficients and is of an odd size. The matrix is used to transform an image into another image
+which may make certain attributes, such as edges, more prominent.
+For example, the convolution filter, $F_{blur}$ is a mean blur. The convolution filter transforms the image by replacing each pixel
+with a new filtered pixel. The new pixel is created by multiplying the surrounding values by those in
+the convolution filter and summing the result, this sum is the new value for the pixel.
 
 \[ F_{blur} = \left[
 \begin{array}{ccc}
@@ -12,10 +15,6 @@ for the pixel.
 2/16 & 4/16 & 2/16 \\
 1/16 & 2/16 & 1/16
 \end{array}\right] \]
-
-If we consider a single cell of the grid, a portion of the image with one symbol in it,
-as a matrix of luminance values. A new image is created as the result of the convolution
-matrix being applied to each pixel.
 
 \begin{figure}[h] \[
 \begin{array}{lcr}
@@ -38,10 +37,14 @@ matrix being applied to each pixel.
 \end{array}
 \end{array} \]
 \caption{Applying the convolution filter to the centred pixel area}
+\label{figure:convolution}
 \end{figure}
 
-The filtering process repeats for each pixel until all pixels have been replaced.
-The resulting image has the luminance matrix $A$.
+If we consider a single cell of the grid, a portion of the image with one symbol in it,
+as a matrix of luminance values. The filtered image is created as the result of the convolution
+matrix being applied to each pixel. Figure \ref{figure:convolution} shows the filter being applied
+to a single pixel. The filtering process repeats for each pixel until all pixels have been replaced.
+The resulting image has a luminance matrix, which we will call $A$.
 
 \[A = \left [
     \begin{array}{r r r r}
@@ -59,6 +62,6 @@ x(i) = \sum_{j}{A_{i,j}} \quad
 y(j) = \sum_{i}{A_{i,j}}
 \end{equation}
 
-Next we record $\mu_x, \mu_y, \sigma_x, \sigma_y$ as the feature set for this filter.
-We can then apply another filter, either on this filtered image, or the original image
-and record statistics on these.
+Next we record the means and standard deviations: $\mu_x, \mu_y, \sigma_x, \sigma_y$ as the feature set for this filter.
+We can then apply another filter, either on this filtered image or, on the original image
+and record statistics on these as well.

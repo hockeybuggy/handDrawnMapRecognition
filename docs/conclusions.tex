@@ -1,16 +1,12 @@
-Each of our classification methods each have their own strengths and
-weaknesses.  The \textbf{Feature-Based method} is able to recognize arbitrary
-features but requires intended representations of each of the maps during
-training. \textbf{Proximity method} works extremely well with the set of maps
-we chose because they adhere to patterns. However to detect these patterns in a
-data set the proximity classifier needs a relatively accurate representation of
-the map. This method has the added benift of haveing it's output be the same as
-it's input.  The \textbf{Gold Comparison} method is able to classify symbols
-fairly well without intended representations of the map. However this method
+Each of our classification methods has its strengths and
+weaknesses.  The feature based method is able to recognize arbitrary
+features and is very easy to extend by adding new filters.
+The proximity method works extremely well with the set of maps
+we chose because there are many common patterns in their composition.
+However, to detect these patterns in a
+data set the proximity classifier needs an accurate representation of
+the map. This method has the added benefit of having its output be the same as
+its input, which means it can improve its output iteratively.  The gold comparison method is able to classify symbols
+fairly well. However, this method
 requires gold images as input and the number of features in the output
-generated is dependent on the number of gold images.
-
-We believe that for the best results the methods should be used in conjunction.
-For example using the gold comparison method we could generate a decent
-representation of the map which could then be cleaned up by the Proximity
-method.
+is dependent on the number of gold images which makes generalization more difficult.
