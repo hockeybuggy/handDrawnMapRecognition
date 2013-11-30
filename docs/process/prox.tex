@@ -2,7 +2,7 @@
 The proximity classifier learns the patterns of symbols present in the data set,
 and then classifies any unknown symbols using the surrounding symbols, and its
 knowledge of the patterns and relationships of the symbols. Here we begin by
-outlining the methodology used; We want to classify the symbol $x$ at a given
+outlining the methodology used; we want to classify the symbol $x$ at a given
 position, as Figure~\ref{fig:neighbours} illustrates.
 
 \begin{figure}[h]
@@ -14,10 +14,10 @@ position, as Figure~\ref{fig:neighbours} illustrates.
     \node[gcell, right of=center](right){G};
     \node[gcell, below of=center](bottom){G};
 
-    \path[line] (center)   -- node[right] {} (top);
-    \path[line] (center)   -- node[above] {} (left);
-    \path[line] (center)   -- node[above] {} (right);
-    \path[line] (center)   -- node[right] {} (bottom);
+    \path[line] (top)   -- node[right] {} (center);
+    \path[line] (left)   -- node[above] {} (center);
+    \path[line] (right)   -- node[above] {} (center);
+    \path[line] (bottom)   -- node[right] {} (center);
 \end{tikzpicture}
 \end{center}
 \caption{Cell 2,19 in Pallet Town, Note: $G$=grass, $D$=dirt, $F$=forest}
