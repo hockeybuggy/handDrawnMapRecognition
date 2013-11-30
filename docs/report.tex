@@ -22,7 +22,7 @@
 %%
 
 %\documentclass[]{article}
-\documentclass[preprint,3p,12pt]{elsarticle}
+\documentclass[final,3p,12pt]{elsarticle}
 %\documentclass[final,12pt,times]{elsarticle}
 
 %% Use the option review to obtain double line spacing
@@ -49,6 +49,14 @@
 \usepackage{graphicx}
 \graphicspath{ {./graphics/} }
 
+% http://tex.stackexchange.com/questions/35712/modify-footer-used-by-elsarticle-cls
+\makeatletter
+\def\ps@pprintTitle{
+    \let\@oddhead\@empty
+    \let\@evenhead\@empty
+    \def\@oddfoot{\centerline{\thepage}}
+    \let\@evenfoot\@oddfoot}
+\makeatother
 
 %% Styles for proximity flow chart
 \tikzstyle{ccell} = [rectangle, draw, fill=red!20, minimum width=3em, text centered, minimum height=3em]
