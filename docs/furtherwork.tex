@@ -8,24 +8,22 @@ system.  One such system, could run the gold comparison method to get a rough
 approximation of the layout of the symbols and then use the proximity method to
 improve the confidence in the results. 
 
-Improving on the individual methods is also possible. For example the feature-based
-classification may see improvement from considering other transformations of
-the pixels when calculating statistics, such as the distance from the centre
-which is especially useful for symmetrical shapes. 
-
-Another improvement that we would have liked to make is to limit the
-region of the cell which the feature based method analyses.  By only taking
-statistics on these smaller sections of the images we could eliminate areas of
-the image that are largely noise, such as the edges of the cell.
-
-The gold comparison method could use ``ideal'' gold standard images rather than mean
-gold images and we suspect that the performance of the gold method could be
-improved by using carefully selected images that better illustrate the intended
-shape of the character. Also, adding more than one ``gold'' symbol for each
-class may allow for more variations than the mean of each variation.
+Improving on the individual methods is also possible. For example the
+feature-based classification may see improvement from considering other
+transformations of the pixels when calculating statistics, such as the distance
+from the centre which is especially useful for symmetrical shapes.  Another
+improvement that we would have liked to make is to limit the region of the cell
+which the feature-based method analyses.  By only taking statistics on these
+smaller sections of the images we could eliminate areas of the image that are
+largely noise, such as the edges of the cell.  The gold comparison method could
+use ``ideal'' gold standard images rather than mean gold images and we suspect
+that the performance of the gold method could be improved by using carefully
+selected images that better illustrate the intended shape of the character.
+Also, adding more than one ``gold'' symbol for each class may allow for more
+variations than the mean of each variation.
 
 Given the strength of the patterns and relationships found by the proximity
-statistics, the extensibility of the feature based method, and the accuracy of
+statistics, the extensibility of the feature-based method, and the accuracy of
 the gold image classifier, we believe the results show promise in a hybrid
 approach of the proposed methods to create an accurate, robust, and extensible
 classification system.
