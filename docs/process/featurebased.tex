@@ -1,15 +1,16 @@
 
 The feature-based method is used to extract geometric information about the
 shape and distribution of the points which make up the symbol. To extract these
-features, the approach used here applies convolution filters to the cell images,
-and then gathers statistics based on the distribution of black pixels in each
-of the $x$ and $y$ dimensions. A convolution filter is a matrix of coefficients
-and is of an odd size. The matrix is used to transform an image into another
+features, the approach used here applies convolution filters to the cell
+images, and then gathers statistics based on the distribution of black pixels
+in each of the $x$ and $y$ dimensions. A convolution filter is a matrix of
+coefficients and is of an odd size, such that there is a single coefficent at
+the center of the filter. The matrix is used to transform an image into another
 image which may make certain attributes, such as edges, more prominent.  For
 example, the convolution filter, $F_{blur}$ is a mean blur. The convolution
 filter transforms the image by replacing each pixel with a new filtered pixel.
 The new pixel is created by multiplying the surrounding values by those in the
-convolution filter and summing the result, this sum is the new value for the
+convolution filter and summing the result. This sum is the new value for the
 pixel.
 
 \[ F_{blur} = \left[
@@ -17,7 +18,8 @@ pixel.
 1/16 & 2/16 & 1/16 \\
 2/16 & 4/16 & 2/16 \\
 1/16 & 2/16 & 1/16
-\end{array}\right] \]
+\end{array}\right]
+\]
 
 \begin{figure}[h] \[
 \begin{array}{lcr}
@@ -60,10 +62,10 @@ which we will call $A$.
 
 We define $x$ and $y$ to be the row and column sum functions.
 
-\begin{equation}
+\[
 x(i) = \sum_{j}{A_{i,j}} \quad
 y(j) = \sum_{i}{A_{i,j}}
-\end{equation}
+\]
 
 Next we record the means and standard deviations: $\mu_x, \mu_y, \sigma_x,
 \sigma_y$ as the feature set for this filter. Then we apply another

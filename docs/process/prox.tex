@@ -20,22 +20,36 @@ position, as Figure~\ref{fig:neighbours} illustrates.
     \path[line] (bottom)   -- node[right] {} (center);
 \end{tikzpicture}
 \end{center}
-\caption{Cell 2,19 in Pallet Town, Note: $G$=grass, $D$=dirt, $F$=forest}
+\caption{This example is from cell 2,19 in Pallet Town, Note: $G$=grass, $D$=dirt, $F$=forest}
 \label{fig:neighbours}
 \end{figure}
+
+
+\begin{table}[h]
+\label{table:relativefreq}
+\begin{center}
+\begin{tabular}{ l | r r r r r r }
+              & $c_{B}$& $c_{D}$& $c_{EDGE}$& $c_{F}$& $c_{G}$& $c_{W}$ \\ 
+              \hline
+    north     & 0      & 0.1558 & 0.0519    & 0.0519 & 0.7403 & 0.0325\\
+    east      & 0.0779 & 0.0974 & 0         & 0.1493 & 0.6428 & 0\\
+    south     & 0      & 0.2403 & 0.0130    & 0.0065 & 0.7403 & 0\\
+    west      & 0.0519 & 0.2273 & 0         & 0.0519 & 0.6428 & 0.0260\\
+\end{tabular}
+\caption{Probability of the neighbours for a grass cell in Pallet Town}
+\end{center}
+\end{table}
 
 To classify x, we first calculate the probability that $x$ belongs to each
 class, $P(X)\quad X_i = P(x\!\in\! C_i)$. The proximity classifier is given the
 class of each symbol in the cardinal directions: north, south, east, and west.
 Using this information, we restrict the probability calculation to consider
-only the subspace where a symbol has the given classes neighbouring it. Such a
+only the case where a symbol has the given classes neighbouring it. Such a
 restriction is the conditional probability:
 
 \[
 P(X) = P(X|\,N\!=\!c_1,\,E\!=\!c_2,\,S\!=\!c_3,\,W\!=\!c_4)
 \]
-
-An example is shown in Figure~\ref{fig:conditionalprob}.
 
 \begin{figure}[h]
 \begin{center}
@@ -46,10 +60,10 @@ An example is shown in Figure~\ref{fig:conditionalprob}.
     \node[ccell, right=of center](right){$C_{i+1,j}$};
     \node[ccell, below=of center](bottom){$C_{i,j-1}$};
 
-    \path[line] (top)   -- node[above right] {$P(X | \, N=C_{i,j+1})$} (center);
-    \path[line] (left)  -- node[above=.75cm] {$P(X | \, W=C_{i-1,j})$} (center);
-    \path[line] (right) -- node[above=.75cm] {$P(X | \, E=C_{i+1,j})$} (center);
-    \path[line] (bottom) -- node[below right] {$P(X | \, S=C_{i,j-1})$} (center);
+    \path[line] (top)   -- node[above right] {$P(X | \, N=c_{1})$} (center);
+    \path[line] (left)  -- node[above] {$P(X | \, W=c_{2})$} (center);
+    \path[line] (right) -- node[above] {$P(X | \, E=c_{3})$} (center);
+    \path[line] (bottom) -- node[below right] {$P(X | \, S=c_{4})$} (center);
 \end{tikzpicture}
 \end{center}
 \caption{The conditional probability of the classes for $X_{i,j}$, given the neighbouring cells}
@@ -67,30 +81,16 @@ this assumption, the calculation becomes much more reasonable for our small
 data set, since there are only $4k$ pieces of data to record for each symbol.
 Our resulting calculation is given in Equation~\ref{eq:prox}.
 
-\begin{equation}[h]
+\begin{equation}
 \label{eq:prox}
 P(X) \approx P(X|\,N\!=\!c_1)P(X|\,S\!=\!c_2)P(X|\,E\!=\!c_3)P(X|\,W\!=\!c_4)
 \end{equation}
 
 From the definition of conditional probability we have that for some class $c$ in
 the direction $D$:
-\[ P(X|\,D\!=\!c) = \frac{P(X \cap D\!=\!c)}{P(D=c)} \]
-
-\begin{table}[h]
-\label{table:relativefreq}
-\begin{center}
-\begin{tabular}{ l | r r r r r r }
-              & $c_{B}$& $c_{D}$& $c_{EDGE}$& $c_{F}$& $c_{G}$& $c_{W}$ \\ 
-              \hline
-    north     & 0      & 0.1558 & 0.0519    & 0.0519 & 0.7403 & 0.0325\\
-    east      & 0.0779 & 0.0974 & 0         & 0.1493 & 0.6428 & 0\\
-    south     & 0      & 0.2403 & 0.0130    & 0.0065 & 0.7403 & 0\\
-    west      & 0.0519 & 0.2273 & 0         & 0.0519 & 0.6428 & 0.0260\\
-\end{tabular}
-\caption{Probability of the neighbours for a grass cell in Pallet Town}
-\end{center}
-\end{table}
-
+\[
+P(X|\,D\!=\!c) = \frac{P(X \cap D\!=\!c)}{P(D=c)}
+\]
 
 To calculate each of the conditional probabilities, we compute a table from the
 samples recording $P(X\cap D\!=\!c)$ and $P(D\!=\!c)$ for each class  $c$, and
